@@ -1,0 +1,33 @@
+Ars Machina — Scribe and Cast
+Version v4.9.9.9 (Fixes from the interface audit)
+Build date: 2026-10-29
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Scope: fixes only (D1–D8 of the 2026-10-29 UI audit). No rule or content change; save format unchanged.
+
+D1  Phone first visit: the chooser's controls row wrapped while the fallback font was in use and unwrapped when the
+    web font arrived (layout shift 0.275 at 390 px). Between 360 and 560 px the three controls now sit in a
+    three-column grid that cannot wrap; the rule lives in the chooser's own style block so it applies before paint.
+    Measured: 0.0057 at 390 px, 0.0043 at 360 px.
+D2  Phone touch targets: fatigue pips keep their 15 px look with a 25 × 32 px hit area (gap 12 px); wound +/− are
+    32 px. Applies with a coarse pointer or below 600 px.
+D3  Field names: fields in tables without a label take one from their column header and row (Ability free XP,
+    Art XP and vis, raw vis pawns: 53 fields on the example), applied after every redraw.
+D4  Section headers no longer carry role="button", tabindex or aria-expanded; the header's Fold or Start button
+    folds it. Clicking the header still folds it.
+D5  The aura cell shows its state with data-on instead of aria-pressed on a span; the console's tabs sit in their own
+    role="tablist" (the speaker button is outside it), with roving tabindex and Left/Right/Home/End keys.
+D6  Contrast (all now 4.5:1 or better in Modern and Retro, dark and light, Build and Play):
+    Modern light --gilt #99731d → #7d5d14, --muted #59656f → #505b64; Retro light --muted #6b5334 → #3f2e18,
+    --gilt #8a5a0c → #734a09, --good #2e6a1e → #285c1a; optional rail steps 62% → 90% opacity; folded optional
+    sections 72% → 90%, their seal no longer greyed; casting-grid numbers white (dark) or near-black (light);
+    the pinned chip and the light status pill use the muted and good colours.
+D7  The global speaker button moves into the header tools beside Credits and Settings (desktop) or the File menu
+    (phone) while a character is open; over the main menu it floats in the bottom corner as before. The Settings note
+    says so.
+D8  Settings › Starting up: "under the ☰ button" → "select the seal at the top left".
+
+Tests: runner block f999Checks on both builds (axe-core 4.10.2 added to the toolkit's dev dependencies): zero
+label, nested-interactive, ARIA and contrast violations on Build and Play in four skin/theme pairs; first-visit
+layout shift under 0.1 at 390 and 360 px; 24 px tap reach on every fatigue and wound control at 390 px; speaker
+button placement at 1280 and 390 px; the Settings note, console arrow keys and header roles.

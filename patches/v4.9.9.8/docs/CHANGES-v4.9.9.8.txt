@@ -1,0 +1,27 @@
+Ars Machina — Scribe and Cast
+Version v4.9.9.8 (Sample companions and grogs)
+Build date: 2026-10-28
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Scope: New Character content. No rule values changed; save format unchanged. Numbered as a patch, following the
+author's recent releases.
+
+New Character › Start from
+- Magus: a blank sheet or the example (unchanged).
+- Companion: a blank sheet, The knight (DE p. 34) or The female scholar (DE p. 33).
+- Grog: a blank sheet, The hunter (DE p. 32) or The standard soldier (DE p. 32).
+  The "The example" choice no longer appears for companions and grogs (it always opened a magus). Switching the
+  kind of character resets an invalid choice to a blank sheet.
+
+The samples are the Definitive Edition's character templates as printed: Characteristics, age, Virtues and
+Flaws (with their details), Abilities with specialties, Personality Traits, Reputations, weapons and armor, and
+the template's customization notes (in Persona › Notes). Ability experience is each score's cost, assigned to
+the creation stages: early childhood (45 XP, childhood Abilities only), later life (15 a year, 20 with Wealthy),
+and Warrior's 50 bonus experience (DE pp. 48–49). The totals match the book's budgets exactly:
+knight 45 + 400, scholar 45 + 225, hunter 45 + 225 + 50, soldier 45 + 300 + 50.
+- Left as the book leaves them: the native language's name, character names (each opens titled by its template),
+  the standard soldier's Weakness ("can be chosen freely", DE p. 32).
+- The knight's Relic Virtue adds its relic (True Faith 1) to the Inventory as for any sheet with that Virtue.
+- Each sample passes all of the sheet's creation checks (tested).
+
+Tests: runner block f998Checks on both builds.

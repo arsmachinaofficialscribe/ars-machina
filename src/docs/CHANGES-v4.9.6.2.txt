@@ -1,0 +1,21 @@
+Ars Machina — Scribe and Cast
+Version v4.9.6.2 (patch: dice assignment; no rule or content change)
+Build date: 2026-10-27
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Change
+- Ability rolls of the realms now use the realm dice from v4.9.6.0, with their roll circles and sounds:
+  Divine — Dominion Lore, Sense Holiness and Unholiness, Holy Magic, Ars Notoria, the holy Methods (Invocation,
+  Meditation, Purity, Holy Music, Kabbalah, Gematria and the others the app lists) and Powers (RoP:D pp. 37, 92).
+  Infernal — Infernal Lore, Chthonic Magic, the unholy Methods and Powers, the Goetic Arts (RoP:I pp. 102, 114-117).
+  Faerie — Faerie Lore, the faerie Methods and Powers, Bonding, Captivating, Dismissing, Summoning (faerie),
+  Curse-Throwing (RoP:F pp. 115, 123-124).
+- An Ability that belongs to a hedge tradition keeps that tradition's die. Other Abilities are unchanged.
+- Implemented inside the v4.9.6.0 realm lookup; no new function wrapper.
+- Unchanged by decision: a holy magus's certamen, Twilight, Concentration and aiming. Might-based beings still have
+  no rolls of their own to assign.
+
+Checked
+- Full suite on both builds, with a new check that ten realm Abilities roll their realm's die and Charm does not.
+
+This is an inert plain-text change record. It does not execute code.

@@ -1,0 +1,16 @@
+# dependencies and build output
+node_modules/
+out/
+tools/dice/node_modules/
+__pycache__/
+*.pyc
+
+# local only
+tests/private-terms.txt
+*.log
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# rulebooks and their text extracts are never committed
+*.pdf

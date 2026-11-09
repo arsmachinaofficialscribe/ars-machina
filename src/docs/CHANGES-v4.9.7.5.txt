@@ -1,0 +1,88 @@
+Ars Machina — Scribe and Cast
+Version v4.9.7.5 (Build layout; auras, regiones and vis)
+Build date: 2026-10-27
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Build layout (no rule changes)
+- Folded sections show a one-line summary of their contents (names, scores, chips) beside the section's status.
+- Any section can be pinned to the side panel (up to four), shown there in full; "Pin another section" adds one.
+- After a jump from the rail or a pinned card, "Back to <section>" returns to the section and place you left.
+- The rail is grouped in four steps: Who (Concept, House, Characteristics), Gifts and flaws (Virtues and Flaws),
+  Skills and magic (Abilities, Arts, Spells, Hedge Magic, Laboratory, Familiar), Gear and story (Combat, Inventory,
+  Personality, Biography), plus Tools. Below 1240 px it is a row of four step chips.
+- Laboratory, Familiar and Hedge Magic start folded and dimmed until started; their button reads "Start".
+- Open all, Fold all, and "Fold the other sections when I open one" (on by default; kept in this browser).
+- Gender, race or nationality, religion, place of origin, title, height, weight, hair, eyes and handedness move from
+  Concept to the top of Biography ("Particulars"). The saved data is unchanged.
+- Abilities: the life-stage pools are tabs with their budgets (a tick when spent), plus "All scores".
+- Each section's help text sits behind an (i) button with its page references. A rule check that fails is shown at
+  the top of its own section. Rules notes longer than about 240 characters fold to their first sentence.
+- Side panel: wards in a 3 x 2 grid; rule checks start folded unless one fails; PDF sheet options moved to the
+  Export PDF dialog.
+- Header: Export PDF, Save .json and Load .json are in one File menu in both modes. On a phone the header is one row
+  (seal, title, Build/Play, menu), and the theme, settings and credits are in that menu.
+- Phones and tablets (980 px and below): a sticky status strip (Flaws, Virtues, experience left, spell levels,
+  checks) replaces the side panel above the form; tapping it opens the side panel over the page.
+
+Fixes
+- Free text grows to fit: Biography's one-sentence concept and relationship notes, raw vis forms, inventory names and
+  notes, Virtue and Flaw details.
+- Inventory rows: number fields and selects share one label baseline; the row no longer wraps "Load" onto its own line.
+- Layout columns sit on whole pixels (side padding rounded down to a whole pixel).
+- Play: the wound tiles and the penalty tile share one top line; the situation chips share one height.
+- The example banner keeps its place after the first edit (its text changes instead of the banner disappearing).
+- Add buttons keep the button where it was on screen and put the cursor in the new row. The sheet is still redrawn.
+- The seal tip no longer dims and blocks the page; its ring no longer covers the title.
+- The phone header no longer wraps the subtitle.
+
+Auras (Play › Modifiers)
+- Dominion: one weaker at night, one stronger on Sundays and holy days (RoP:D p. 10; DE p. 418).
+- Infernal: +1 at night, +1 under an Interdict, +1 Wednesday to Good Friday of Holy Week, -1 on a kept Shabbat,
+  0 from Good Friday dusk to Easter Monday and on the Night of Destiny, -2 for the rest of Ramadan; never above 10
+  (RoP:I pp. 10-11). Changing the strength by hand clears these.
+- Aligned Magic auras (RoP:M pp. 15-16): an Art alignment adds the aura again to spells using that Art; Healing adds
+  half the aura (rounded up) to Recovery; Luck offers +1/+2/+3 (aura 1-4/5-8/9-10) on each roll; Distracting raises
+  Concentration Ease Factors by 3 at aura 5+; an emotion alignment gives +1/+2/+3 (aura 1-3/4-6/7-10).
+- Infernal auras (RoP:I pp. 12-17): Recovery rolls take -aura. Debauched: Confidence cannot be spent. Malevolent: an
+  optional +aura botch dice on physical Characteristic and Ability rolls, and attack rolls note +aura to Damage.
+  Perfidious: noted (+aura to the Ease Factor to spot a lie). In an Infernal regio holy powers and holy magic take
+  -aura. Tartaran and Abyssal regiones: in an Abyssal regio each Characteristic in a roll is -aura.
+  True Faith 1+ is immune to the tarnish, corrupted and regio effects (p. 13).
+
+Realms tab
+- Regio sight (DE p. 421): Perception + Second Sight, Magic Sensitivity, or Sense Holiness and Unholiness (Divine and
+  Infernal) + stress die vs 5 + 2 x the difference, or 5 + 2 x (current aura + level) from another realm's aura;
+  lost near the boundary rolls with 0.
+- Faerie regiones: Perception + Awareness with Faerie Sight, Second Sight or Magic Sensitivity (RoP:F p. 16; optional
+  rule, on); guessing the way in, Intelligence + Faerie Lore vs 15, or 3 when the story narrows the choice (p. 16).
+- Celestial disorientation (RoP:D pp. 14-15): Stamina + Dominion Lore (or Parma Magica if higher) + stress die vs
+  rating x 3; failure gives -(rating x 3) to every roll until you leave; exposure limit Stamina + Parma + 3 hours.
+- Corruption roll (RoP:I pp. 11-12): stress die + temporary Infernal aura vs 3 + strongest aura (maintain) and
+  6 + strongest aura (increase); sacrifice bonus; Confidence for a corruption rite; erosion time of a neglected aura.
+- Dominion rite (RoP:D pp. 11-12): Communication + Theology or Dominion Lore (2+) + stress die vs 6, with what it needs
+  and how the Dominion grows and fades.
+- Empyreal aura from a miracle, 1 at level 50 and +1 per 5 levels; a Divine creature's home up to Might / 10
+  (RoP:D pp. 12-13). Faerie aura = Might / 5; two faeries clashing, 2 + the higher Might / 5, at most 9 (RoP:F p. 14).
+- The covenant aura (RoP:M pp. 8-14): tethers (natural 1-2; residue, monument, being, burial and vis-source
+  calculators), base aura = natural (at most 5) + preternatural (strongest + 1 per other, at most 5); the yearly aura
+  modifier (held to +-9); stable years lower the aura's botch dice; the Strengthening and Weakening tables with botch
+  dice +1 after each 9+; permanent changes and regio levels recorded; a log of years.
+
+Vis
+- Raw vis rows have a kind: ordinary; Faerie, Divine or Infernal (DE p. 422); vis infesta, sordida or prava
+  (RoP:I pp. 18-19); dedicated or extraordinary (RoP:M pp. 119-123); encased, anchor, accrued, sleeping or abstract
+  (RoP:F pp. 18-19). Each kind's rules are noted under the table.
+- Spending vis in a formulaic or Ritual casting (Play › Modifiers): Infernal vis and vis infesta double the botch dice
+  (DE p. 422; optional rule for The Infernal's reading); vis sordida +5 a pawn and three botch dice a pawn, never fewer
+  than the pawns; vis prava makes the roll a zero with two botch dice a pawn; an infernally aligned caster avoids
+  these; dedicated vis +4 a pawn and double botch dice for its own Technique and Form; abstract vis gives nothing.
+- Post-Gauntlet laboratory: "Vis pawns used, by year" is checked against Magic Theory x 5 a year (DE p. 50).
+- Optional rule (off): large stores of one Art's vis cause spontaneous spells (RoP:M p. 123).
+
+Optional rules added (Settings › Optional rules)
+- Sub: faerie regio sight with Awareness (on); vis infesta with one botch die a pawn (off); stored vis (off).
+- Homebrew: count every magical botch in the yearly aura modifier (off).
+
+Not changed
+- Adding a row still redraws the Build sheet (now without losing the place or the cursor).
+- Start-up and mode-switch speed on phones were not changed in this release.

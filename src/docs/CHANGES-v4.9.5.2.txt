@@ -1,0 +1,17 @@
+Ars Machina — Scribe and Cast
+Version v4.9.5.2 (patch: fixes only, no rule or content change)
+Build date: 2026-10-26
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Fix
+- Main menu spacing. The menu list spaces its entries 10 px apart. Two scripts (v3.3 catalogue integration and
+  v4.9.1.0) add the Book catalogues tile, itself a list entry, before the About button, which put it inside About's
+  own list entry: the two tiles shared one entry and sat 0 px apart while the others were 10 px apart. Both now
+  insert before About's list entry. Affects Modern and Retro alike.
+- The tile and its page heading read "Book catalogues" (sentence case).
+
+Checked
+- New runner check on the hosted and offline builds: every menu list entry holds exactly one tile and all gaps are
+  equal. Full suite otherwise unchanged; Content-Security-Policy hashes recomputed.
+
+This is an inert plain-text change record. It does not execute code.

@@ -1,0 +1,17 @@
+Ars Machina — Scribe and Cast
+Version v4.9.3.4
+Build date: 2026-10-25
+
+Change
+- Storyguide is now lazy-initialized. Its 194,503-character script is kept in the self-contained HTML as a non-executable payload and activated when the user opens Storyguide or About/Changelog.
+- The first click is replayed after activation so the same menu action completes. Returning to an active Storyguide session still restores it after reload.
+- The Storyguide workspace and its data remain intact; no game rules, calculations, interface styling, artwork, sound, or animations were changed.
+- The in-app changelog now records this update. Netlify and Cloudflare Pages CSP hash lists were updated for the changed loader and version metadata; the Storyguide payload retains its exact authorized hash.
+
+Preservation
+- The offline release remains one self-contained HTML file; Storyguide does not require a new network request.
+- All static assets are copied unchanged from v4.9.3.3.
+- PDF and fontkit remain lazy-loaded as before.
+- No wildcard, unsafe-inline, blob, or external script permission was added.
+
+This is an inert plain-text change record. It does not execute code.

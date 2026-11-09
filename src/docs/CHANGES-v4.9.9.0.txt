@@ -1,0 +1,74 @@
+Ars Machina — Scribe and Cast
+Version v4.9.9.0 (Faerie and Magic in play)
+Build date: 2026-10-28
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Scope: a block of Realms of Power rules. Save format unchanged; new fields are optional and sanitised on load.
+
+Play › Realms › The Faerie Realm (when Realms of Power: Faerie is switched on)
+- Enter and leave the Faerie Realm. Fable points from eight kinds of choice, each earning its point once a visit;
+  the first point becomes a fable score of 1; raising the score costs score + 1 points; a spent point adds the score
+  to the next roll (RoP:F p. 26).
+- Becoming faerie: Virtues exchanged for faerie Virtues up to the fable score (Major counts 3), recorded per visit and
+  kept for the next visit; notes on Pretences, faerie bodies, Traditional Ward and Increased Might (RoP:F pp. 26–27).
+- Offer roll r990:offer: Communication + Charm, Profession or Craft + offer modifier (goods or Free Expression, the
+  highest only) + promise (–6/–3/0/+3) + change (+3/0/–3/–6) + stress die against the threat (6/9/12/15/18);
+  Elysium –6, or Ease Factor –3 when putting an Elysian story back on track. Rolling it spends a fable point and a
+  Long-Term Fatigue level (RoP:F pp. 27–29). Optional rule faeOfferAA (off): artistic Reputation and a faerie
+  patron's Might (RoP:F p. 28).
+- Leaving: leftover points turned into score, Warping Points taken to lower the effective score, the group's lowest
+  score, the real time per Faerie day (1 hour … 1 year), Warping recorded on leaving; no Twilight check for magi;
+  aging by time in Faerie; beings with Might take no Warping (RoP:F pp. 24, 30).
+- Arcadian Travel rolls (r990:arcin, r990:arcout) for a character with that Mystery Virtue (custom Virtue; HoH:MC
+  p. 92): stress die + Perception + charm Ability + aura; leaving at (13 – destination aura) × 3, –6 with an Arcane
+  Connection; companions up to Faerie Magic (RoP:F pp. 23, 29).
+- Faerie beings: Spirit Away note when the being has that power; Common Sense and Threshold notes (RoP:F pp. 23–24).
+
+Play › Realms › A magic character's year (a Magic being, Realms of Power: Magic on)
+- Acclimation: familiar's bond; aura strength by Might and time within (always / half / frequent); seasons in the
+  Magic Realm (aura 10, Might halved); constant, regular or occasional effects by Might or effect level; vis eaten
+  (Might ÷ 2, rounded up); Acclimation Prone doubles Might for auras and vis and the seasons for effects (RoP:M
+  pp. 41, 53–54). "Lose 1 point of Might" when unprotected.
+- Vis consumption chart roll r990:viseat (botch dice = pawns) (RoP:M p. 54); advancement with Might subtracted and
+  2 per pawn of vis to offset it; the transformation experience table; vis-as-study roll r990:transvis (RoP:M p. 52).
+
+Play › Realms › Magic things and warped beasts (Realms of Power: Magic on)
+- 26 Things of Virtue (6 herbs, 9 objects, 6 formed stones, 5 trees and roots) with vis, Virtue, Flaw, duration,
+  Enrichment method and Shape and Material bonuses (RoP:M pp. 125–130). Rolls: knowing one (Int + Magic Lore vs 9,
+  r990:know) and the Enrichment Total (Int + Magic Lore + aura vs 9, r990:enrich) (RoP:M pp. 124–125).
+- Warped animal: Flaws and Virtue by Warping Score, Magic-specific list (RoP:M pp. 78–79; DE p. 389).
+
+Play › Realms › Tamed creatures (Realms of Power: Magic on, or any tamed creature or Animal Handling)
+- Taming seasons for a magus (Re(Form) Lab Total + Animal Handling + Animal Ken + experimentation + 1 per 5 levels
+  of a similar Lab Text – Might), a Master of (Form) Creatures (Might, doubled for the same Form, or Magic Lore +
+  Animal Handling + Animal Ken – Might) and a mundane trainer (Int + Animal Handling + Animal Ken – Might); mundane
+  beasts at Might 1 + 2 × Confidence with the Gift's –3/–6; tamed when the points exceed the Might; Loyal +0 to +3
+  (DE pp. 203, 384–385).
+- Command roll (Presence + Animal Handling, Ride or Magic Lore; automatic/6/9/12/15) and Loyalty test per creature
+  (r990:cmd:<i>, r990:loyal:<i>) (DE pp. 385–386).
+- The twelve mundane beasts of the Definitive Edition (pp. 429–435), as full stat cards and as tamed-list entries.
+
+Build
+- Might-Based Being (Magic): kind "Beast of Virtue" or "elemental". Beast of Virtue guidance and checks: Magic Animal,
+  an Essential Virtue, a Personality Flaw, never Lame or Blind, and (our reading) no other physical-defect Flaw
+  (RoP:M pp. 55–56). Elemental: Size from Might, the Characteristic set, the element's non-negative Characteristics,
+  inherited Virtues and Flaws, Brawl and Athletics or Swim at the Might's magnitude, the obligatory power, combat and
+  vis, spells; checks for Magic Thing, the inherited Flaws, Size and Abilities (DE pp. 449–451; RoP:M pp. 133–139).
+- Inventory: Things of Virtue carried, Enriched or not, a magus's talisman; check that an Enriched one gives nothing
+  to a bearer with Magic Resistance (RoP:M p. 125).
+
+Data
+- Bestiary powers: Spirit Away (RoP:F p. 23), 320 powers.
+- New character fields: st.fae, st.m990 {bk, elem, acc}, st.tov, st.tame (sanitised by the v4.9.9.0 migrate and
+  blankState wrappers).
+
+Readings that are ours (the books are silent)
+- New Virtue exchanges on a visit count against that visit's fable score.
+- Elemental Characteristics for a Might between table rows use the row at or below it.
+- A Beast of Virtue's physical-defect Flaws beyond Lame and Blind: Deaf, Crippled, Poor Eyesight, Poor Hearing,
+  Missing Eye, Missing Ear, Missing Hand.
+- Vis as a transformation source: one botch die for every 5 pawns, rounded up.
+- Knowing a Thing of Virtue: a simple die, or a stress die when the situation is stressful.
+
+Tests
+- f990Checks block (15 checks); securityChecks hostile payload extended to the new fields, with a sanitising check.

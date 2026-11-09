@@ -1,0 +1,233 @@
+{
+ "div": {
+  "h": "assets/96b76fb074be.webp",
+  "t": "assets/a57cdae4b262.webp",
+  "p": "assets/dc28ee4278f3.png",
+  "pt": "assets/ffce06acb019.png",
+  "rp": [
+   "assets/0cf5d3e8a365.png",
+   "assets/1c8c0b6ed006.png",
+   "assets/f81dbafd49b9.png",
+   "assets/b927c33946d5.png",
+   "assets/3ad20be7aa87.png",
+   "assets/4d717ff7f2e9.png",
+   "assets/5e036be1ccb2.png",
+   "assets/b7520084cf31.png",
+   "assets/08665c02bfe8.png",
+   "assets/f853d3a7dd4a.png"
+  ],
+  "rp10": "assets/05ddabaa2d1c.png",
+  "rc": [
+   "assets/a7dca99d845f.png",
+   "assets/0de011cd1297.png",
+   "assets/b3721c719f67.png",
+   "assets/48bd62c163a6.png",
+   "assets/037599d3f1e2.png",
+   "assets/9f7dd9d60540.png",
+   "assets/723f4e2abc98.png",
+   "assets/4e823ff517ec.png",
+   "assets/a5b1a73bcd53.png",
+   "assets/075942cebd06.png"
+  ],
+  "rc10": "assets/ed30e75f7105.png",
+  "c": "assets/4b0d5f145af5.webp",
+  "pc": "assets/d25ecc4acb8b.png",
+  "ink": "#6e4c0e",
+  "shade": [
+   {
+    "rgb": [
+     201,
+     182,
+     155
+    ],
+    "L": 0.4824
+   },
+   {
+    "rgb": [
+     221,
+     210,
+     192
+    ],
+    "L": 0.6527
+   },
+   {
+    "rgb": [
+     192,
+     177,
+     162
+    ],
+    "L": 0.4526
+   },
+   {
+    "rgb": [
+     101,
+     66,
+     38
+    ],
+    "L": 0.068
+   },
+   {
+    "rgb": [
+     101,
+     66,
+     39
+    ],
+    "L": 0.0681
+   }
+  ]
+ },
+ "inf": {
+  "h": "assets/3d8614d7f227.webp",
+  "t": "assets/cc1866f7f515.webp",
+  "p": "assets/9da6b7f22cf2.png",
+  "pt": "assets/e1f6f7b7504d.png",
+  "rp": [
+   "assets/726f4466ae28.png",
+   "assets/4d8d2d73267b.png",
+   "assets/e534d698b4e3.png",
+   "assets/0fa787dfed83.png",
+   "assets/e659b599ed91.png",
+   "assets/787eacbaae8b.png",
+   "assets/4330a5009250.png",
+   "assets/e5ce9c8e9a8e.png",
+   "assets/aaf061944019.png",
+   "assets/f14d6948143f.png"
+  ],
+  "rp10": "assets/7efb66cf3e59.png",
+  "rc": [
+   "assets/9f21b957bbf5.png",
+   "assets/6d8c4abdce2e.png",
+   "assets/ace94dda9248.png",
+   "assets/db150ec4c6ac.png",
+   "assets/82541972ba68.png",
+   "assets/ea43e33abe09.png",
+   "assets/c7d19c3051b3.png",
+   "assets/51e5d1679f5f.png",
+   "assets/c26e155a883a.png",
+   "assets/181bd0711f75.png"
+  ],
+  "rc10": "assets/a9becc97f5d5.png",
+  "c": "assets/777348bc58fb.webp",
+  "pc": "assets/2b0738cba75f.png",
+  "ink": "#e0702a",
+  "shade": [
+   {
+    "rgb": [
+     29,
+     11,
+     7
+    ],
+    "L": 0.0052
+   },
+   {
+    "rgb": [
+     29,
+     23,
+     21
+    ],
+    "L": 0.0093
+   },
+   {
+    "rgb": [
+     33,
+     22,
+     25
+    ],
+    "L": 0.0097
+   },
+   {
+    "rgb": [
+     36,
+     1,
+     1
+    ],
+    "L": 0.004
+   },
+   {
+    "rgb": [
+     1,
+     0,
+     0
+    ],
+    "L": 0.0001
+   }
+  ]
+ },
+ "fae": {
+  "h": "assets/bb0dd9479f26.webp",
+  "t": "assets/e1f210281404.webp",
+  "p": "assets/654e1ebab36d.png",
+  "pt": "assets/1495a950b814.png",
+  "rp": [
+   "assets/f8d77a97704c.png",
+   "assets/4602f7a3074e.png",
+   "assets/35169685184c.png",
+   "assets/72617404a8da.png",
+   "assets/43dc0248e8ba.png",
+   "assets/0c3ef0537da9.png",
+   "assets/a356a7635bcc.png",
+   "assets/5ab12a256534.png",
+   "assets/b4a4b28dd3ae.png",
+   "assets/215f8a5f2bf9.png"
+  ],
+  "rp10": "assets/079224b29cb4.png",
+  "rc": [
+   "assets/aebf0ec7e070.png",
+   "assets/65c9b6ae7f93.png",
+   "assets/b786e9b4fc4c.png",
+   "assets/b2b0f26f81df.png",
+   "assets/f800e6fb5f10.png",
+   "assets/47911fdfd366.png",
+   "assets/84092aa4ab70.png",
+   "assets/0b4f5a18b0f2.png",
+   "assets/b92e8f407e05.png",
+   "assets/33408281c949.png"
+  ],
+  "rc10": "assets/783335aad99c.png",
+  "c": "assets/7fab5bd82d66.webp",
+  "pc": "assets/e15b002b89a5.png",
+  "ink": "#3b2f6e",
+  "shade": [
+   {
+    "rgb": [
+     151,
+     139,
+     164
+    ],
+    "L": 0.2772
+   },
+   {
+    "rgb": [
+     186,
+     174,
+     198
+    ],
+    "L": 0.4479
+   },
+   {
+    "rgb": [
+     144,
+     151,
+     172
+    ],
+    "L": 0.3104
+   },
+   {
+    "rgb": [
+     39,
+     37,
+     41
+    ],
+    "L": 0.0191
+   },
+   {
+    "rgb": [
+     39,
+     37,
+     41
+    ],
+    "L": 0.0191
+   }
+  ]
+ }
+}

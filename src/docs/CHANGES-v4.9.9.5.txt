@@ -1,0 +1,51 @@
+Ars Machina — Scribe and Cast
+Version v4.9.9.5 (Realms in realm sub-tabs)
+Build date: 2026-10-28
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Scope: a layout and loading change to Play › Realms. No rule values changed. Save format unchanged; two optional
+play fields (x.rlmTab, x.rlmAll) are read only against fixed values.
+
+Play › Realms
+- Sub-tabs: Divine, Infernal, Faerie, Magic, Places. Only the chosen sub-tab's sections are drawn; each sub-tab shows
+  how many tools it holds. The section strip above the sections is not shown on this tab.
+  Divine: holy magic, holy powers, True Faith, miracles, God's aid, tempers and tarnishes, relics, saints, the Divine
+  Ascent, Ars Notoria, golems, Dominion and Empyreal auras. Infernal: maleficia, Ars Goetia, sin and temptation,
+  Confidence through sin, Infernal influence, the infernalist, Infernal auras. Faerie: faerie wizardry, Faerie auras,
+  the Faerie Realm. Magic: the covenant aura, a magic character's year, Things of Virtue and warped beasts, tamed
+  creatures. Places: regiones, Warping by realm. Tempers and tarnishes sits under Infernal when only the infernal side
+  applies.
+- Gating by the sheet (our reading; the books do not limit these tools to particular characters):
+  God's aid, saints, Dominion auras: True Faith or Faith Points, Dominion Lore, a holy Power or Method, Holy Magic,
+  a clergy Virtue, Pious, Sense Holiness and Unholiness, or a Divine being (a chosen saint or a Divine aura also keeps
+  them).
+  Tempers and tarnishes: as above, or Infernal Lore, spiritual authority, or a temper or tarnish in force.
+  Sin and temptation: a Personality Trait or Flaw tied to a sin or virtue, a sin recorded, or Infernal Lore / an
+  infernalist / an Infernal being. Confidence through sin: a trait with a penchant for a sin (RoP:I p. 23).
+  Infernal influence: that, or Infernal Lore. Infernal auras: Infernal Lore, an infernalist, an Infernal being, or an
+  Infernal aura.
+  The Faerie Realm and Faerie auras: Faerie Lore, a Virtue or Flaw naming faeries or Arcadia, a Faerie being, a visit
+  in progress or fable points (or a Faerie aura).
+  The covenant aura: a magus, Magic Lore, a Magic being or a Magic aura. Things of Virtue: Magic Lore, a Magic being
+  or a Thing of Virtue recorded. Tamed creatures: Animal Handling, Animal Ken or a creature on the list.
+  Regiones: a magus, any realm Lore, or Second Sight. Warping by realm: Warping Points or a recorded source.
+  Sections that were already drawn only for a character who has them (True Faith, holy magic and powers, maleficia,
+  Ars Goetia, faerie wizardry, Ars Notoria, the infernalist, the Divine Ascent, relics, golems, a magic character's
+  year) keep their own tests. Books switched off still remove their sections.
+- Show all tools: a switch that draws every section of the chosen sub-tab; its label counts the hidden ones.
+- Descriptions: each section's description, and any long plain note in its body, sits behind an "i" button beside the
+  section title (aria-expanded, aria-controls). Open descriptions stay open across redraws for the session.
+- Overflow: inside this tab buttons wrap their labels, fields and action grids shrink to the card, tables scroll
+  inside their card, and cards are tighter (padding 10px 12px, gaps 8px 14px).
+
+Code
+- patches/v4.9.9.5/realmtabs.js and realmtabs.css: an outer tabRealms wrapper that splits the tab by section and a
+  sectionize wrapper for the "realms" tab only.
+- The 4.9.4.0 and 4.9.7.0 modules hand tfScore, tfPts, dominionLore, CLERGY, holyPowerAbil, isInfernalist and
+  sinTraits to window.AMRLM for the gating; the 4.9.7.5 and 4.9.9.0 panels are no longer wrapped in
+  f975-realms / f990-realms divs.
+
+Tests
+- New runner block f995Checks (hosted and offline builds): bare companion, True Faith, Infernal Lore, Show all tools,
+  the info button across a redraw, an unknown saved sub-tab, and no overflow on any sub-tab in Retro and Modern at
+  1280 and 390 px. The 4.9.7.0, 4.9.7.5 and 4.9.9.0 Realms checks now draw every sub-tab with Show all tools.

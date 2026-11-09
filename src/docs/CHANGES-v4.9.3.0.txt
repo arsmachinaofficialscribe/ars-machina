@@ -1,0 +1,16 @@
+Ars Machina — Scribe and Cast
+Netlify package v4.9.3.0
+Build date: 2026-10-24
+
+Changes made
+- Removed a spell-list filtering pass whose result was discarded, avoiding needless iteration and technique parsing.
+- Reworked the spell picker to parse each enabled spell's technique/form data once per list build and reuse it for filtering and labels. Spell order and displayed values are preserved.
+- Scoped CSP blocked-inline-script diagnostics to same-origin page sources. Browser-extension injected scripts are no longer reported as site script errors; same-origin CSP violations remain visible. The Content-Security-Policy was not loosened.
+- Updated the visible/app version, build date, CSS/script identifiers, README version, and in-app changelog.
+
+Fidelity and preservation
+- Kept all existing static assets byte-for-byte, including every image, dice face, sound, and data file.
+- No visual effects, artwork, animation frames, timing, audio, or content were removed, resampled, recompressed, or simplified.
+- These changes are intended to preserve output and behavior while reducing redundant work.
+
+This is an inert plain-text change record. It does not execute code.

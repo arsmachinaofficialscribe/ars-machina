@@ -1,0 +1,51 @@
+Ars Machina — Scribe and Cast
+Version v4.9.6.0 (feature: realm dice; rules: training packages and Savantism)
+Build date: 2026-10-27
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Realm dice
+- Three new d10s rendered with the toolkit's own renderer (tools/dice: three.js 0.169 in headless Chromium).
+  Its geometry and camera were fitted to the shipped dice's face outlines (DIE_FACE_DATA.geo) to within 0.00002, and a
+  test render's silhouette overlaps the shipped Hermetic die by 99.9%.
+  Divine: alabaster lit from within, gold veins, a six-winged seraph and gold rim.
+  Infernal: charred iron with ember cracks, a heraldic dragon's head (ember inlay in a dark groove), smoky red rim.
+  Faerie: dragonfly-wing glass in teal, violet and rose with fine veins, a violet dragonfly, pearl rim.
+- Each die has a hero image, a 12-frame tumble sheet, Retro hero and tumble sprites, Retro faces 0-9 and "10" with
+  matte high-contrast numerals, roll-log chips, face shading data for Modern engraving, a landing sound, and chip and
+  numeral colours. 84 asset files, 263 KB, fetched only when a die is first shown.
+- Rolls: Divine — holy powers, prayer, holy influence, miracles, God's aid, tempers, Ars Notoria, and a holy magus's
+  spellcasting unless "Cast this as Hermetic magic instead" is ticked. Infernal — maleficia, Goetic Arts, Scouring,
+  tarnishes. Faerie — faerie rites, Curse-Throwing. Might-based beings' own rolls are mapped to their realm's die; the
+  app has none yet.
+- Roll circle: Divine — a turning halo of gold rays, six feathered wings unfurling and beating, rising motes.
+  Infernal — crimson flames licking around the circle, blood-red embers, the circle tinted blood red.
+  Faerie — four-pointed sparks orbiting and twinkling, the circle tinted teal. Transform and opacity animation only, at
+  most 30 elements, none with reduced motion; Retro steps the motion, draws with crisp edges and tints its pixel
+  circle.
+
+Rules
+- Training packages (Grogs pp. 66-73): 7 childhood, 41 career and 10 non-career packages in Build's Early childhood and
+  Later life stages, with choices where the book gives them; the suggested age (Wealthy one quarter less, Poor half
+  as much again, p. 68); checks for 15 years per package and for the Flaws or Virtue a package needs. Every five-year
+  option totals 75 XP and every three-year option 45 (Natural Philosopher's formulae excepted, A&A ch. 5).
+- Savantism (Definitive Edition p. 143): v4.8.3.0 already halved the childhood and later-life pools (rounded down),
+  capped Abilities at 3 (favoured 6) and halved Seasons Advancement Totals except the favoured Ability's. Added: the
+  apprenticeship and after-Gauntlet pools are halved too; the favoured Ability may reach 6 below age 30; an optional
+  per-character rule buys the favoured Ability at full rate; a note in Build's Abilities section explains the Flaw.
+- Feral Upbringing (DE p. 129): 120 childhood XP in the wilderness Abilities and no Language. Covenant Upbringing
+  (DE p. 124): childhood XP may buy Latin and Order of Hermes Lore.
+
+Optimisation and technical debt
+- The die renderer, specs, driver and packer now live in the toolkit (tools/dice), with a README entry; any die can be
+  re-rendered and repacked with two commands.
+- Start-up: the Virtue-list reconciliation key skips Unicode work for plain-ASCII names and caches; the list sorts
+  compute each key once with one collator; the header switches measure on the next frame instead of forcing a
+  layout mid-parse. Under the profiler, time to DOMContentLoaded fell from about 1.12 s to 1.05 s (median of three)
+  and the switch measurement from about 98 ms to 69 ms; unprofiled wall time is within run-to-run noise.
+
+Checked
+- Full suite on both builds; new checks: the 14 realm roll ids, holy magus casting and its lapse, every realm image
+  loading, the roll-circle effects, the Grogs p. 73 worked example (Sir Edwin) reproduced exactly, Poor ageing, the
+  Savantism pools halved once and the favoured Ability at 6 below 30, and Feral Upbringing.
+
+This is an inert plain-text change record. It does not execute code.

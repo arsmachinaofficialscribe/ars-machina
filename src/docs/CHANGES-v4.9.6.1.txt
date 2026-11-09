@@ -1,0 +1,33 @@
+Ars Machina — Scribe and Cast
+Version v4.9.6.1 (patch: optimisation and fixes; no rule or content change)
+Build date: 2026-10-27
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Optimisation
+- One start-up draw. Three scripts (the main app, the changelog layer and the catalogue integration) each redrew the
+  whole sheet while the page loaded, about 155 ms in all under the profiler. While the page is still loading
+  (the v4.9.5.1 boot mark) they now mark a redraw as due, and it runs once, just before the page is shown.
+- Bestiary and hedge data on demand (hosted build). The 663 KB data block now travels as a separate cached asset
+  (assets/<hash>.json, fetched with its Subresource Integrity hash) after start-up in idle time, or at once when a
+  panel needs it; the panels redraw when it arrives. The page falls from 2,554,942 to 1,894,158 bytes (-26%), and
+  since assets are cached for a year while the page is revalidated, visitors no longer download it again with each
+  release. The offline file keeps it inline.
+- Measured locally in Chromium (five loads each, median): page ready (DOMContentLoaded end) 652 ms -> 317 ms; load
+  697 ms -> 437 ms.
+- Checked and left: all scripts and styles were already minified; lossless recompression of the 798 PNG sprites would
+  save 2.4% (about 16 KB) for six minutes per build.
+
+Fixes found on the way
+- The Build step rail now shows its task groups (v4.9.1.0) from the first visit; before, the first draw ran before
+  that layer had loaded and the rail stayed ungrouped until the first click.
+- The main menu no longer takes keyboard focus from the first-run style chooser when both are open.
+- The sound button's overlap check: it now takes its confirming second reading itself instead of waiting for some
+  later change to the page, and while the menu is open only the menu's own contents count (it was counting the sheet
+  hidden underneath). In Play it now steps aside where it would cover an Ability card, as designed.
+
+Checked
+- Full suite on both builds, with a new check that the on-demand data loads, matches its integrity hash and is used.
+  Screenshot differences from v4.9.6.0: the grouped Build rail (8 views) and the sound button stepping aside in Play
+  (4 views); start and menu views unchanged.
+
+This is an inert plain-text change record. It does not execute code.

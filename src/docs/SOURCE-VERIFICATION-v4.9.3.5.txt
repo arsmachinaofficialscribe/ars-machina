@@ -1,0 +1,68 @@
+Ars Machina — Scribe and Cast
+Source verification v4.9.3.5
+Date: 2026-10-26
+
+Scope
+The v4.9.3.1 audit recovered Range, Duration and Target for 65 spells. In 39 of them the Target field also held the first
+line of the spell's description (for example "Ind The spell removes all pain not exceeding the pain of a light wound from t").
+
+Method
+For each affected spell the source book's text was searched for the printed "R: …, D: …, T: …" line that is followed by
+that description. The match was accepted only when the Range and Duration agree with the record and the Technique/Form and
+level printed immediately before the line agree with the record. 38 matched in this way; Eternal Repetition in a Bottomless
+Pool (Covenants p. 101) was read directly from the page, where the layout splits its Target onto the line above.
+Remain Within Those Walls (Magi of Hermes p. 101) prints "T: Arcane Circle"; the record had "Arcane".
+Two older records (Hinder the Gift, Recognize Your Master) held their base-level breakdown in Target; it was moved to the
+empty Base field.
+
+Corrections (42)
+- Strength Extinguished — MoH p. 82; CrAn 30; R/D/T now Touch / Sun / Part. Target was “Part Creates a bull’s heart”
+- Blissful Sensations — MoH p. 20; CrCo 30; R/D/T now Touch / Sun / Ind. Target was “Ind The spell removes all pain not exceeding the pain of a light wound from t”
+- The Wooden Horde — ToP p. 122; CrHe 45; R/D/T now Touch / Moon / Group. Target was “Group This Animae Magic ritual creates ten Herbam-based faeries each with”
+- Weaver’s Trap of Threads — MoH p. 58; CrHe 20; R/D/T now Voice / Sun / Group. Target was “Group A huge net of thick threads grows in the indicated area”
+- Eternal Repetition in a Bottomless Pool — Cov p. 101; CrIm 35; R/D/T now Arc / Sun / Ind. Target was “Ind This spell uses enchanted mirrors to display the text of a book to which”
+- Told Story — MoH p. 124; CrIm 20; R/D/T now Voice / Performance / Individual. Target was “Individual Creates the images and sounds of a story sung by the bard”
+- Orpheus’ Ballad — MoH p. 140; CrMe 20; R/D/T now Voice / Mom / Group. Target was “Group The spell creates a momentary flash of intense unnatural fear”
+- The Distracted Turb — ToP p. 123; CrMe 45; R/D/T now Voice / Diameter / Group. Target was “Group Using Animae Magic”
+- Bring Forth the Lord of Knives — ToP p. 123; CrTe 35; R/D/T now Touch / Diameter / Individual. Target was “Individual This Animae Magic spell con jures a slender faerie made o”
+- Sense the Sleeping Hound — App p. 47; InAn 5; R/D/T now Voice / Mom / Ind. Target was “Ind This spell indicates to the caster if an animal within range is asleep”
+- Scent of Ash — HP p. 12; InAu 15; R/D/T now Personal / Concentration / Smell. Target was “Smell The caster can smell and identify”
+- From This Line Descended — TrME p. 44; InCo 30; R/D/T now Arcane Connection / Momentary / Individual. Target was “Individual This spell reveals whether the target represen”
+- Recognize Your Master — GotF p. 132; InCo 5; R/D/T now Touch / Mom / Ind. Target was “Ind (Base 4, +1 Touch)”. Base breakdown moved from Target to Base: (Base 4, +1 Touch)
+- Verifying the Presence of Artemis’ Blessing — MoH p. 22; InCo 15; R/D/T now Touch / Sun / Ind. Target was “Ind The caster is immediately aware of a conception in the target during the”
+- Form of the (Temperament) Heartbeast — HoH:MC p. 36; MuAn 20; R/D/T now Per / Sun / Ind. Target was “Ind There are four versions of this spell”
+- Assume the Stature of the Giants of Eld — MoH p. 49; MuCo 10; R/D/T now Per / Diam / Ind. Target was “Ind Adds +3 to the caster’s normal Size”
+- Avalanche of Flesh and Steel — MoH p. 49; MuCo 10; R/D/T now Touch / Conc / Group. Target was “Group Up to ten men of Size +1 become capable of running as fast as a horse”
+- The Desert Wanderer — MoH p. 13; MuCo(An) 25; R/D/T now Per / Sun / Ind. Target was “Ind Alexander uses this spell to transform into an Arabian camel”
+- The Guardian of the Tombs — MoH p. 13; MuCo(An) 20; R/D/T now Per / Sun / Ind. Target was “Ind When faced with animals that might feed upon his camel form”
+- The Shadow on the Sand — MoH p. 13; MuCo(An) 30; R/D/T now Per / Sun / Ind. Target was “Ind The ability to take the shape of a vulture allows Alexander to forage for”
+- Summer’s Blessing — MoH p. 124; MuIg(Te) 30; R/D/T now Voice / Sun / Individual. Target was “Individual This spell turns the heat and flames of a large campfire into a sm”
+- Confound the Rival Singer — MoH p. 140; MuIm 5; R/D/T now Sight / Conc / Ind. Target was “Ind A somewhat mischievous spell”
+- Avoiding the Blame — MoH p. 12; MuMe 15; R/D/T now Eye / Sun / Ind. Target was “Ind This spell allows Alexander to rewrite all of the target’s memories concern”
+- Remembered Messages — TrME p. 74; MuMe 20; R/D/T now Touch / Sun / Boundary. Target was “Boundary To use this spell successfully requires a little preparati”
+- Miniaturist of Venice — HP p. 89; MuTe 50; R/D/T now Touch / Sun / Group. Target was “Group This spell reduces 100 cubic paces of glass int”
+- Harnessing the Essential Power (Form) — AM p. 67; MuVi Gen; R/D/T now Touch / Mom / Ind. Target was “Ind You cast this spell as another spell of a level less than this one is cas”
+- The Hedge Lord’s Synthemata of (X) — TMRE p. 88; MuVi Gen; R/D/T now Per / Diam / Ind. Target was “Ind The spell adds its (level –5”
+- Wizard’s Expansion (Form) — MoH p. 113; MuVi Gen; R/D/T now Voice / Momentary / Individual. Target was “Individual The Target of the targeted spell increases by one categ”
+- The Twice Gifted Coin — Cov p. 62; PeMe 15; R/D/T now Touch / Mom / Ind. Target was “Ind This spell is usually cast when the target deposits a coin into the caste”
+- Saving the Apprentice’s Time — MoH p. 31; PeTe 10; R/D/T now Touch / Mom / Room. Target was “Room Realizing she could squeeze in a few more precious moments of lab time”
+- Hinder the Gift — GotF p. 60; PeVi 55; R/D/T now Touch / Sun / Ind. Target was “Ind (Base effect, +1 Touch, +2 Sun)”. Base breakdown moved from Target to Base: (Base effect, +1 Touch, +2 Sun)
+- Paralysis of the Gift — HP p. 86; PeVi 20; R/D/T now Touch / Diameter / Individual. Target was “Individual The target feels The Gift becoming dull and moribund”
+- Revoke the Protection of (Form) — CI p. 62; PeVi Gen; R/D/T now Voice / Diam / Ind. Target was “Ind There are ten versions of this spell”
+- Revoke the Protection of (Realm) — CI p. 62; PeVi Gen; R/D/T now Voice / Diam / Ind. Target was “Ind There are four versions of this spell”
+- Division According to Blood — HP p. 88; Re(In)Co 25; R/D/T now Touch / Momentary / Part. Target was “Part To cast this spell”
+- The Jongleur’s Steps — App p. 46; ReAn 4; R/D/T now Voice / Conc / Ind. Target was “Ind This spell animates a shoe”
+- Swallowed by the Mist — MoH p. 75; ReAq 20; R/D/T now Voice / Mom / Part. Target was “Part This spell turns the targeted section of water to mist”
+- The Unruffled Traveler — App p. 48; ReAu 4; R/D/T now Per / Sun / Ind. Target was “Ind This spell wards the caster from light breezes”
+- Control the Dead Turb — HP p. 116; ReCo 40; R/D/T now Voice / Sun / Group. Target was “Group A group of ten corpses animate and follow the caster’s verbal commands”
+- Remain Within Those Walls — MoH p. 101; ReCo 20; R/D/T now Touch / Ring / Arcane Circle. Target was “Arcane”
+- The Messenger’s Shortcut — TrME p. 108; ReCo(An) 45; R/D/T now Touch / Mom / Group. Target was “Group Transports a rider and his horse one league (three miles”
+- Deny Them the Bridge — TrME p. 45; ReTe 30; R/D/T now Touch / Concentration / Structure. Target was “Structure This spell lifts a stone bridge”
+
+Not changed
+- Records whose Target is followed by a printed note, such as "Individual (+1 Size)", keep the note.
+- Evening's Comfort (Magi of Hermes p. 30) keeps "T: Per", as printed.
+- The 60 removals of v4.9.3.1 stand. A sample checked against The Broken Covenant of Calabais shows those spells appear only
+  in character stat blocks, which give a level and base breakdown but no printed R/D/T line.
+
+The source PDFs were read only. This report is inert plain text and does not execute code.

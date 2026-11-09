@@ -1,0 +1,15 @@
+Ars Machina — Scribe and Cast
+Netlify package v4.9.3.2
+Build date: 2026-10-25
+
+Changes made
+- Floorp/Firefox reported inline CSP violations without a script sample, producing false “Blocked script” app diagnostics for anonymous injected code.
+- The diagnostic now ignores inline CSP events whose sample is empty or whitespace; identifiable same-origin blocked-script samples are still reported.
+- The Content-Security-Policy remains strict; no script source or execution permission was added.
+
+Preservation
+- All 813 static assets remain byte-for-byte unchanged.
+- The spell source verification and picker data from v4.9.3.1 are preserved.
+- No visuals, animation, timing, audio, app content, or browser-specific APIs were changed.
+
+This is an inert plain-text change record. It does not execute code.

@@ -1,0 +1,32 @@
+/* v4.9.7.6 — group dividers in the Build sheet */
+#work > .f976-gdiv{display:flex;align-items:center;gap:14px;margin:30px 2px 12px;font:700 12px/1.2 var(--caps);letter-spacing:.1em;color:var(--muted)}
+#work > .f976-gdiv.first{margin-top:6px}
+#work > .f976-gdiv::before,#work > .f976-gdiv::after{content:"";flex:1 1 0;height:0;border-top:1px solid var(--rule)}
+#work > .f976-gdiv::before{flex:0 0 18px}
+#work > .f976-gdiv span{white-space:nowrap}
+
+/* sections a character cannot use yet: shown in the rail, greyed, not selectable */
+#rail .step.f976-na{opacity:.42;cursor:not-allowed;filter:grayscale(1);-webkit-user-select:none;user-select:none}
+#rail .step.f976-na:hover{background:none}
+
+/* one typeset for the rail and the rule checks */
+#rail .prog,#led-checks h4,.led-box h4{font:700 12px/1.3 var(--caps);letter-spacing:.1em;text-transform:none;color:var(--muted)}
+#rail .rail-g,.chk-g > summary,.chk-g > summary .chk-gn{font:600 13px/1.3 var(--caps);letter-spacing:.06em;text-transform:none;opacity:1}
+#rail .rail-g,.chk-g > summary,.chk-g > summary .chk-gn{color:var(--muted)}
+.chk-g > summary:hover .chk-gn{color:var(--lapis)}
+#rail .step .lbl,#led-checks ul.checks li{font-size:14px;line-height:1.35}
+#rail .step .sv,.chk-g > summary .chk-gc{font:400 12.5px/1.3 var(--body);letter-spacing:0;text-transform:none}
+
+/* portraits: upright, 100 × 130 */
+.hframe,.pslot .hframe,.hero-pt .hframe{aspect-ratio:100/130;height:auto}
+.hframe{width:120px}
+.pslot{width:150px}
+.pslot .hframe{width:132px}
+.concept-top .pslot .hframe,.pane .pslot .hframe{width:132px}
+.hero.hx:has(.hero-pt){grid-template-columns:200px minmax(0,1fr);align-items:start;column-gap:22px}
+.hero.hx .hero-pt{align-self:start}
+.hero.hx .hero-pt .hframe{width:200px;height:auto}
+@media (width<=980px){.hero.hx:has(.hero-pt){grid-template-columns:164px minmax(0,1fr)}.hero.hx .hero-pt .hframe{width:164px}}
+@media (width<=700px){.hero.hx:has(.hero-pt){grid-template-columns:132px minmax(0,1fr);column-gap:14px}.hero.hx .hero-pt .hframe{width:132px}}
+@media (width<=560px){.hero.hx:has(.hero-pt){grid-template-columns:112px minmax(0,1fr)}.hero.hx .hero-pt .hframe{width:112px}}
+.crop-stage{max-width:none}

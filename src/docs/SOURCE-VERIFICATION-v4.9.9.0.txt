@@ -1,0 +1,23 @@
+Ars Machina — source verification for v4.9.9.0 (2026-10-28)
+
+Read from the PDFs and the Definitive Edition text in the owner's library.
+
+Definitive Edition takes precedence where it carries the rule:
+- Training Creatures (DE pp. 384–386) adds Animal Ken to every taming formula, sets the required points at the
+  creature's Might with a minimum of 1, and adds an Ease Factor 15 command row (suicidal; Loyalty test against 9).
+  RoP:M pp. 81–82 lacks all three. The app uses the DE.
+- Mundane beasts (DE pp. 429–435) replace the RoP:M appendix (pp. 140–144). Differences:
+  Falcon (Falco): Communication –2 in the DE, 0 in RoP:M p. 142.
+  Lion (Leo): Cunning +2 in the DE, +1 in RoP:M p. 143.
+  Horse, Courser: Wound Penalties "–5 (16–21)" in RoP:M p. 143 (printing slip); the DE's values are used.
+- Elementals (DE pp. 449–451): the Size, Might and Characteristics table, combat, vis from wounds and Might recovery
+  follow the DE; the design procedure (inherited Virtues and Flaws, non-negative Characteristics, Abilities at the
+  Might's magnitude, obligatory powers) comes from RoP:M pp. 134–139, which the DE does not carry.
+
+Roadmap correction
+- The roadmap listed 13 ready beasts in the Book of Mundane Beasts; there are 12 (RoP:M pp. 141–144; DE pp. 429–435).
+
+Notes on the books
+- RoP:M's sample water elemental (p. 137) has Perception –2 although water elementals "cannot take a negative" in
+  Perception (p. 134); the app shows the rule as guidance and does not check it.
+- RoP:M p. 135's elemental table equals the DE's (p. 450).

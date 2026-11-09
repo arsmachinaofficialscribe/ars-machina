@@ -1,0 +1,52 @@
+Ars Machina — Scribe and Cast
+Version v4.9.8.0 (Lighter start, smoother changes)
+Build date: 2026-10-28
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Scope: loading and rendering only. No rule, data or save-format change.
+
+Network payload at start-up (hosted build)
+- The idle-time loop in the site-prefetch script that fetched every die's hero and tumble pictures (30 dice, about
+  2 MB) is removed. The die-face engraver (v4.8.7.0) no longer preloads every die's hero picture in idle time.
+- window.amWarmDie(key) warms one die (Modern: tumble + hero; Retro: tumble + resting sprite) and the engraver's
+  picture for it. After each Play draw, in idle time, the die of the selected check (getCheck(P().sel), dieArtKey)
+  is warmed, so the first roll still has its frames.
+- The bestiary and hedge lists (am49-data, 1.9 MB raw) are no longer fetched in idle time after load. They load
+  when a panel asks (unchanged getter, v4.9.0.0) or when the pointer or focus reaches the Realms, Magic or Hedge
+  tab or the Storyguide menu item.
+- The spell catalogue (v33-catalog-data) ships as plain JSON in the hosted build (pack.py PLAIN_JSON); the server
+  compresses it. The offline file keeps the zlib block.
+- Measured in Chromium, served with brotli, before entering the app: 82 requests, 3,403,208 bytes (v4.9.7.6) →
+  15 requests, 805,291 bytes.
+
+Animations and page changes
+- applyTheme, applySkin and applyFonts first hold every Build section and Play section lying more than 0.6 of a
+  screen outside the viewport (class am-cv: content-visibility auto at its measured size). They are released one
+  per idle callback from 0.7 s later. Page length and scroll position do not change; rail jumps land as before.
+- The sound button's overlap check (v4.8.4.0) runs 140 ms after scrolling stops instead of on every scrolled frame,
+  and its change watcher waits for 300 ms of quiet instead of firing every 300 ms during an animation.
+- Retro pixel sigils (retro-skin script) are not redrawn while the menu or a roll overlay covers them
+  (window.amTopLayer).
+- The roll overlay (.fx) has no backdrop blur. Its scrim is 86 % opaque; screenshots before and after show no
+  visible difference.
+- Measured at 4x CPU slowdown, 1350 px wide, mean frame time during the change: theme 147 ms → 32 ms, theme back
+  91 ms → 30 ms; skin about 100 ms → 48–64 ms (noisy). At 390 px: theme 90 ms → 19 ms, skin 83 ms → 31 ms.
+  Script time during a 1.2 s smooth scroll of the Build sheet: 380 ms → 66–81 ms (390 px: 500 ms → 115 ms).
+  Menu pages, folds and the roll were already at 60 frames per second and are unchanged.
+
+Main-thread work at load
+- The first-run chooser no longer forces a layout of the half-parsed page while html[data-booting] is set; its
+  ResizeObserver positions the previews after the first layout. Its palette lookup reads the style sheets once per
+  sheet count and keeps only :root rules.
+- No inflate of the spell catalogue in the hosted build (its script: about 100 ms → 25 ms at 4x).
+- Measured at 4x CPU slowdown from navigation to 4 s after load (Lighthouse-style grouping):
+  1350 px: 2.65–2.76 s → 2.0–2.1 s of main-thread work; time over 50 ms per task 1.16–1.21 s → 0.68–0.79 s.
+  390 px: 2.94 s → 2.28 s; 1.42 s → 1.05 s.
+- Not changed: the boot sheet draw (renderAll, about 85 ms at full speed) and the first layout; the start-up sorts
+  with Intl.Collator; script compile of the inline code.
+
+Tests
+- tests/run-tests.js: new perfChecks block (no die art or bestiary file at start-up; at most 20 start-up requests;
+  plain JSON catalogue loads; the selected check's die is warmed and no other; pointing at Realms fetches the lists;
+  a theme change holds off-screen sections and restores them all; rail jumps land at one offset; scrolling runs at
+  most 10 hit tests). The static check reads plain or zlib JSON blocks.

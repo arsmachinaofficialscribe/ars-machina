@@ -1,0 +1,6 @@
+# Security contact for Ars Machina — Scribe and Cast (RFC 9116).
+# The app runs entirely in the browser; character data never leaves it.
+Contact: mailto:security@arsmachina-scribe-and-cast.win
+Expires: 2027-10-27T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://arsmachina-scribe-and-cast.win/.well-known/security.txt

@@ -1,0 +1,30 @@
+Ars Machina — Scribe and Cast
+Version v4.9.8.1 (The style chooser appears sooner)
+Build date: 2026-10-28
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Scope: start-up painting only. No rule, data or save-format change.
+
+- The boot style (am-boot) no longer hides the first-run chooser (.amx-start): it paints as soon as its script
+  inserts it, about three quarters of the way through the page, instead of at DOMContentLoaded. Everything else
+  stays hidden until DOMContentLoaded, as since 4.9.5.1.
+- A first run is marked on <html> as data-boot-first (arm5-startup-setup-v46 not "1"). In the dark palette the boot
+  backdrop then paints the chooser's bar, its two halves (or, below 861 px, the Modern half) and its footer, with
+  the app's name where the chooser's title appears, from the first frame. Light palette and later visits keep the
+  plain backdrop and "Loading".
+- A click on a chooser button or half before DOMContentLoaded is held (window capture listener in the boot script)
+  and replayed once the page is ready.
+- The chooser's headings are written in Title Case in its source ("in Clear Light", "by Torchlight", "Concept and
+  Setting"), since it now paints before the Title Case observer (4.9.7.6) exists.
+
+Measured with Lighthouse 12 on a local server, v4.9.8.0 → v4.9.8.1:
+- Desktop, simulated throttling: score 97 → 98; Speed Index 1,190 → 758 ms; First Contentful Paint 979 → 690 ms.
+- Desktop, applied throttling (3 runs): Speed Index about 1,100 → 480–630 ms; FCP 1,370 → 150–330 ms; LCP 1,370 →
+  560–740 ms; score 92 → 88–93. Total Blocking Time 0 → 210–290 ms: the start-up work is unchanged, but it now falls
+  after the first paint, where the metric counts it.
+- Mobile, applied throttling: score 39 → 61–65; Speed Index 6,440 → 2,660–2,840 ms; FCP 3,440 → 830–870 ms;
+  LCP 6,730 → 3,700–3,840 ms.
+
+Tests
+- startupChecks: before loading finishes only the chooser may paint (was: nothing); the hosted build must paint the
+  chooser before loading finishes; an early click on "Enter Retro" is held and carried out.

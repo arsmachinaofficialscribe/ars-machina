@@ -1,0 +1,50 @@
+Ars Machina — Scribe and Cast
+Version v4.9.5.0
+Build date: 2026-10-26
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Fixes
+- True Faith grants a single Faith Point (RoP:D p. 57; DE p. 419). A character with the Virtue now starts with it; in
+  v4.9.4.0 the points stayed at 0 until a dawn was marked. Characters saved before this release receive the point once.
+- Student of (Realm): "Divine" (or "Holy") is accepted for the Dominion as well as "Dominion". It grants Dominion Lore
+  for character creation and its +2 bonus (DE p. 49); before, "Divine" silently granted nothing.
+
+Security verification
+- Content-Security-Policy (index.html <meta>, first element after the charset): script-src lists 79 exact SHA-256
+  hashes and nothing else (no 'self', 'unsafe-inline', 'unsafe-eval', nonce, wildcard or outside host);
+  default-src, object-src, frame-src, worker-src, base-uri and form-action 'none'; connect-src, img-src, media-src and
+  font-src limited to 'self' and data:/blob: where the app makes its own files. Every inline script and every on-demand
+  file matches a listed hash, and none is unused.
+- On-demand files (PDF libraries, PDF fonts, Storyguide) are fetched from the same site with Subresource Integrity and
+  then run only because their hash is listed: a changed file is refused twice.
+- Character files: a deliberately hostile file (markup and script in every text field, __proto__ and constructor keys,
+  wrong types, oversized numbers, unknown records) loads, renders on every Build section and Play tab, injects no
+  markup, pollutes no prototype, opens no dialog and raises no error. The True Faith, Ars Notoria and known-effect
+  records are clamped to their types and ranges on load. This test now runs with every release.
+- No request leaves the site; no AI or local-path text appears in anything shipped; data stays in the browser and the
+  player's own .json files.
+- Live site (checked on arsmachina-scribe-and-cast.win, still serving v4.9.3.5): all _headers present; scripts reach
+  the browser unaltered with data-cfasync="false"; Rocket Loader and Email Obfuscation are not active.
+
+Hardening in _headers
+- Content-Security-Policy header: frame-ancestors 'none'; base-uri 'none'; object-src 'none'; form-action 'none'.
+  A <meta> policy cannot carry frame-ancestors; both policies apply together, and the header adds no script rule.
+- "! Access-Control-Allow-Origin": Cloudflare Pages sends Access-Control-Allow-Origin: * by default, which let any
+  website read the page and its files. The app only reads its own site, so the header is removed.
+
+Not changed, for the owner to decide (Cloudflare dashboard)
+- JavaScript Detections is still injecting its inline script on the live site; the CSP blocks it (console only).
+- Strict-Transport-Security could add includeSubDomains (and preload) if every subdomain is served over HTTPS.
+- Unknown paths return the app with status 200 (Pages' single-page fallback); an on-demand file with a wrong name
+  still fails, because its fingerprint does not match.
+
+Optimisation
+- The v4.9.4.0 additions now return at once when nothing they handle is active (no God's aid, temper, tarnish or
+  Ars Notoria ring), and the Ars Notoria aura reduction is looked up only in a Divine aura. Build and Play render times
+  match v4.9.3.5 within measurement noise; a roll check costs about 0.006 ms more than in v4.9.3.5.
+
+Checked
+- Full suite on the hosted and offline builds: CSP and SRI, assets, version, AI-trace scan, the security checks above,
+  the v4.9.4.0 and v4.9.5.0 feature checks, and 16 screenshot views unchanged from v4.9.3.5 apart from the version.
+
+This is an inert plain-text change record. It does not execute code.

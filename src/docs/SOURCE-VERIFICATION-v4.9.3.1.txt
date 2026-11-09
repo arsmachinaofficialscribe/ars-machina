@@ -1,0 +1,144 @@
+Ars Machina — Scribe and Cast
+Source verification v4.9.3.1
+Date: 2026-10-24
+
+Audit scope
+Reviewed the 125 catalogue records that had blank or incomplete Range/Duration/Target fields. Searched all 47 supplied PDF files (6,694 pages), then checked candidate spell lines against the cited source book and printed page. The report below records only exact spell-line matches with a complete R/D/T triplet as recoveries.
+
+Result: recovered 65 complete spell records; removed 55 records with unresolved/incomplete source data; removed 5 records that are enchanted-item effects rather than spells.
+
+Recovered from cited source pages
+- Piercing Lance of Bone — L&L p. 60; CrAn 20; R/D/T: Touch / Diam / Ind
+- Strength Extinguished — MoH p. 82; CrAn 30; R/D/T: Touch / Sun / Part Creates a bull’s heart
+- Conjure a Dead Army — HP p. 116; CrCo 25; R/D/T: Touch / Mom / Group
+- Blissful Sensations — MoH p. 20; CrCo 30; R/D/T: Touch / Sun / Ind The spell removes all pain not exceeding the pain of a light wound from t
+- Weaver’s Trap of Threads — MoH p. 58; CrHe 20; R/D/T: Voice / Sun / Group A huge net of thick threads grows in the indicated area
+- The Wooden Horde — ToP p. 122; CrHe 45; R/D/T: Touch / Moon / Group This Animae Magic ritual creates ten Herbam-based faeries each with — Animae magic required
+- Told Story — MoH p. 124; CrIm 20; R/D/T: Voice / Performance / Individual Creates the images and sounds of a story sung by the bard — Performance Magic required
+- Eternal Repetition in a Bottomless Pool — Cov p. 101; CrIm 35; R/D/T: Arc / Sun / Ind This spell uses enchanted mirrors to display the text of a book to which
+- Orpheus’ Ballad — MoH p. 140; CrMe 20; R/D/T: Voice / Mom / Group The spell creates a momentary flash of intense unnatural fear
+- The Distracted Turb — ToP p. 123; CrMe 45; R/D/T: Voice / Diameter / Group Using Animae Magic — Animae magic required
+- Instant Loyalty of the Rebellious Turb — Cov p. 41; CrMe 50; R/D/T: Voice / Year / Group
+- (Mental Characteristic) of the Heroes — HoH:TL p. 103; CrMe 60; R/D/T: Touch / Mom / Ind
+- Bring Forth the Lord of Knives — ToP p. 123; CrTe 35; R/D/T: Touch / Diameter / Individual This Animae Magic spell con jures a slender faerie made o — Animae magic required
+- The Quarryman’s Gift of (Stone) — HP p. 40; CrTe 35; R/D/T: Touch / Momentary / Individual
+- Neriusian Portal — RoP:D p. 94; CrVi 65; R/D/T: Touch / Sun / Circle — Holy Magic required
+- (Immortal)’s Blessing — RoP:D p. 117; CrVi Gen; R/D/T: Per / Mom / Ind — Holy Magic required
+- Sense the Sleeping Hound — App p. 47; InAn 5; R/D/T: Voice / Mom / Ind This spell indicates to the caster if an animal within range is asleep
+- Scent of Ash — HP p. 12; InAu 15; R/D/T: Personal / Concentration / Smell The caster can smell and identify
+- Verifying the Presence of Artemis’ Blessing — MoH p. 22; InCo 15; R/D/T: Touch / Sun / Ind The caster is immediately aware of a conception in the target during the
+- Pull of Blood — MoH p. 65; InCo 20; R/D/T: Touch / Momentary / Bloodline — Faerie Magic required
+- From This Line Descended — TrME p. 44; InCo 30; R/D/T: Arcane Connection / Momentary / Individual This spell reveals whether the target represen
+- Perceive the Eyes of Knives — GotF p. 21; InMe 20; R/D/T: Touch / Mom / Room
+- Tread of Fellow Travelers — MoH p. 66; InMe 30; R/D/T: Road / Diameter / Group — Faerie Magic required
+- Reveal the Magical Deception — GotF p. 21; InVi 25; R/D/T: Per / Conc / Touch
+- Form of the (Temperament) Heartbeast — HoH:MC p. 36; MuAn 20; R/D/T: Per / Sun / Ind There are four versions of this spell
+- The Griffin Reborn — MoH p. 83; MuAn 35; R/D/T: Touch / Moon / Pair
+- Sculpt the Living Water — GotF p. 96; MuAq 20; R/D/T: Voice / Sun / Ind
+- Appease the Queen of Winter — GotF p. 96; MuAq 60; R/D/T: Voice / Year / Boundary
+- Assume the Stature of the Giants of Eld — MoH p. 49; MuCo 10; R/D/T: Per / Diam / Ind Adds +3 to the caster’s normal Size
+- Avalanche of Flesh and Steel — MoH p. 49; MuCo 10; R/D/T: Touch / Conc / Group Up to ten men of Size +1 become capable of running as fast as a horse
+- The Guardian of the Tombs — MoH p. 13; MuCo(An) 20; R/D/T: Per / Sun / Ind When faced with animals that might feed upon his camel form
+- The Desert Wanderer — MoH p. 13; MuCo(An) 25; R/D/T: Per / Sun / Ind Alexander uses this spell to transform into an Arabian camel
+- The Shadow on the Sand — MoH p. 13; MuCo(An) 30; R/D/T: Per / Sun / Ind The ability to take the shape of a vulture allows Alexander to forage for
+- Dragon’s Blood — HP p. 15; Mu(Re)Co(Ig, Te) 70; R/D/T: Personal / Year / Part
+- Summer’s Blessing — MoH p. 124; MuIg(Te) 30; R/D/T: Voice / Sun / Individual This spell turns the heat and flames of a large campfire into a sm
+- Confound the Rival Singer — MoH p. 140; MuIm 5; R/D/T: Sight / Conc / Ind A somewhat mischievous spell
+- Avoiding the Blame — MoH p. 12; MuMe 15; R/D/T: Eye / Sun / Ind This spell allows Alexander to rewrite all of the target’s memories concern
+- Seed of Betrayal — GotF p. 73; MuMe 15; R/D/T: Eye / Moon / Ind
+- Remembered Messages — TrME p. 74; MuMe 20; R/D/T: Touch / Sun / Boundary To use this spell successfully requires a little preparati
+- Miniaturist of Venice — HP p. 89; MuTe 50; R/D/T: Touch / Sun / Group This spell reduces 100 cubic paces of glass int
+- Harnessing the Essential Power (Form) — AM p. 67; MuVi Gen; R/D/T: Touch / Mom / Ind You cast this spell as another spell of a level less than this one is cas — Grigori Magic required
+- The Hedge Lord’s Synthemata of (X) — TMRE p. 88; MuVi Gen; R/D/T: Per / Diam / Ind The spell adds its (level –5 — Synthemata Magia required
+- The Lasting Synthemata of (X) — TMRE p. 86; MuVi Gen; R/D/T: Per / Diameter / Ind — Hermetic Synthemata required
+- Synthemata of (X) — TMRE p. 86; MuVi Gen; R/D/T: Per / Mom / Ind — Hermetic Synthemata required
+- Wizard’s Expansion (Form) — MoH p. 113; MuVi Gen; R/D/T: Voice / Momentary / Individual The Target of the targeted spell increases by one categ
+- The Twice Gifted Coin — Cov p. 62; PeMe 15; R/D/T: Touch / Mom / Ind This spell is usually cast when the target deposits a coin into the caste
+- Saving the Apprentice’s Time — MoH p. 31; PeTe 10; R/D/T: Touch / Mom / Room Realizing she could squeeze in a few more precious moments of lab time
+- Paralysis of the Gift — HP p. 86; PeVi 20; R/D/T: Touch / Diameter / Individual The target feels The Gift becoming dull and moribund
+- Fumigant of Minor Demons — TrME p. 74; PeVi Gen; R/D/T: Touch / Mom / Boundary
+- Revoke the Protection of (Form) — CI p. 62; PeVi Gen; R/D/T: Voice / Diam / Ind There are ten versions of this spell
+- Revoke the Protection of (Realm) — CI p. 62; PeVi Gen; R/D/T: Voice / Diam / Ind There are four versions of this spell
+- The Jongleur’s Steps — App p. 46; ReAn 4; R/D/T: Voice / Conc / Ind This spell animates a shoe
+- Still the Raging Waters — GotF p. 96; ReAq 15; R/D/T: Voice / Conc / Ind
+- Swallowed by the Mist — MoH p. 75; ReAq 20; R/D/T: Voice / Mom / Part This spell turns the targeted section of water to mist
+- The Unruffled Traveler — App p. 48; ReAu 4; R/D/T: Per / Sun / Ind This spell wards the caster from light breezes
+- In Christ’s Footsteps — GotF p. 96; ReCo 5; R/D/T: Per / Conc / Ind
+- Stance of the Firm Buttocked Knight — L&L p. 60; ReCo 20; R/D/T: Personal / Sun / Ind
+- Division According to Blood — HP p. 88; Re(In)Co 25; R/D/T: Touch / Momentary / Part To cast this spell
+- Control the Dead Turb — HP p. 116; ReCo 40; R/D/T: Voice / Sun / Group A group of ten corpses animate and follow the caster’s verbal commands
+- The Messenger’s Shortcut — TrME p. 108; ReCo(An) 45; R/D/T: Touch / Mom / Group Transports a rider and his horse one league (three miles
+- The Unerring Lance — L&L p. 60; ReTe 20; R/D/T: Touch / Diam / Ind
+- Deny Them the Bridge — TrME p. 45; ReTe 30; R/D/T: Touch / Concentration / Structure This spell lifts a stone bridge
+- Awaken Sleeping Giant! — HP p. 13; ReTe(Ig) 45; R/D/T: Touch / Momentary / Part
+- Invoke the Pact of (Daimon) — TMRE p. 80; ReVi Gen; R/D/T: Arcane / Mom / Ind — Hermetic Theurgy required
+- Sustain a Spell of (Form) — TMRE p. 27; ReVi Gen; R/D/T: Touch / Special / Ind — Spell Binding required
+
+Removed: incomplete or unverifiable spell data
+- Champion's Strength — BCoC p. 61; CrAn 40. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Mend the Broken Figure — BCoC p. 61; CrAn 40. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Gift of Man's Fortitude — BCoC p. 61; MuAn 15. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Ignite the Inflammable Item — BCoC p. 66; CrIg 15. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Conflagration of Light — BCoC p. 66; CrIg 50. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Tossing the Brawling Brute — BCoC p. 75; ReCo 10. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Topple the Brutish Band — BCoC p. 75; ReCo 20. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- For They are Life to Those Who Find Them and Healing to all Their Flesh — CI p. 67; CrCo 20. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Pungent Potion of Ease — HMRE p. 51; CrCo 20. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Saoshant’s Elixir — RoP:D p. 117; CrCo 50. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Palm of Odorous Flame — MoH p. 30; CrIg 5. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Repel Winter’s Clutches — MoH p. 75; CrIg 5. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Conflagrative Servant — MoH p. 111; Cr(Re)Ig 45. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Rising Passion — GotF p. 73; CrMe 15. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Bind the Living Ghost — TMRE p. 71; Cr(Pe, Re)Me(Co) Gen. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- The Riches That Are Rightfully Mine(d) — Cov p. 61; CrTe 35. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Sight of the Molting Magus — HoH:TL p. 72; InCo 25. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- An Ear for Distant Bells — L&L p. 15; InIm 15. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Transform the Tailor’s Craft — MoH p. 91; MuAn 15. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Slipperiness of the Eel — TSE p. 35; MuCo(An) 5. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Stickiness of the Lizard’s Toes — TSE p. 35; MuCo(An) 5. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- The Twisted Tongue — L&L p. 84; Mu(Pe)Co 20. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Put on the Whole Armor of God, That You may be Able to Stand Against the Schemes of the Devil — CI p. 67; MuCo 30. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- A Spell for the Defense of the Realm Against Expected Invasions — TrME p. 78; MuCo 50. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Covenant of the Dragon — HP p. 15; Mu(Re)Co(Ig, Te) 85. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Locked Storehouse — MoH p. 65; MuHe(Te) 45. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Conflagratious Lanyard — MoH p. 13; MuIg(An) 30. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Servant of Fire — MoH p. 125; MuIm(Ig, Me) 35. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Nordic Triumph — L&L p. 122; MuMe(He, Te) 65. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Rapid Excavations — MoH p. 14; MuTe(Aq) 30. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Transmutation of Fire — MoH p. 113; MuTe(He, Ig) 40. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Clear Breath of the Consummate Liar — GotF p. 73; MuVi(Me) 20. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Group Wizard’s Boost (Form) — MoH p. 113; MuVi Gen. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Be Rid of the Tell Tale Smoke — MoH p. 28; PeAu 20. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Evisceration of a Thousand Knives — GotF p. 60; PeCo 30. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Slay the Innocent — TSE p. 37; PeCo(An) 30. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Obliteration of the Traveler’s Barrier — TSE p. 37; PeTe(He) 20. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Flaws of the Weaponsmith — GotF p. 60; PeTe 25. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Sap the Griffin’s Strength — GotF p. 60; PeVi Gen. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Shattering the Malicious Rune — GotF p. 60; PeVi Gen. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Plague of Rats — A&A p. 30; ReAn 20. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- The Verminous Infestation — A&A p. 30; ReAn 20. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Bring the Herd to Market — TrME p. 108; ReAn 40. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Then I was the Craftsman at His Side. I was Filled with Delight Day After Day — CI p. 67; ReCo 15. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- It will be Health to Your Flesh and Strength to Your Bones — CI p. 67; ReCo 20. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- That I May Come Unto You with Joy by the Will of God, and May With You be Refreshed — CI p. 67; ReCo 25. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Possess the Deceased Host — TMRE p. 74; ReCo 30. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Control the Dead Horde — HP p. 117; ReCo 50. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- The Daner’s Dame — App p. 46; ReHe 5. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- The Resolute Mind of the Tireless Researcher — Cov p. 122; ReMe 20. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Summoning the Spirit of Anger — HoH:S p. 99; ReMe 40. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Grasp of the Distant Slingstone — TSE p. 37; ReTe 10. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- Foras Vim — MoH p. 31; ReTe 15. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- The Perfected Structure — TMRE p. 96; Re(Cr)Te(He) 20. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+- The Patient Spell — MoH p. 113; ReVi Gen. No complete, matching R/D/T line could be verified in the supplied book corpus; removed from the spell picker rather than inventing missing values.
+
+Removed: enchanted-item effects, not spells
+- Reveal the Hidden Words — HoH:S. The cited book presents this as an enchanted item/effect, not a spell; removed from the spell picker.
+- Ring of Protection against Magical Creatures of Fire — HP. The cited book presents this as an enchanted item/effect, not a spell; removed from the spell picker.
+- Scribe of All That I Can See — HP. The cited book presents this as an enchanted item/effect, not a spell; removed from the spell picker.
+- The Entrapped Flame — HP. The cited book presents this as an enchanted item/effect, not a spell; removed from the spell picker.
+- Vulcan’s Glass — HP. The cited book presents this as an enchanted item/effect, not a spell; removed from the spell picker.
+
+Preservation notes
+- Every retained record keeps its source book, printed page, name, Technique/Form, level, ritual status, requisites, and any verified special requirement.
+- The source PDFs were read only; they were not modified.
+- This report is inert plain text and does not execute code.

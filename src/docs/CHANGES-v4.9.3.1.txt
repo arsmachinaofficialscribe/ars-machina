@@ -1,0 +1,18 @@
+Ars Machina — Scribe and Cast
+Netlify package v4.9.3.1
+Build date: 2026-10-24
+
+Changes made
+- Cross-checked all 125 spell catalogue records flagged as missing Range, Duration, or Target against the supplied book PDFs.
+- Recovered complete Range, Duration, and Target values for 65 spells from the cited source pages.
+- Removed 55 records for which the source corpus did not provide a complete, matching Range/Duration/Target line.
+- Removed five entries that the cited pages identify as enchanted-item effects, not spells.
+- Replaced the spell picker’s vague “partial source stats” label with the record’s specific source note.
+
+Source and data integrity
+- The source verification report lists every recovered and removed record and explains each removal category.
+- All remaining new spell records have complete Range, Duration, and Target values; their printed spell names, Technique/Form, levels, book pages, and special requirements are preserved.
+- All original static assets remain byte-for-byte unchanged.
+- No visual effects, artwork, animation frames, timing, audio, or other app content were altered.
+
+This is an inert plain-text change record. It does not execute code.

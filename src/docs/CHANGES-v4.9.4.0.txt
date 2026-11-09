@@ -1,0 +1,66 @@
+Ars Machina — Scribe and Cast
+Version v4.9.4.0
+Build date: 2026-10-26
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Hedge magic: known effects finished (Hedge Magic, Revised Edition)
+- Folk witches: Known Effects lists the published effects with their Ease Factors: the eight curses (Disease, Miscarriage,
+  Aging, Emotion, Tongue, Paralysis, Beast, Reduction; pp. 37–38), Flight (p. 38), and the Healing and Animal Healing
+  table of wounds and Fatigue levels with their vis costs (pp. 35, 38). Custom entries take a power, Ease Factor and method.
+- Elementalists: entries record Technique, elemental Form and effect level, with the summoning chart (pp. 23–26).
+  HMRE prints no named elementalist effects, so none are offered from the book.
+- Each known effect loads its Play roll with the power and Ease Factor, or Technique, Form and level, already set.
+- Nightwalkers: unchanged; their powers have fixed rolls, all already in Play (pp. 106–108).
+
+True Faith and the Divine (Realms of Power: The Divine; Definitive Edition)
+- True Faith Score (1 per True Faith Virtue taken, or set in Play), Faith Points with a dawn refresh, and a test or
+  crisis of faith that stops spending (RoP:D pp. 57–60; DE p. 419).
+- Magic Resistance of True Faith Score × 10. It does not stack with other Magic Resistance; the higher total applies
+  (DE p. 55).
+- Faith Points spent on a roll like Confidence: +3 each, up to the True Faith Score per roll (one at a time without a
+  score); +6 each from True Faith 3 (Hope).
+- Embodying the Light: Devotion (2: Premonitions, dispel illusions and glamours with a Faith Point), Hope (3: +6 per
+  Faith Point, Magic Resistance doubled against Mentem), Charity (5: an Empyreal aura of score – 4 at Voice range)
+  (RoP:D pp. 61–62).
+- Pray for a miracle: stress die + True Faith + Concentration (or a Holy Method) + aura against the miracle's level,
+  adjusted for timeliness (+10 to –20) and need (–15 to +20); extra Faith Points +3 each; group prayer with Ceremony;
+  Faith Points spent from the result; botch and Warping notes (RoP:D pp. 60–62).
+- Invoke God's aid: stress die + Communication + Dominion Lore, at least three botch dice on a zero; 9+/15+/24+ give
+  +1/+2/+3 to the scene's rolls that further the objective, ending automatically at the first failed roll; group
+  prayer; paid with a Confidence or Faith Point (RoP:D pp. 41–42).
+
+Tempers and tarnishes
+- Temper a Dominion aura: stress die + Presence + Leadership (+ Ceremony when ceremonial; Uncertain Faith –3),
+  9+/15+/24+ for +1/+2/+3, with the seven tempers and their virtues and vices (RoP:D pp. 38–40).
+- Tarnish an Infernal aura: stress die + Presence + Leadership, 9+ to 24+ for 1 to 6 (RoP:I pp. 23–24).
+- An active temper offers +value / –value on rolls in the Divine aura; an active tarnish offers +value / –value on
+  Personality rolls in the Infernal aura (none with True Faith, RoP:I p. 13). Each fades by a day, morning or season.
+  Aura modifiers set a temper or tarnish laid by someone else.
+
+Ars Notoria (RoP:D pp. 92, 97–100)
+- Recitation total = Intelligence + Ars Notoria + modifiers (fasting, chastity, honorable and dishonorable Flaws,
+  sins, non-Divine Supernatural Abilities, True Faith, storyguide) + stress die; Ease Factor 6 (first) or 3 (known)
+  + 3 × ring + 1 per season. Rings are first learned in order.
+- Active rings in Play: 100 XP in Philosophiae, Theology or Medicine; Communication or Intelligence +3 to a maximum of
+  +5; the fifth ring's realm sensing; the sixth ring's divination; the seventh ring's stress dice without botches.
+- Rolls for the search for the Book of Solomon (Intelligence + Dominion Lore vs 21) and for fasting (Stamina vs 6, +1
+  per consecutive season).
+- The Ars Notoria score reduces the Divine aura penalty to other magic by 3 per point.
+- Build: checks Artes Liberales, Latin, Greek, Hebrew and Chaldean at 4, and the creation eligibility; adds the 50 XP
+  pool for the languages. Ars Notoria is now a Supernatural Ability (it was filed as Academic).
+
+Readings where the books are silent (labelled in the app)
+- Miracle "+ Aura": the Divine aura is added; other auras are not.
+- Extra Faith Points spent on a miracle add +3 each as RoP:D p. 60 states, even with Hope.
+- Hope doubles the character's final Magic Resistance against Mentem.
+- The Ars Notoria 50 XP pool covers the four languages only, as the Virtue says "to help you achieve the language
+  requirements".
+- Ring benefits apply in Play only; the Build tab shows the permanent sheet.
+
+Checked
+- Every inline script and on-demand file matches its CSP hash; SRI matches each file; 849 assets present and named by
+  hash; no AI or local-path text in anything shipped.
+- Regression suite (hosted and offline) and 25 new feature checks covering each item above pass in Chromium, with no
+  errors or CSP violations. The 16 screenshot views match v4.9.3.5 apart from the version number.
+
+This is an inert plain-text change record. It does not execute code.

@@ -1,0 +1,61 @@
+Ars Machina — Scribe and Cast
+Version v4.9.9.7 (Play screen tidy)
+Build date: 2026-10-28
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Scope: layout and persistence; no rule values changed. Numbered as a patch at the author's request. Save format
+unchanged; new optional play fields x.rlmOn (per-tool choices) and fight ({on, round}) are read with coercion only.
+
+Play › Realms
+- "Show all tools" is replaced by "Tools shown: n of m", a fold listing every Realms tool available to the sheet,
+  grouped Divine, Infernal, Faerie, Magic and Places. Each tool can be ticked or unticked; tools the sheet does not
+  call for are marked "not on the sheet". "Show all" ticks everything; "Only what the sheet uses" clears the choices.
+  Choices are saved with the sheet per tool title. Sections a switched-off book removes are not listed.
+- The empty-tab note points to Situation for the aura and to Tools shown.
+
+Play › Situation
+- Calm or Under stress, Aura, Mounted and Exertion form one framed strip of 36 px cells that share the width; the
+  aura cell keeps room for its realm (the chosen realm stays readable from 390 to 1440 px, measured), and below
+  620 px the strip stacks. "Fatigue and wounds apply on their own" moves to the Situation label's tooltip.
+
+Play › every tab
+- A section's description longer than 90 characters, and plain body notes longer than 140 characters (no bold,
+  links or controls), sit behind the "i" button beside the section title, as on Realms since 4.9.9.5. Open
+  descriptions stay open across redraws for the session. Notes carrying figures in bold stay in place.
+
+Persistence
+- A fight in progress and its round were lost on reload and on switching characters; they are now kept per sheet
+  in play.fight and restored.
+
+Legend (roll console › Legend), checked line by line against the Definitive Edition (and Grogs p. 65, Lords of Men
+pp. 123–135 for their tables)
+- Page fixes: Characteristics p. 48 (was 47); Ability and Art costs p. 49 (48); later life p. 49 (48);
+  apprenticeship p. 49 (50); Affinity p. 69 (72); Confidence p. 29 (28); spontaneous totals p. 214 (213); ceremonial
+  casting pp. 217–218 (215); vis in casting p. 216 (215); Mastery p. 225 (223); Lab Total p. 249 (250); summa
+  writing pp. 379–380; Damage and Soak p. 394 (393); creature Magic Resistance p. 412 (552); Personality and
+  Reputation pp. 28–29 (28); Warping from botch dice p. 228 (227); mastered spells pp. 213–214, 225; Magic tab:
+  Magic Resistance doubled against a mastered spell p. 225 (227).
+- Wording fixes: "Targeting" was the Multiple Casting mastery penalty (p. 226), now named so; fast casting is for
+  Spontaneous spells only (p. 217); Affinity rounds up for Abilities too and raises Advancement Totals (p. 69);
+  "1 XP removes this" dropped from untrained Abilities (not in p. 157); Arcane Discovery risk is +1 per 5 points or
+  fraction of Magic Theory (p. 277); Opening the Arts: the master's Arts under 5 (p. 270); Soak adds the Form Bonus
+  for magi (p. 394); creature Magic Resistance adds the aura modifier (p. 412); Divine powers take no aura penalty
+  or extra botch dice in other realms' auras (p. 411); maintaining another spell is 12, +3 for each spell beyond
+  the second, and the injured penalty replaces the normal one (p. 215); Disarm is resisted by Defense only (Lords of
+  Men p. 133); the Grogs table names its book and reads "crises".
+- Checked and correct: Ease Factors (p. 8), dice and stress-die odds (p. 7), botch dice (p. 8), spellcasting
+  results (p. 213), realm interaction (p. 411), Fatigue and wounds (pp. 403–405), Concentration (p. 215), combat
+  maneuvers (p. 398), aging and crisis (pp. 391–392), Twilight (p. 228), certamen (p. 231), the laboratory formulas
+  (pp. 249–280), study (pp. 376–383), combat (pp. 393–407), Penetration and regio sight (pp. 412, 421).
+- Not checked: the Hedge Magic summoning chart, shown only to hedge wizards.
+
+Checked and left as they are
+- The aura realm and strength appear under Situation and in the roll console's "Aura modifiers" fold; Mounted and
+  Exertion appear under Situation and in the combat roll's modifiers. Each pair edits the same saved value and
+  stays in step (tested both ways). Play tab, sub-tab, roll, console tab, Realms sub-tab, folds and situation all
+  survive a reload.
+
+Screenshots: the four Play views differ from 4.9.9.6 by the taller Situation strip (24 px Modern, 26 px Retro,
+shifting what follows) and the General Abilities description moving behind its "i" button.
+
+Tests: runner block f997Checks on both builds; the 4.9.9.5 checks use the picker.

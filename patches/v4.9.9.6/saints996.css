@@ -1,0 +1,7 @@
+.s996-pw{border:1px solid var(--rule);border-radius:8px;padding:6px 10px 8px;margin:8px 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:4px 12px;min-width:0}
+.s996-pw legend{font:600 12px var(--caps);letter-spacing:.08em;color:var(--muted);padding:0 4px}
+.s996-pw .chk{font-size:13px;align-items:baseline}.s996-pw small{margin-left:2px}
+.s996-saint{margin-top:8px}.s996-over{color:var(--bad)}
+.s996-relic{margin:8px 0}.s996-use{grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr))}
+.s996-pws b{color:var(--ink)}
+.pane.sectioned:has(>.rlm-bar) .psec-b{grid-template-columns:minmax(0,1fr)}.pane.sectioned:has(>.rlm-bar) :is(.psec-in,details,fieldset){min-width:0}

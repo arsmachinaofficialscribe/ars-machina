@@ -1,0 +1,17 @@
+Ars Machina — Scribe and Cast
+Netlify package v4.9.3.3
+Build date: 2026-10-25
+
+Changes made
+- Corrected the app metadata used in credits, menus, and exported character files to report v4.9.3.3 and build date 2026-10-25; the header already displayed v4.9.3.3.
+- The PDF and fontkit libraries were present in the app as two compressed lazy-load chunks, but Netlify’s Content-Security-Policy did not authorize those scripts after the app expanded and inserted them. This caused PDF export to report that the library had not loaded.
+- Added the exact SHA-256 hashes of the two decoded, bundled library chunks to script-src. The two chunks are verified from the shipped HTML payload.
+- Kept the v4.9.3.2 diagnostic change: anonymous CSP events with empty samples are omitted, while identifiable same-origin script violations remain visible.
+
+Preservation
+- The PDF libraries remain bundled in the page; no external library request was introduced.
+- The CSP still permits only explicitly hashed scripts. No broad unsafe-inline, blob, or wildcard script source was added.
+- All 813 static assets remain byte-for-byte unchanged.
+- The v4.9.3.1 spell source verification data and audit are preserved.
+
+This is an inert plain-text change record. It does not execute code.

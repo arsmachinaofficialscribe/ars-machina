@@ -1,0 +1,21 @@
+Ars Machina — Scribe and Cast
+Version v4.9.5.1 (patch: fixes only, no rule or content change)
+Build date: 2026-10-26
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Fix
+- Start-up flash. The app is a single large page and the browser paints it while it is still being read. The Build
+  workspace sits near the top of the page, the main menu is made by a script about 2.7 MB in, and the first-visit
+  style chooser by a script about 3.5 MB in. Measured in Chromium on a first visit: Build painted at about 0.1 s, the
+  menu at about 0.4 s, the chooser at about 0.9 s. On later visits Build showed for about 0.2–0.3 s before the menu.
+- Now the first script in the page marks it as loading; until every script has run (DOMContentLoaded) the page shows
+  only its theme's background (dark, light, Retro dark or Retro light), with a quiet "Loading" line after 0.4 s. The
+  app is laid out underneath but transparent, so measurements and keyboard focus work as before. A 15-second
+  fallback clears the mark if the event never arrives. The load-error notice is never hidden.
+
+Checked
+- New start-up checks on the hosted and offline builds: nothing painted before loading finishes; the chooser is on the
+  first painted screen of a first visit and holds keyboard focus; the menu is on the first painted screen of a later
+  visit. Full suite otherwise unchanged; Content-Security-Policy hashes recomputed for the changed script.
+
+This is an inert plain-text change record. It does not execute code.

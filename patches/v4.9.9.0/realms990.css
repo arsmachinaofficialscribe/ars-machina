@@ -1,0 +1,11 @@
+/* 4.9.9.0 Faerie and Magic in play */
+.f990-realms h4,.f990-being h4,.f990-tov h4{margin:14px 0 6px}
+.f990-being,.f990-tov{margin-top:12px;border-top:1px solid var(--rule);padding-top:8px}
+.f990-beast{border:1px solid var(--rule);border-radius:8px;margin:6px 0;padding:0 10px}
+.f990-beast>summary{cursor:pointer;padding:6px 0;font-weight:600}
+.f990-beast>summary small{font-weight:400;opacity:.75;margin-left:6px}
+.f990-beast dl{display:grid;grid-template-columns:max-content 1fr;gap:2px 12px;margin:0 0 8px;font-size:13.5px}
+.f990-beast dt{font-weight:600}
+.f990-beast dd{margin:0}
+.f990-bestiary>summary{cursor:pointer;font-weight:600;padding:6px 0}
+@media (max-width:560px){.f990-beast dl{grid-template-columns:1fr}}

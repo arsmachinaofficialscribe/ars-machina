@@ -1,0 +1,8 @@
+* text=auto eol=lf
+*.png binary
+*.webp binary
+*.jpg binary
+*.woff2 binary
+*.zip binary
+# the app's source page holds inlined, compressed payloads: keep it out of language stats and diffs
+src/index.html linguist-generated=true -diff

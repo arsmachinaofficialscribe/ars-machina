@@ -1,0 +1,38 @@
+Ars Machina — Scribe and Cast
+Version v4.9.6.3 (patch: data fixes; no rule or content change)
+Build date: 2026-10-27
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Virtues and Flaws
+- Two Flaws were listed under half their names. The Definitive Edition prints both headings over two lines, and the
+  v2.0.0 heading scan read only the second line:
+  - "Infernal Power" (Minor, Hermetic, p. 146) is Susceptibility to Infernal Power. The false entry is removed.
+    Susceptibility to Infernal Power now shows its Definitive Edition page, 146 (it showed 117, an old corebook page).
+    The false entry had also been merged with Realms of Power: The Infernal's corrupted-beast Virtue "Infernal Power"
+    (p. 78), which it hid from the list; that Virtue is listed again.
+  - "Aura for (Ability)" (Minor, Supernatural, p. 138) is Necessary (Realm) Aura for (Ability). The false entry is
+    removed, and Necessary (Realm) Aura for (Ability) is listed from the Definitive Edition, p. 138 (also Grogs p. 82).
+    Its -3 roll option was already wired under the full name; a duplicate under the short name is removed.
+- A saved character that carries either false name is renamed when opened.
+- A scan of the Definitive Edition's two-line Virtue and Flaw headings against the list found no others.
+
+Bestiary
+- Nasir, the Helper and Samuil, Angelic Guide: Realms of Power: The Divine p. 33 (they showed p. 5).
+- 137 entries held their powers as one paragraph. 56 are now split into one entry per power. 48 printed only a list of
+  power names: those names are listed one by one, with each power's text filled in from the same book, or from the
+  saints' miracles and curses of Realms of Power: The Divine pp. 88-89 for saints in other books; 23 names the book
+  does not describe there say so. Prose after the powers is kept as a "Notes" entry. 33 paragraphs hold no power lines
+  (for example "n/a", "None", or a reference to another stat block) and are unchanged.
+- 43 entries had a power whose text ran into the next power's line; those are separated.
+- Dysenteric Infliction (a saint's curse, RoP: The Divine p. 89) was inside Blisters of Humility, and Dozens of Eyes
+  and Venomous Bite inside Enthralling Sound, in the power catalogue; separated.
+- Lamashtu's Fatal Menses (Realms of Power: Faerie p. 67) was missing; added.
+
+Text
+- The Legend's realm interaction note said half an aura is shown unrounded. It rounds down where the book gives no
+  rounding (DE p. 6), as the calculations have since v4.8.5.0; the note now says so.
+
+Checked
+- Full suite on both builds; Content-Security-Policy hashes recomputed.
+
+This is an inert plain-text change record. It does not execute code.

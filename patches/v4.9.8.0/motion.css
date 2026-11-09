@@ -1,0 +1,8 @@
+/* 4.9.8.0 motion and rendering cost */
+/* While the theme, skin or fonts change, sections well outside the viewport are held at their measured size and
+   skipped (class am-cv, set and cleared by the v4.9.8.0 script); they are restyled one at a time in idle time
+   afterwards, so the cross-fade only has to redraw what is on screen. */
+#work>section.folio.am-cv,.psec.am-cv{content-visibility:auto}
+/* the roll scrim is 86 % opaque: its 3 px backdrop blur cost a full-screen filter pass on every animation frame
+   and could not be seen through it */
+.fx{-webkit-backdrop-filter:none;backdrop-filter:none}

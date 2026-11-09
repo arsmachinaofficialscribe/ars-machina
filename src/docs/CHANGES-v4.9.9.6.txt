@@ -1,0 +1,44 @@
+Ars Machina — Scribe and Cast
+Version v4.9.9.6 (Saints and relics)
+Build date: 2026-10-28
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Scope: numbered as a patch at the author's request; it adds saints and relic content. Save format unchanged; new
+optional fields (sn996 on the sheet; saint, rpw and hf on relic items) are sanitised on load.
+
+Play › Realms › Saints
+- The saint list adds the 25 saints of "More Saints" (RoP:D p. 91) with Divine Might by category (greater 75, area
+  50, local 25) and patronage. The book gives them no powers. St Patrick, St Kevin and St John the Evangelist are not
+  added again: they are statted as Saint Patrick (CI p. 134), Saint Kevin of Glendalough (CI p. 135) and
+  St. John the Apostle (Antagonists p. 61).
+- The chosen saint's powers are listed with each power's cost and Penetration (Divine Might – 5 × cost, RoP:D p. 88).
+- Your patron saint: invoking that saint counts as invoking your patron; any other saint takes –15 (RoP:D p. 87).
+- Your saints: name, kind (greater, area or local, RoP:D p. 89), patronage, and powers chosen from the book's
+  miracles (p. 88) and curses (p. 89), or taken from a sample saint (p. 89). The total cost is shown against the
+  rule of thumb, a fifth of the Divine Might (p. 89), with the category guidance (p. 88). A saint from the p. 91 list
+  can be made one of your saints to give it powers. Basis for custom and local saints: DE p. 501; RoP:D p. 89.
+- A patron or a saint of your own keeps the Saints section on the Divine sub-tab.
+
+Play › Realms › Relics
+- Each relic: highest Faith Score in any faith (Divine Might = that × 10; DE p. 419; RoP:D p. 45), the saint it
+  belongs to, and its powers, taken from that saint or chosen (DE p. 419; RoP:D p. 45). Using a power spends its cost
+  from the relic's Divine Might until sunrise; Penetration is the relic's Divine Might – 5 × cost (our reading,
+  following the saints' rule, RoP:D p. 88).
+- Sample relics (RoP:D p. 44): the Head of John the Baptist (Faith 5, Might 50; Resist Temptation, The Faithful Made
+  Whole), Nehushtan (Faith 3 Jewish / 2 Christian or Muslim, Might 30; Mass Healing), the Ark of the Covenant
+  (Faith 10 Jewish / 7 Christian or Muslim, Might 100; powers at the storyguide's choice).
+- The note adds the DE rule: one relic's benefits at a time; relying on more than one is a sin and loses all (DE p. 419).
+
+Fixes
+- Saint Martin of Tours lacked The Laborer's Boon (RoP:D p. 90).
+- Grant of Serenity read "Enchantment of the Hermetic spell Detachment" in 22 bestiary entries: "the Hermetic spell
+  Enchantment of Detachment" (RoP:D p. 88).
+- Tarnishing an aura cited RoP:I p. 23; the rule is on p. 24.
+- Realms: an open table of the seven tempers ran past the pane at phone width in Retro; section bodies now shrink to
+  the pane.
+
+Loading screen: not added. The page already paints a backdrop with the app's name from the first bytes (observed
+first paint 0.19 s unthrottled) and the style chooser follows; Lighthouse's simulated mobile first paint is set by
+the size of the document, which a loading screen cannot change.
+
+Tests: runner block f996Checks on both builds.

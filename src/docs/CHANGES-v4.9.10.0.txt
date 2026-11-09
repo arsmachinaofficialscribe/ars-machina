@@ -1,0 +1,65 @@
+Ars Machina — Scribe and Cast
+Version v4.9.10.0 (A clearer Build sheet, and a faster one)
+Build date: 2026-11-09
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Scope: Build sheet layout and speed. No rule or content change; save format unchanged. Numbered 4.9.10.0 at
+Haik's request (mass battle, planned under that number, moves to the next release). Section headings stay in
+Title Case (Haik, 2026-11-09).
+
+LAYOUT (patches/v4.9.10.0/sheet.css, sheet.js)
+- Section cards stay; inside them, lists sit in boxes (sunk panel, rule border, header band) and rows are divided
+  by hairlines: Virtue and Flaw columns, Personality Traits and Reputations, every table in a section (Characteristics,
+  Abilities, Arts, weapons), the spell and possession lists, and Personality's sub-groups (Warping, Aging and Twilight;
+  Longevity Ritual; Raw Vis), which are wrapped in .f910-box after each redraw. Biography and Combat sub-groups too.
+- Spells: one grid row (name, Arts, Level, Casting, Max learnable, details, remove), column names on the first row
+  only (the others keep them for screen readers). Range, Duration, Target, mastery, notes and the "As in the book"
+  line open behind a chevron (button.f910-more, aria-expanded); open rows are kept for the session.
+- Possessions: the same, with columns Kind, Number, Kept, Load each, Load and the Ready button.
+- Sources: "Ars Magica Definitive Edition p. 79" and every supplement title become a chip "DE p. 79" (codes from
+  BOOKS; ArM5 shown as DE), the full title in the tooltip. On a Virtue or Flaw the chip sits on the name line
+  (Retro: on the detail line, so names are not cut).
+- Free box on a Virtue or Flaw: shown when ticked, or while the row is hovered or focused.
+- Fields inside rows and tables have no border until hovered or focused.
+- House picker: crests 32 px in a strip of 132 px tiles (two or three rows instead of two rows of 120 px tiles).
+- Ledger (audit C4): Experience ring shows "/ total"; Best Art leaves the rings for a text line.
+- Retro: the 4 px red stripe painted down the left of every section header (72 % of its height, so the seal cut it
+  into two red ticks) is gone. Each section card instead hangs a pixel bookmark ribbon from its top frame: a 9 × 16
+  pixel sprite (inline SVG, crisp edges) drawn at 2× (18 × 32 px) in the left gutter, with a 2 px hard drop shadow;
+  it is gold while the section is pinned. Retro section cards have 32 px left padding (was 22) so the ribbon clears
+  the seal. A folded section's summary chips sit 10 px above the gold rule under the heading (they touched it).
+- Phones (≤ 600 px): the section header's pill column flexes and its text wraps, so it never runs under the i,
+  pin and Fold buttons (it did on Abilities, Arts and others in 4.9.9.9).
+- Desktop example magus: Build page 13,957 → 11,989 px; phone 21,468 → 17,811 px. Spells 1,744 → 673 px,
+  Virtues and Flaws 1,341 → 929 px, Inventory 1,692 → 1,148 px.
+
+SPEED (patches/v4.9.10.0/perf.js; phone width, 4x CPU throttling, example magus)
+- Typing: the input listener schedules refresh() (window.amRefreshSoon): number fields once a frame, text fields
+  280 ms after the last key; focusout, pointerdown, Enter/Tab, pagehide, a hidden page, renderAll and setMode run it
+  at once. setPath still stores every key in st immediately. Time to paint a keystroke in Name: 145–200 → 31–68 ms.
+- Keyed redraw: renderAll hands the fourteen section strings to window.amWorkSet, which keeps each section whose
+  markup is unchanged (combobox and portrait-clip counters masked) and replaces only the others; anything unexpected
+  falls back to innerHTML. The 4.9.7.6 grouping step moves sections only when their order or groups changed.
+  Adding a Personality Trait: renderAll 310–335 → 120–145 ms.
+- Forced layouts removed: the 4.9.9.9 sound-button check read offsetParent inside every redraw (and in its body
+  class observer), forcing a full-page layout mid-redraw (130–216 ms on a phone). It now runs only debounced and
+  decides header or File menu from the 640 px breakpoint.
+- Laboratory: labRefresh waits while its section is folded and runs when the section opens.
+- Not changed, measured: start-up 15 requests, 0.76 MB brotli (0.76 MB in 4.9.9.9); hosted page 2.49 MB
+  (0.55 MB brotli); offline file 8.79 MB. The desktop start-up "layout shift 0.11–0.23" in the audit tool is the
+  shift after its own click on Enter (hadRecentInput not filtered); a real first visit measures 0.004.
+
+NUMBERS REVIEWED (no change needed)
+- Against the Definitive Edition text: all 28 melee and 7 missile weapons (Init, Atk, Dfn, Dam, Str, Load, Range),
+  the 7 armor rows (partial and full Prot and Load), Characteristic costs, the Burden table, fatigue penalties and
+  recovery times, the wound recovery intervals and Ease Factors, the Concentration table (with +3 per maintained
+  spell beyond the second), and the Ability and Art XP formulas. All agree.
+
+TESTS
+- Runner block f910Checks on both builds: source chips, spell row disclosure, inventory chevrons, Personality boxes,
+  ledger line, Retro bookmark (no stripe; red, gold when pinned; clears the seal), Retro folded-chip clearance,
+  keyed redraw (Concept kept, Personality rebuilt, an open spell row kept, seals in order), a new
+  character redraws with its own values, deferred typing reaches the ledger and the autosave, folded Laboratory drawn
+  on opening, no pill under the header buttons at 390 px.
+- Screenshot differences against 4.9.9.9 are the redesigned Build views (all four skin/theme pairs); menu, start and
+  Play views unchanged.

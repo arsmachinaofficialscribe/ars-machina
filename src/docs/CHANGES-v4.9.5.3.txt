@@ -1,0 +1,24 @@
+Ars Machina — Scribe and Cast
+Version v4.9.5.3 (patch: hosting configuration; no app, rule or content change)
+Build date: 2026-10-27
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Added
+- /.well-known/security.txt (RFC 9116), answering the Cloudflare security insight "Configure your website's
+  Security.txt". Fields: Contact mailto:security@arsmachina-scribe-and-cast.win; Expires 2027-10-27T00:00:00.000Z
+  (RFC 9116 advises less than a year); Preferred-Languages en; Canonical
+  https://arsmachina-scribe-and-cast.win/.well-known/security.txt. Two comment lines; no other data.
+- _headers: the file is served as text/plain; charset=utf-8 (as RFC 9116 requires), cached for a day.
+- The offline file is unchanged apart from its version: security.txt belongs to the hosted site only.
+
+Owner action
+- Turn on Cloudflare Email Routing for the domain and route security@arsmachina-scribe-and-cast.win to your inbox
+  before or with this deployment; until then the published address bounces.
+- Renew the Expires date before 2027-10-27 (the release tests fail from 30 days before it).
+
+Checked
+- Runner: security.txt has Contact and Canonical, Expires is 30 days to one year away, _headers sets its content type.
+- Test fix: the Retro screenshot views were being taken in Modern, because the shot harness entered the first-run
+  chooser with its default (Modern) button. They now enter with the matching button and assert the skin.
+
+This is an inert plain-text change record. It does not execute code.

@@ -1,0 +1,77 @@
+Ars Machina — Scribe and Cast
+Version v4.9.7.0 (rules: sin and sanctity, from Realms of Power: The Infernal and The Divine)
+Build date: 2026-10-27
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Realms tab
+- Shown for every character while any Realms of Power book is switched on in Build's sources, and hidden when all four
+  are off, like other sourcebook sections. Its sections follow their books: sin and infernalists need The Infernal;
+  saints, relics, the Divine Ascent and golems need The Divine.
+- Sin and temptation (RoP:I pp. 20-22): each Personality Trait can be tied to one of the seven sins or its opposing
+  virtue, guessed from the trait's name (the p. 21 table) or chosen; a virtuous trait reads as the sin at a negative
+  score. Personality Flaws named for a sin count as +3 (Minor) or +6 (Major) (p. 22). Counts of venial and mortal sins
+  since absolution, cleared by absolution.
+- Confidence through sin (RoP:I p. 24): a season of indulgence gives a Confidence Point; a ritual of the sin gives a
+  Confidence Point and an infernal Warping Point (p. 18).
+- Infernal influence (RoP:I p. 23): simple die + Presence + Leadership; 9/12/15/18/21/24 give a trait of 1 to 6.
+  Ceremonial influence needs Infernal Lore 1 and a Confidence Point.
+- Warping by realm: Infernal Warping effects at Warping Scores 1, 3, 5 and 6+ and their sources (RoP:I pp. 17-18);
+  Divine Warping's common Flaws, immunities and sources (RoP:D p. 62).
+- Saints (RoP:D pp. 87-89): invoke a saint, Communication + Charm + modifiers + simple die vs 15 + simple die, with
+  the eleven modifiers; threaten a saint, Presence + Leadership + modifiers + stress die vs 9 + Divine Might / 5, with
+  the seven modifiers and the month, season and curse results; Confidence may be spent on a threat, Faith Points may
+  not. Saints from the bestiary, or the four categories (Divine Might 100/75/50/25). The miracles and curses list with
+  each power's Penetration (Divine Might - 5 x cost).
+- Relics (RoP:D pp. 43-45): for relics in Inventory, Faith Points with a sunrise refresh, Divine Might (Faith x 10),
+  scourging the Infernal, Magic Resistance of the most powerful relic.
+
+Infernalists (RoP:I pp. 94-96, 124)
+- Hierarchy Score = the highest Infernal Reputation.
+- Vituperation: Stamina + Concentration + Confidence Score + stress die vs Warping Score + points gained + Hierarchy
+  + aura + stress die (no botch); the Wizard's Twilight table for its length; the aging roll that follows (stress die
+  no botch + age / 10 rounded up - living conditions + Warping Score); Confidence Score and Points afterwards; the
+  option to accept it unrolled.
+- Sacrifice adds +2/+4/+6/+8/+10 to a maleficium's total.
+- Profaning: a Confidence Point turns a holy object into a pawn of vis infesta (added under Raw vis); relic rules noted.
+- Goetic magic: a magus may use Rego for a Goetic Art and Vim for the Lore; Goetic Mastery noted. The False Gift:
+  Twilight is replaced by Vituperation.
+
+Holy characters (RoP:D pp. 41, 46, 63-65, 142-143)
+- A failed holy power names the tragedy of hubris it risks (minor 1-10 short, major 11-20, ultimate 21+), with True
+  Faith x 10 standing in for the total.
+- The Divine Ascent: Ascension roll (Presence + Concentration or Meditation + stress die vs Warping Score + points
+  gained + True Faith + aura + stress die), extra Warping Points equal to the margin, the Ascent's length, and the
+  effects of Divine Gloom, Divine Form (Magic Resistance, Soak, Penetration, impious botch dice as a roll option) and
+  Divine Unity.
+- Schism: a rival temper in a Dominion aura's settings, applied as a second temper.
+- Golems: Awaken Golem Total (Intelligence + Kabbalah + Wonders + Ceremony bonus + Dominion aura) against 30 each
+  season, the final stress die and the Kabbalah x 5 cap; Empower Golem Total against a power's level; the madness roll.
+
+Corrupted beasts (RoP:I p. 78)
+- Greater Infernal Power (Major) and Lesser Infernal Power (Minor) replace the unsourced "Infernal Power" Virtue;
+  Horrifying Appearance (Major Flaw) added; a build check that they need the Corrupted Beast Flaw. A saved "Infernal
+  Power" Virtue opens as Lesser Infernal Power.
+
+Dice
+- The new rolls use the realm dice: Divine for Ascension, saints and golems; Infernal for influence and Vituperation.
+
+Optional rules (Settings, new "Optional rules" tab beside "General")
+- Two lists. Sub rules: optional or variant rules printed in the books, and the author's rulings. Homebrew rules:
+  readings where the books are silent or unclear. Defaults follow the Definitive Edition first, then the author's
+  rulings, then the recommended readings. Choices are kept in this browser; "Reset optional rules" restores them.
+- Sub rules: the storyguide rolls the saint's die in secret (on; RoP:D p. 87); Savantism's full-rate option is offered
+  (on; author's ruling; DE p. 143); holy magi cast on the Divine die (on; author's ruling).
+- Homebrew rules (recommended setting in brackets): Faerie Magic keeps foreign-aura botch dice in a Faerie aura (on;
+  DE pp. 236, 411); holy magic keeps foreign-aura botch dice (on; RoP:D p. 69); assume about 2 Warping Points a year
+  after Gauntlet when none are recorded (on; DE p. 32); Hope doubles extra Faith Points on a miracle (off; RoP:D pp. 60,
+  62); the Ars Notoria pool also buys Artes Liberales (off; p. 92); Divine Ascension uses Presence, not Intelligence
+  (on; p. 63); a relic's Magic Resistance adds to other Magic Resistance (off; RoP:D p. 43, DE p. 55); Goetic magic
+  substitutes Rego and Vim only where higher (on; RoP:I p. 124); sacrifice also adds to Goetic Art totals (off; p. 95).
+
+Checked
+- Full suite on both builds, with nine new runner checks for v4.9.6.3 and v4.9.7.0; Content-Security-Policy hashes
+  recomputed. Each new roll was built for a test
+  character with traits, True Faith, a holy Method and Power, unholy Method and Power, Kabbalah, an Infernal
+  Reputation and a relic, with no page errors.
+
+This is an inert plain-text change record. It does not execute code.

@@ -1,0 +1,124 @@
+/* 4.9.10.0 Build sheet: cards stay the sections; inside them, boxes hold lists and lines hold fields */
+:root{--f910-pad:22px;--f910-line:color-mix(in srgb,var(--rule) 70%,transparent);--f910-band:color-mix(in srgb,var(--rule) 38%,var(--sunk))}
+@media (width<=760px){:root{--f910-pad:14px}}
+
+/* section headers: one line, seal inline, quiet actions */
+#work>section.folio>header{align-items:center;gap:6px 12px}
+
+/* boxes: every list or table a player works through sits in a sunk panel with a header band */
+#work section.folio table{background:var(--sunk);border:1px solid var(--rule);border-radius:10px;border-collapse:separate;border-spacing:0}
+#work section.folio table thead tr:first-child th:first-child{border-top-left-radius:9px}
+#work section.folio table thead tr:first-child th:last-child{border-top-right-radius:9px}
+#work section.folio table thead th{background:var(--f910-band);border-bottom:1px solid var(--rule);padding-top:7px;padding-bottom:7px}
+#work section.folio table tbody :is(td,th){border-bottom:1px solid var(--f910-line)}
+#work section.folio table tbody tr:last-child :is(td,th){border-bottom:0}
+.vf-cols>*,.sp-list,.inv-list{background:var(--sunk);border:1px solid var(--rule);border-radius:10px;padding:0 12px 4px}
+.vf-cols>*>h3{margin:0 -12px 2px;padding:8px 12px;background:var(--f910-band);border-bottom:1px solid var(--rule);border-radius:10px 10px 0 0}
+.vf-cols>*>:is(.vf-row,[data-lv-item]){border-bottom:1px solid var(--f910-line)}
+.vf-cols>*>:is(.vf-row,[data-lv-item]):last-of-type{border-bottom:0}
+.vf-cols>*>:is(.btn,button,.vf-add,div:last-child):not(.vf-row){margin-top:6px}
+.sp-row,.inv-row{border-bottom:1px solid var(--f910-line)}
+.sp-list>.sp-row:last-child,.inv-list>.inv-row:last-child{border-bottom:0}
+.sp-list,.inv-list{padding-top:6px}
+
+/* lines: summaries above a box read as one strip of figures */
+:is(.vf-sum,.f975-sum){row-gap:4px}
+
+/* inline fields read as text until touched */
+#work :is(.vf-row,.sp-row,.inv-row,.stg-ab,table) :is(input[type=text],input[type=number],input:not([type]),textarea,select){border-color:transparent;background:transparent}
+#work :is(.vf-row,.sp-row,.inv-row,table) :is(input,textarea,select):hover{border-color:var(--rule)}
+#work :is(.vf-row,.sp-row,.inv-row,table) :is(input,textarea,select):focus{border-color:var(--gilt)}
+
+/* Virtues and Flaws: two lines a row, Free only when set or touched */
+.vf-row{padding:5px 0;gap:0 8px}
+.vf-row .meta{font-size:13px;gap:2px 10px;flex-wrap:wrap}
+.vf-row .meta textarea,.vf-row .meta input[type=text]{flex:1 1 9em;min-width:7em}
+.vf-row .meta select{min-width:4.6em;padding-right:18px}
+.vf-row{grid-template-columns:minmax(0,1fr) auto auto auto}
+.vf-row>.f910-src{align-self:center}
+.vf-row .meta>span:first-child{color:var(--ink)}
+.vf-row .meta textarea{min-height:0;padding-top:0;padding-bottom:0}
+.vf-row .meta .chk:has(input:not(:checked)){display:none}
+.vf-row:is(:hover,:focus-within) .meta .chk{display:inline-flex}
+.f910-src{font-size:12px;color:var(--muted);white-space:nowrap;border:1px solid var(--rule);border-radius:999px;padding:0 7px;line-height:18px}
+
+/* Spells and Inventory: a row each, detail on demand */
+.sp-row,.inv-row{padding:4px 0;position:relative}
+.sp-row>.sp-main,.inv-row>.sp-main{align-items:center;gap:4px 12px;flex-wrap:nowrap}
+.sp-row>.sp-main .sp-name,.inv-row>.sp-main .sp-name{flex:1 1 12em;min-width:8em}
+.sp-row>.sp-main .mini,.inv-row>.sp-main .mini{flex-direction:row;align-items:center}
+.sp-list>.sp-row:not(:first-child)>.sp-main .mini>span,.sp-list>.sp-row:not(:first-child)>.sp-main .sp-stat>span,
+.inv-list>.inv-row:not(:first-child)>.sp-main .mini>span,.inv-list>.inv-row:not(:first-child)>.sp-main .sp-stat>span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sp-list>.sp-row:first-child>.sp-main,.inv-list>.inv-row:first-child>.sp-main{align-items:end}
+.sp-list>.sp-row:first-child>.sp-main .mini,.inv-list>.inv-row:first-child>.sp-main .mini{flex-direction:column;align-items:stretch}
+.sp-row>:not(.sp-main),.inv-row>:not(.sp-main){display:none}
+.sp-row.f910-open>:not(.sp-main),.inv-row.f910-open>:not(.sp-main){display:flex}
+.sp-row.f910-open>.sp-note,.inv-row.f910-open>.sp-note{display:block}
+.sp-row.f910-open,.inv-row.f910-open{background:var(--sunk);margin:0 calc(-1 * var(--f910-pad) / 2);padding:6px calc(var(--f910-pad) / 2) 10px;border-radius:8px}
+.f910-more{flex:none;width:26px;height:26px;border:1px solid transparent;border-radius:6px;background:none;color:var(--muted);cursor:pointer;display:inline-grid;place-items:center}
+.f910-more:hover{border-color:var(--rule);color:var(--ink)}
+.f910-more svg{width:14px;height:14px;transition:transform .15s}
+.f910-open .f910-more svg{transform:rotate(90deg)}
+@media (width<=600px){.sp-row>.sp-main,.inv-row>.sp-main{flex-wrap:wrap}}
+
+/* House: one strip of crests */
+#s-house .house-tiles{grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:6px}
+#s-house .house-pick{display:flex;flex-direction:row;align-items:center;gap:8px;padding:4px 8px 4px 4px;min-height:0;text-align:left}
+#s-house .house-pick svg{width:32px;height:32px;flex:none}
+#s-house .house-pick span{font-size:14px;line-height:1.15}
+
+/* ledger: a stat block that travels with the page */
+#ledger .led-box{border-radius:var(--r,12px)}
+
+/* column grids so every row lines up under one header */
+@media (width>600px){
+.sp-list>.sp-row>.sp-main{display:grid;grid-template-columns:minmax(9em,1fr) 4em 3.2em 4.2em 5.2em 26px 26px;align-items:center;gap:2px 8px}
+.sp-list>.sp-row>.sp-main>*{min-width:0}
+.sp-list>.sp-row>.sp-main .mini input{width:100%!important}
+.sp-list>.sp-row>.sp-main .sp-stat{text-align:right;display:flex;flex-direction:column;align-items:flex-end}
+.sp-list>.sp-row:first-child>.sp-main .mini>span,.sp-list>.sp-row:first-child>.sp-main .sp-stat>span{white-space:normal;line-height:1.1;font-size:11px}
+.inv-list>.inv-row>.sp-main{display:grid;grid-template-columns:minmax(6em,1fr) 7em 2.6em 6.8em 3em 2.4em 4.2em 26px 26px;align-items:center;gap:2px 8px}
+.inv-list>.inv-row>.sp-main>*{min-width:0;grid-row:1}
+.inv-list>.inv-row>.sp-main>.sp-name{grid-column:1}
+.inv-list>.inv-row>.sp-main>:has([data-k$=".cat"]){grid-column:2}
+.inv-list>.inv-row>.sp-main>:has([data-k$=".qty"]){grid-column:3}
+.inv-list>.inv-row>.sp-main>:has([data-k$=".where"]){grid-column:4}
+.inv-list>.inv-row>.sp-main>:has([data-k$=".load"]){grid-column:5}
+.inv-list>.inv-row>.sp-main>.sp-stat{grid-column:6;text-align:right;display:flex;flex-direction:column;align-items:flex-end}
+.inv-list>.inv-row>.sp-main>button:not(.xbtn):not(.f910-more){grid-column:7;justify-self:end}
+.inv-list>.inv-row>.sp-main>.f910-more{grid-column:8}
+.inv-list>.inv-row>.sp-main>.xbtn{grid-column:9}
+.inv-list>.inv-row>.sp-main .mini :is(input,select){width:100%!important;min-width:0}
+.inv-list>.inv-row>.sp-main input[type=number],.sp-list>.sp-row>.sp-main input[type=number]{text-align:right}
+}
+#s-arts table{width:100%}
+#s-arts table :is(td,th){padding-left:5px;padding-right:5px}
+#s-arts table :is(td,th):first-child{padding-left:10px}
+#s-arts table :is(td,th):last-child{padding-right:10px}
+/* Retro's wider type: the source chip drops to the detail line so names are not cut */
+:root[data-skin=retro] .vf-row>.f910-src{grid-row:2;grid-column:2/-1;justify-self:end}
+:root[data-skin=retro] .vf-row .meta{grid-column:1/2}
+
+/* sub-group boxes */
+#work .f910-box{background:var(--sunk);border:1px solid var(--rule);border-radius:10px;padding:0 12px 12px;margin:14px 0 0}
+#work .f910-box>h3:first-child{margin:0 -12px 10px;padding:8px 12px;background:var(--f910-band);border-bottom:1px solid var(--rule);border-radius:10px 10px 0 0}
+#work .f910-box table{background:var(--surface)}
+.f910-best{margin:8px 0 0;font-size:13px;color:var(--muted);text-align:center}
+.f910-best b{color:var(--ink);font-size:15px}
+
+/* phones: the status pill shares its row with the header buttons without running under them */
+@media (width<=600px){
+#work>section.folio>header{grid-template-columns:40px minmax(0,1fr) auto}
+#work>section.folio>header>.pill{min-width:0;justify-self:start;max-width:100%}
+#work>section.folio>header>.pill .p{white-space:normal;line-height:1.25;display:inline-block}
+}
+
+/* Retro: a pixel bookmark ribbon hangs from each section card (replacing the red stripe that the seal cut in two);
+   it turns gold while the section is pinned. The card's left padding makes room for it. */
+:root[data-skin=retro] #work>section.folio>header{background:none}
+:root[data-skin=retro] #work>section.folio{position:relative;padding-left:32px}
+:root[data-skin=retro] #work>section.folio::before{content:"";position:absolute;top:-2px;left:7px;width:18px;height:32px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 16' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='0' width='7' height='1' fill='%233f0f07'/%3E%3Crect x='8' y='0' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='1' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%23b8462a'/%3E%3Crect x='2' y='1' width='5' height='1' fill='%237c2414'/%3E%3Crect x='7' y='1' width='1' height='1' fill='%23511509'/%3E%3Crect x='8' y='1' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='2' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='2' width='6' height='1' fill='%23f2c443'/%3E%3Crect x='7' y='2' width='1' height='1' fill='%23a87a1e'/%3E%3Crect x='8' y='2' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='3' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='3' width='1' height='1' fill='%23b8462a'/%3E%3Crect x='2' y='3' width='5' height='1' fill='%237c2414'/%3E%3Crect x='7' y='3' width='1' height='1' fill='%23511509'/%3E%3Crect x='8' y='3' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='4' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='4' width='1' height='1' fill='%23b8462a'/%3E%3Crect x='2' y='4' width='5' height='1' fill='%237c2414'/%3E%3Crect x='7' y='4' width='1' height='1' fill='%23511509'/%3E%3Crect x='8' y='4' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='5' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='5' width='1' height='1' fill='%23b8462a'/%3E%3Crect x='2' y='5' width='5' height='1' fill='%237c2414'/%3E%3Crect x='7' y='5' width='1' height='1' fill='%23511509'/%3E%3Crect x='8' y='5' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='6' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='6' width='1' height='1' fill='%23b8462a'/%3E%3Crect x='2' y='6' width='5' height='1' fill='%237c2414'/%3E%3Crect x='7' y='6' width='1' height='1' fill='%23511509'/%3E%3Crect x='8' y='6' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='7' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='7' width='1' height='1' fill='%23b8462a'/%3E%3Crect x='2' y='7' width='5' height='1' fill='%237c2414'/%3E%3Crect x='7' y='7' width='1' height='1' fill='%23511509'/%3E%3Crect x='8' y='7' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='8' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='8' width='1' height='1' fill='%23b8462a'/%3E%3Crect x='2' y='8' width='5' height='1' fill='%237c2414'/%3E%3Crect x='7' y='8' width='1' height='1' fill='%23511509'/%3E%3Crect x='8' y='8' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='9' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='9' width='1' height='1' fill='%23b8462a'/%3E%3Crect x='2' y='9' width='5' height='1' fill='%237c2414'/%3E%3Crect x='7' y='9' width='1' height='1' fill='%23511509'/%3E%3Crect x='8' y='9' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='10' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='10' width='1' height='1' fill='%23b8462a'/%3E%3Crect x='2' y='10' width='5' height='1' fill='%237c2414'/%3E%3Crect x='7' y='10' width='1' height='1' fill='%23511509'/%3E%3Crect x='8' y='10' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='11' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='11' width='1' height='1' fill='%23b8462a'/%3E%3Crect x='2' y='11' width='5' height='1' fill='%237c2414'/%3E%3Crect x='7' y='11' width='1' height='1' fill='%23511509'/%3E%3Crect x='8' y='11' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='12' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='12' width='1' height='1' fill='%23b8462a'/%3E%3Crect x='2' y='12' width='2' height='1' fill='%237c2414'/%3E%3Crect x='4' y='12' width='1' height='1' fill='%23090604'/%3E%3Crect x='5' y='12' width='2' height='1' fill='%237c2414'/%3E%3Crect x='7' y='12' width='1' height='1' fill='%23511509'/%3E%3Crect x='8' y='12' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='13' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='13' width='1' height='1' fill='%23b8462a'/%3E%3Crect x='2' y='13' width='1' height='1' fill='%237c2414'/%3E%3Crect x='3' y='13' width='1' height='1' fill='%23090604'/%3E%3Crect x='5' y='13' width='1' height='1' fill='%23090604'/%3E%3Crect x='6' y='13' width='1' height='1' fill='%237c2414'/%3E%3Crect x='7' y='13' width='1' height='1' fill='%23511509'/%3E%3Crect x='8' y='13' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='14' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='14' width='1' height='1' fill='%23b8462a'/%3E%3Crect x='2' y='14' width='1' height='1' fill='%23090604'/%3E%3Crect x='6' y='14' width='1' height='1' fill='%23090604'/%3E%3Crect x='7' y='14' width='1' height='1' fill='%23511509'/%3E%3Crect x='8' y='14' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='15' width='2' height='1' fill='%23090604'/%3E%3Crect x='7' y='15' width='2' height='1' fill='%23090604'/%3E%3C/svg%3E") 0 0/18px 32px no-repeat;image-rendering:pixelated;filter:drop-shadow(2px 2px 0 #0000008c);pointer-events:none;z-index:1}
+:root[data-skin=retro][data-theme=light] #work>section.folio::before{filter:drop-shadow(2px 2px 0 #3a220a59)}
+:root[data-skin=retro] #work>section.folio:has(>header [data-f975b=pin][aria-pressed=true])::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 16' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='0' width='7' height='1' fill='%234a3208'/%3E%3Crect x='8' y='0' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='1' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%23ffe08a'/%3E%3Crect x='2' y='1' width='5' height='1' fill='%23d9a62e'/%3E%3Crect x='7' y='1' width='1' height='1' fill='%238a6012'/%3E%3Crect x='8' y='1' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='2' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='2' width='6' height='1' fill='%237c2414'/%3E%3Crect x='7' y='2' width='1' height='1' fill='%23511509'/%3E%3Crect x='8' y='2' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='3' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='3' width='1' height='1' fill='%23ffe08a'/%3E%3Crect x='2' y='3' width='5' height='1' fill='%23d9a62e'/%3E%3Crect x='7' y='3' width='1' height='1' fill='%238a6012'/%3E%3Crect x='8' y='3' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='4' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='4' width='1' height='1' fill='%23ffe08a'/%3E%3Crect x='2' y='4' width='5' height='1' fill='%23d9a62e'/%3E%3Crect x='7' y='4' width='1' height='1' fill='%238a6012'/%3E%3Crect x='8' y='4' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='5' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='5' width='1' height='1' fill='%23ffe08a'/%3E%3Crect x='2' y='5' width='5' height='1' fill='%23d9a62e'/%3E%3Crect x='7' y='5' width='1' height='1' fill='%238a6012'/%3E%3Crect x='8' y='5' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='6' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='6' width='1' height='1' fill='%23ffe08a'/%3E%3Crect x='2' y='6' width='5' height='1' fill='%23d9a62e'/%3E%3Crect x='7' y='6' width='1' height='1' fill='%238a6012'/%3E%3Crect x='8' y='6' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='7' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='7' width='1' height='1' fill='%23ffe08a'/%3E%3Crect x='2' y='7' width='5' height='1' fill='%23d9a62e'/%3E%3Crect x='7' y='7' width='1' height='1' fill='%238a6012'/%3E%3Crect x='8' y='7' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='8' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='8' width='1' height='1' fill='%23ffe08a'/%3E%3Crect x='2' y='8' width='5' height='1' fill='%23d9a62e'/%3E%3Crect x='7' y='8' width='1' height='1' fill='%238a6012'/%3E%3Crect x='8' y='8' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='9' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='9' width='1' height='1' fill='%23ffe08a'/%3E%3Crect x='2' y='9' width='5' height='1' fill='%23d9a62e'/%3E%3Crect x='7' y='9' width='1' height='1' fill='%238a6012'/%3E%3Crect x='8' y='9' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='10' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='10' width='1' height='1' fill='%23ffe08a'/%3E%3Crect x='2' y='10' width='5' height='1' fill='%23d9a62e'/%3E%3Crect x='7' y='10' width='1' height='1' fill='%238a6012'/%3E%3Crect x='8' y='10' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='11' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='11' width='1' height='1' fill='%23ffe08a'/%3E%3Crect x='2' y='11' width='5' height='1' fill='%23d9a62e'/%3E%3Crect x='7' y='11' width='1' height='1' fill='%238a6012'/%3E%3Crect x='8' y='11' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='12' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='12' width='1' height='1' fill='%23ffe08a'/%3E%3Crect x='2' y='12' width='2' height='1' fill='%23d9a62e'/%3E%3Crect x='4' y='12' width='1' height='1' fill='%23090604'/%3E%3Crect x='5' y='12' width='2' height='1' fill='%23d9a62e'/%3E%3Crect x='7' y='12' width='1' height='1' fill='%238a6012'/%3E%3Crect x='8' y='12' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='13' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='13' width='1' height='1' fill='%23ffe08a'/%3E%3Crect x='2' y='13' width='1' height='1' fill='%23d9a62e'/%3E%3Crect x='3' y='13' width='1' height='1' fill='%23090604'/%3E%3Crect x='5' y='13' width='1' height='1' fill='%23090604'/%3E%3Crect x='6' y='13' width='1' height='1' fill='%23d9a62e'/%3E%3Crect x='7' y='13' width='1' height='1' fill='%238a6012'/%3E%3Crect x='8' y='13' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='14' width='1' height='1' fill='%23090604'/%3E%3Crect x='1' y='14' width='1' height='1' fill='%23ffe08a'/%3E%3Crect x='2' y='14' width='1' height='1' fill='%23090604'/%3E%3Crect x='6' y='14' width='1' height='1' fill='%23090604'/%3E%3Crect x='7' y='14' width='1' height='1' fill='%238a6012'/%3E%3Crect x='8' y='14' width='1' height='1' fill='%23090604'/%3E%3Crect x='0' y='15' width='2' height='1' fill='%23090604'/%3E%3Crect x='7' y='15' width='2' height='1' fill='%23090604'/%3E%3C/svg%3E")}
+/* Retro: summary chips under a folded heading stand clear of the gold rule, as they do in Modern */
+:root[data-skin=retro] #work>section.folio>header>.f975-sum{margin-bottom:10px}

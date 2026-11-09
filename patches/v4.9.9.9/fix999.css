@@ -1,0 +1,24 @@
+/* D2: larger touch targets for fatigue and wounds */
+@media (pointer:coarse),(max-width:600px){
+ .hx-pips{gap:12px}.hx-pip{position:relative}.hx-pip::before{content:"";position:absolute;inset:-10px -7px}
+ #work .mini-step button,#work .hx-w button{width:32px;height:32px}
+ .hx-pip{z-index:1}
+}
+/* D5: the aura cell is not a toggle; it shows its state with data-on */
+.sx-aura[data-on=true]{border-color:var(--gilt);color:var(--ink);background:color-mix(in srgb,var(--gilt)13%,var(--surface))}
+.ctabs-t{display:flex;flex:1 1 auto;min-width:0}
+/* D6: contrast */
+:root[data-theme=light]:not([data-skin=retro]){--gilt:#7d5d14;--muted:#505b64}
+:root[data-skin=retro][data-theme=light]{--muted:#3f2e18;--gilt:#734a09;--good:#285c1a}
+.rail .step.f975-optstep{opacity:.9}
+.folio.f975-opt.shut{opacity:.9}
+.folio.f975-opt.shut>header .seal{opacity:1;filter:none;color:var(--muted);border-color:var(--rule)}
+.f975-chip{color:var(--muted)}
+.tefo td[data-te] :is(b,small){color:#fff}
+:root[data-theme=light]:not([data-skin=retro]) .pill .p.st-ok{color:var(--good)}
+:root[data-skin=retro][data-theme=light] .rail .seal-sm{color:var(--ink)}
+:root[data-theme=light] .tefo td[data-te] :is(b,small){color:#10161d}
+/* D7: the speaker button in the header */
+.am-sound-toggle.s99-hdr{position:static!important;inset:auto!important;width:32px;height:32px;margin:0 2px;box-shadow:none;display:inline-grid!important;place-items:center;opacity:1!important;visibility:visible!important;transform:none!important}
+.am-sound-toggle.s99-fm{position:static!important;inset:auto!important;width:100%;height:auto;min-height:36px;border:0;border-radius:6px;background:transparent;box-shadow:none;display:flex!important;align-items:center;justify-content:flex-start;gap:8px;padding:9px 12px;font-size:15px;opacity:1!important;visibility:visible!important;transform:none!important;color:inherit;font-family:inherit;text-align:left}
+.am-sound-toggle.s99-fm svg{width:18px;height:18px;flex:none}.am-sound-toggle.s99-fm span{display:inline!important;position:static!important;width:auto!important;height:auto!important;clip:auto!important;overflow:visible!important}

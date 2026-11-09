@@ -1,0 +1,40 @@
+Ars Machina — Scribe and Cast
+Version v4.9.7.6 (Build grouping; upright portraits)
+Build date: 2026-10-27
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Build sheet
+- The sections stand in the rail's order: Who (Concept, House, Characteristics); Gifts and Flaws (Virtues and Flaws);
+  Skills and Magic (Abilities, Arts, Spells, Might-Based Being, Hedge Magic, Laboratory, Familiar); Gear and Story
+  (Combat, Inventory, Personality, Biography); Tools (Calculator). A divider with the step's name stands before each
+  group. Characteristics now come before Virtues and Flaws on the sheet.
+- Seals are numbered in sheet order; the rail's seals match. (Hedge Magic no longer shares a seal with Spells.)
+
+Sections that need a Virtue or a character type
+- Hedge Magic: Known Effects is shown only with a hedge tradition's Virtue: Folk Witch (HMRE p. 34), Gruagach
+  (p. 56), Gruagach Master (p. 57), Mathematicus of Bologna (p. 80), Vitki (p. 122), Elementalist Air, Earth, Fire
+  or Water (p. 18), (Type) Controlling, Divining or Refining (p. 19), (Type) Summoning (p. 20), Elemental Medicine,
+  Philosophiae or Theurgy (p. 19), or Elemental Magic taken by a non-magus.
+  Change: a character with only Second Sight (or another folk power) and no Folk Witch Virtue no longer shows the
+  folk witch block. Effects already recorded stay in the file and return when the Virtue is taken.
+- Arts, Spells, Laboratory and Familiar (magi only), and Hedge Magic without its Virtue, are not on the sheet; the
+  rail shows them greyed and not selectable, with the reason in a tip.
+- The Play tab is unchanged.
+
+Headings and type
+- The app's headings are in Title Case (minor words lower case except first, last and after a colon; abbreviations
+  such as "yr" and "pp." kept). Character names and other entered text are not changed. Buttons stay in sentence case.
+- The rail and the rule checks share one typeset: panel headings 12 px small caps; group names 13 px small caps;
+  entries 14 px; counts and states 12.5 px.
+
+Portraits
+- Upright frame, 100 x 130 (window 82 x 112), in the Build slot, the Play header, the crop dialog (300 x 390), the
+  character card (158 x 205 niche) and the PDF sheet (112 x 146 pt).
+- Stored picture 540 x 702. Transparent portraits are kept as PNG through cropping, pixelization and re-cutting.
+- Pixelization works at the picture's own size (blocks unchanged).
+- Square portraits in older files are re-cut on load: from the original picture and its crop when the file has one,
+  otherwise by trimming the sides; a pixelized portrait is re-cut from its unpixelized copy and pixelized again.
+- Play header: the portrait is 200 px wide (164 px at 980 px and below, 132 px at 700, 112 px at 560).
+
+Not changed
+- No rule values changed. Save format unchanged.

@@ -1,0 +1,51 @@
+Ars Machina — Scribe and Cast
+Version v4.9.3.5
+Build date: 2026-10-26
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Fixes
+- Storyguide opens on the first click. In v4.9.3.4 the first click only loaded the Storyguide code: it re-clicked the button
+  while the browser was still handling the original click, and the browser ignores a click made that way. The loader now
+  finishes, then opens the Storyguide screen directly.
+- Menu history works from Storyguide. Storyguide wraps the menu drawing function and, for its own screen, does not call the
+  functions it wraps. Loaded on demand it ended up outside the v4.8.6.2 history wrapper, so Back and Escape lost their place.
+  The Storyguide screen now records history itself.
+- The menu click sound plays once on the first Storyguide click (it played twice in v4.9.3.4).
+- About no longer loads the Storyguide; nothing in About or the Changelog uses it.
+- In-app changelog order: the v4.9.3.4 entry had been added inside the v4.8.5.0 script and showed below v4.8.5.0. All
+  entries from v4.9.3.1 to v4.9.3.5 are now added last, newest first.
+- Spell data: 39 of the 65 spells recovered in v4.9.3.1 carried the first line of their description in the Target field.
+  Each was checked against its book and corrected. Remain Within Those Walls reads "Arcane Circle" as printed, and two spells
+  had their Base breakdown moved out of Target into the empty Base field. See SOURCE-VERIFICATION-v4.9.3.5.txt.
+
+Performance (Cloudflare build)
+- index.html is 2.47 MB, down from 4.69 MB.
+- The 32 web font files are separate woff2 files in assets/ instead of base64 text in the page.
+- Code needed only on demand is a separate file in assets/, fetched the first time it is needed:
+  PDF libraries (pdf-lib, fontkit) and the PDF sheet's fonts and icons when a sheet is first exported (or when the pointer
+  rests on the export button), and the Storyguide when it is first opened (or hovered).
+- Every assets/ file is named by its content hash and cached for a year; a new release changes only the files that changed.
+- The two embedded data blocks (catalogue and realm data) are recompressed with Zopfli; the same data, smaller.
+- Inline code and styles were re-minified (Terser, Lightning CSS); markup indentation was removed.
+
+Security
+- The Content-Security-Policy still allows scripts only by exact SHA-256 hash; no 'self', wildcard, unsafe-inline, eval or
+  external source was added. On-demand files are fetched with Subresource Integrity (the same SHA-256) and then run as
+  inline scripts that the hash list authorises, so a changed file is refused twice.
+- Scripts carry data-cfasync="false", so Cloudflare Rocket Loader leaves them alone if it is ever switched on again.
+- The unused fixed nonce attributes were removed; the policy never used nonces.
+- _headers adds an explicit "/" cache rule.
+
+Checked
+- Every inline script and on-demand file matches its CSP hash; every SRI value matches its file; all 849 asset references
+  resolve and every asset is named by its own SHA-256.
+- Chromium: no errors or CSP violations on load; Storyguide first click, Back/Escape, active-session restore after reload,
+  PDF export through the fetched libraries, the corrected spell records, and changelog order.
+- Screenshots of the start screen, Build, menu and Play in Modern and Retro, dark and light, match v4.9.3.4 except for the
+  version number.
+- The offline file runs from disk with no network request: Storyguide, PDF export and every image.
+
+Preservation
+- All 813 original images are byte-for-byte unchanged. No rules, calculations, artwork, sound or animation were changed.
+
+This is an inert plain-text change record. It does not execute code.
