@@ -1,0 +1,24 @@
+Ars Machina — Scribe and Cast
+Version v4.9.11.2 (Roll screen hotfix)
+Build date: 2026-11-09
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Scope: three fixes to the roll ceremony reported against 4.9.11.1. No rule or content change; save formats unchanged.
+
+- No automatic close. The result stage scheduled fxClose after 1.9 s (1.6 s with reduced motion, +0.8 s when
+  skipped). That timer is removed (one counted replacement). The screen closes on a click, a tap, a key, or its
+  existing controls. This was the behaviour before 4.9.11.1 too; it is changed at Haik's request.
+- Retro roll circle reverted. In Retro, fxCircleSvg0 returns the pre-4.9.11.1 drawing again, and the pixel
+  renderer's layer list for the circle is back to fx-r1..fx-r4. Reasons: the 4.9.11.1 medallions rendered as filled
+  studs that ignored the Art tint (the renderer copies fill, and the tint rules set stroke), they were cloned into
+  the Imaginem ghost layers, and the renderer forces opacity to 1 so nothing faded in. The circle's SVG is now
+  cached per skin (fxCircleSvg replaced), so switching skin takes effect on the next roll.
+- Modern roll circle: medallions (g.fx-med) fade in after 0.5 s instead of showing their dark fill at once; the
+  wood, iron and Characteristic dice tints and the botch tint reach the icons and rim lozenges; medallions and
+  lozenges are hidden inside .fx-ghost copies.
+- The seal and the Play crest are unchanged from 4.9.11.1 in both skins.
+
+TESTS
+- f9112Checks (both builds): the roll screen is still open 6 s after a result and closes on a key; the Retro
+  circle has no medallions and the Modern one has fifteen; a ghost copy shows no medallion.
+- Screenshot differences from 4.9.11.1: none expected (the 16 baseline views show no roll screen).

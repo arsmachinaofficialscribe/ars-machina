@@ -1,0 +1,61 @@
+Ars Machina — Scribe and Cast
+Version v4.9.11.0 (Play and the Storyguide catch up with the Build sheet)
+Build date: 2026-11-09
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Scope: the 4.9.10.0 Build-sheet speed work, source chips and button wording carried to Play, the Storyguide and
+the main menu. No rule or content change; character and saga save formats unchanged. Numbered 4.9.11.0 at Haik's
+request on 2026-11-09: mass battle, siege and the Storyguide seasons together become 5.0.0.0.
+
+PLAY SPEED (patches/v4.9.11.0/play.js; phone width, 4x CPU throttling, example magus)
+- Keyed redraw: renderPlay hands its page and console strings to window.amPlaySet, which keeps every block whose
+  markup is unchanged (the hero and its crest, untouched sections, open folds) and compares changed blocks child by
+  child, matched by tag, id and class, three levels deep; only what changed is rebuilt. Nodes later wrappers insert (the Situation strip) are not in
+  the markup, so they are removed and re-inserted by those wrappers as before, never left stale. The first draw
+  after a mode switch, and window.amPlayFull, use a full innerHTML redraw. Every Play tab reads the same through
+  the keyed path as through a full redraw (tested).
+- No layout read back mid-redraw: the console scroll position is remembered from its scroll events instead of read
+  at the start of each redraw, and is restored only when the console was rebuilt; the section strip's sticky offsets
+  (psecAfter) are measured in the next animation frame; the root custom properties --hdr-h, --psec-nav-h,
+  --f975-top and --f975-sb are written only when they change (writing one restyles the whole page); the Build/Play
+  switch's aria-pressed is written only when it changes, so its slide animation no longer measures after every
+  redraw. A Play click now lays the page out once (was three times).
+- Measured, same session, 4 clicks each: loading a roll 131–216 → 89–118 ms; Situation stress chip 101–155 →
+  88–94 ms; Magic/Skills tab 149–287 → 93–177 ms; a redraw with nothing changed 112–152 → 70–84 ms. UI audit
+  "load a roll" at 390 px (four skin/theme pairs, includes a 200 ms wait): 421–656 → 360–424 ms.
+- Left for later: playSheet still rebuilds every check's string (≈30 ms of each click at 4x), and P() and XP()
+  copy their defaults on every call (≈13 ms); both change long-standing behaviour and are not touched here.
+
+SOURCES
+- Play: "Ars Magica Definitive Edition p. 367" and "Ars Magica DE p. 432" read "DE p. 367" / "DE p. 432", as on the
+  Build sheet; the full title is in the tooltip (spell cards, inventory notes, mounts). Applied to text after each
+  Play redraw (window.amShortSrc).
+- Storyguide: bestiary and person stat lines show the Definitive Edition as "DE p. N" instead of "ArM5 p. N".
+
+WORDING
+- Buttons in sentence case, the project convention since 4.9.5.2 (headings keep Title Case, 4.9.7.6). 3.2.0.1 had
+  set Title Case on the main menu and Storyguide buttons; those were never brought in line.
+  Main menu: New character, Preview character. Storyguide menu: New saga, Saga library, Import saga JSON.
+  Storyguide: + New person/story/encounter/place/map/session log/entry, + Session log, + Journal entry,
+  + Calendar entry, + Another degree, + Follow-up, + House rule, + Web address, + New place for this pin,
+  + Create first scene, + New scene, + Add to people; ◀ Previous season, Next season ▶, Next turn ▶; All stories/
+  people/encounters/maps, Covenant places, Session logs, Saga calendar, Journal entries (back buttons); Delete
+  story/person/encounter/place/map/log/entry; Save name, Create saga, Remove image/link/pin, Choose another file,
+  Clear search, End encounter, Roll initiative for all, Add to the session log, Manage/Export templates, From
+  template…, Save as template, Close out session…, Export saga JSON, Download a sample empty saga, Show to troupe,
+  Back to Storyguide view, Go to stories, Go to the dashboard, Open the saga calendar, Main menu, Edit scene,
+  Change scene / Choose a scene, Troupe-visible / Storyguide only, Links and tags, Import as a copy / as a new saga;
+  tabs Covenant sheet, Session logs. Navigation rail entries and section headings are unchanged (Title Case).
+
+FIX
+- Storyguide record headings (a person's name, a story's, place's, map's, encounter's or session's title, a pin
+  label, the scene title on the stage) were run through the 4.9.7.6 Title Case pass, so "New person" showed as
+  "New Person" and a name such as "de la Haye" as "De la Haye". They are now marked data-notc and show as typed.
+
+TESTS
+- Runner block f911Checks on both builds: loading a roll keeps the hero and untouched sections; the Situation strip
+  follows the state and appears once; every Play tab reads the same keyed and full; no duplicate ids; a redraw reads
+  no layout; the strip offset is still measured; Play source chips; main menu and Storyguide menu wording; Storyguide
+  action buttons in sentence case; Storyguide bestiary pages as DE.
+- 304 checks, 0 failed, both builds. No screenshot view differs from 4.9.10.0 (the menu and Storyguide wording
+  changes are not in the sixteen compared views; Play draws identically through the keyed path).

@@ -1,0 +1,14 @@
+/* 4.9.11.2 hotfix: the Modern roll circle's medallions arrive with the drawing instead of before it,
+   follow the die material's tint, and stay out of the Imaginem ghost copies. Retro uses the earlier circle. */
+.fx-ghost :is(.fx-med,.fx-node){display:none}
+.fx[data-die=wood] .fx-circle .fx-ico,.fx[data-die^=ch] .fx-circle .fx-ico{stroke:#a8936a}
+.fx[data-die=wood] .fx-circle .fx-node,.fx[data-die^=ch] .fx-circle .fx-node{fill:#a8936a}
+.fx[data-die=iron] .fx-circle .fx-ico{stroke:#9aa4ae}
+.fx[data-die=iron] .fx-circle .fx-node{fill:#9aa4ae}
+.fx.fx-botch[data-fx] .fx-circle .fx-ico{stroke:#c4493a}
+.fx.fx-botch[data-fx] .fx-circle .fx-node{fill:#c4493a}
+@media (prefers-reduced-motion:no-preference){
+ .fx-circle .fx-med{opacity:0;animation:.55s .5s forwards f9112Med}
+ .fx-circle .fx-med .fx-ico{opacity:1;animation:none}
+ @keyframes f9112Med{to{opacity:1}}
+}

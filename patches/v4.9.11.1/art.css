@@ -1,0 +1,22 @@
+/* 4.9.11.1 art: the roll circle and the Play crest */
+@media (prefers-reduced-motion:no-preference){.crest-svg .turn-mid{transform-origin:60px 60px;animation:200s linear infinite reverse turn}}
+ .crest-svg .turn-mid{transform-origin:60px 60px;animation:200s linear infinite reverse turn}
+:root[data-skin=retro] .crest-svg :is(.c-f,.c-p2){display:none}
+:root[data-skin=retro] .crest-svg :is(.turn,.turn-mid,.turn-in) :is(circle,polygon,line){stroke-width:2.4px;opacity:1}
+/* the roll circle */
+.fx-r5{transform-origin:200px 200px}
+.fx-circle .fx-ico{fill:none;stroke:#d9bd76;stroke-width:1.7px;stroke-linecap:round;stroke-linejoin:round}
+.fx-circle .fx-mc{fill:#0a0d14;opacity:.9}
+.fx-circle .fx-node{fill:#c9a659;stroke:none;opacity:.85}
+.fx[data-fx] .fx-circle .fx-ico{stroke:var(--fx-c)}
+.fx[data-fx] .fx-circle .fx-node{fill:var(--fx-c)}
+.fx.fx-botch .fx-circle .fx-ico{stroke:#c4493a}
+.fx.fx-botch .fx-circle .fx-node{fill:#c4493a}
+:root[data-skin=retro] .fx-circle .fx-ico,:root[data-skin=retro] .fx-circle .fx-rim2{display:none}
+:root[data-skin=retro] .fx-circle .fx-mc{fill:#c9a659}
+:root[data-skin=retro] .fx-circle .fx-med[class] .fx-mc{stroke:#120d08}
+@media (prefers-reduced-motion:no-preference){
+ .fx-circle .fx-ico,.fx-circle .fx-node{opacity:0;animation:.6s .35s forwards fxFade}
+ .fx-r5{animation:18s linear infinite fxSpin}
+ .fx-rolling .fx-r5{animation-duration:1.8s;will-change:transform}
+}

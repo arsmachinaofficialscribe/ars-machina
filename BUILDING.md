@@ -1,4 +1,4 @@
-# Building Ars Machina
+# Ars Machina tools
 
 Packer and regression tests for Ars Machina — Scribe and Cast. `src/` always holds the current release.
 
@@ -86,6 +86,39 @@ panels (Faerie Realm fable and offers, a magic character's Acclimation and trans
 warped animals, tamed creatures with the Definitive Edition's mundane beasts), the Build being card (Beast of Virtue,
 elemental) and Things of Virtue in Inventory. State: `st.fae`, `st.m990`, `st.tov`, `st.tame`; rolls `r990:*`.
 Rows built from user text must escape the title (`row()` does not).
+
+### Play redraw (4.9.11.0)
+`patches/v4.9.11.0/play.js`: `renderPlay` hands its page and console strings to `window.amPlaySet`, which keeps every
+element whose markup is unchanged and compares changed ones child by child (matched by tag, id and class, three
+levels deep). Elements a later wrapper inserts carry no `__amSrc` and are removed before the wrappers run again, so
+those wrappers must insert idempotently. `window.amPlayFull = true` forces the old full redraw (the tests compare the
+two). The console's scroll position comes from its scroll events and the section strip offsets are measured in the
+next frame: a Play redraw reads no layout. Root custom properties are written only when they change.
+
+### Sizes, seal and circles (4.9.11.1)
+`patches/v4.9.11.1/scale.py` snaps every `font-size`, `font:` size and single-value `border-radius` in the `<style>`
+blocks to one scale at patch time (12/13/14/15/16/18/21/27 px; 4/8/12 px). New rules use the tokens `--fs-1..8`,
+`--r-1..3` and `--bh-s/m/l` (button heights 28/34/42). Give repeated rows a whole-pixel `line-height`: the page's 1.45
+puts 1 px rules on half pixels.
+`seal.py` generates the seal (viewBox 120; layers `.turn`, `.turn-mid`, `.turn-in`; `s-a` bold lines, `s-f` fine work).
+Its rules (`seal.css`) sit in a `<style>` before the header, because the Retro pixel renderer draws the seal once, as
+soon as it exists, and copies only computed `display`, stroke, fill and font properties (not `r`, `scale` or
+transforms set in CSS). `art.js` replaces `fxCircleSvg0` (class names kept; `fx-r5` and `.fx-med.fx-m-<Art>` are new)
+and wraps `crest()`. (Its odds caption under the Characteristic tiles was removed in 4.9.11.4.)
+
+Since 4.9.11.2 the roll screen has no close timer (it waits for a click, tap or key), Retro uses the earlier roll
+circle (`fxCircleSvg0` chooses by skin; `fxCircleSvg` caches one drawing per skin), and the Retro renderer's circle
+layers are `fx-r1..fx-r4` again. The Retro renderer copies `fill` but the Art tints set `stroke`: filled shapes in a
+circle stay gold there.
+
+Since 4.9.11.3 the seal's SVG holds two drawings: class `sn` (the 4.9.11.1 seal, shown in Modern) and class `so`
+(the earlier seal at three times its size, shown in Retro and in the chooser's Retro half). The show/hide rules select
+the leaf shapes (`g.sn>*`, `g.so>*`), because the Retro renderer copies each shape's own computed `display`.
+`crest()` returns the earlier crest in Retro.
+
+Since 4.9.11.4 the odds yardstick is `P().odds = {on, ef, opp}`, edited under Modifiers › Odds badges (a `consoleMods`
+wrapper) and read only by the `oddsChip` wrapper, and only while `on` is true. Nothing that rolls reads it. A control
+on the Play page must never write `P().ef` or `P().oppTotal` as a side effect: those are the next roll's numbers.
 
 ## What the tests cover
 - CSP: every inline script, lazy payload and on-demand file matches an exact SHA-256 in `script-src`; no unused hashes; no unsafe keywords, 'self', wildcards or nonces; SRI equals the file; `data-cfasync="false"` leads every script tag.

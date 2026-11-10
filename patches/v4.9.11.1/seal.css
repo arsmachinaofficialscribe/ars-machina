@@ -1,0 +1,16 @@
+/* 4.9.11.1 seal. This block sits before the header: the Retro pixel renderer draws the seal once, as soon as
+   it exists, so its rules must already be parsed by then. */
+/* the seal: three turning layers; fine work only on the large seal */
+@media (prefers-reduced-motion:no-preference){
+ .sigil .turn-mid,[data-amx-sigil] .turn-mid{transform-origin:50%;animation:150s linear infinite reverse turn}
+}
+:is(.sigil,[data-amx-sigil] svg):not(.menu-head *) :is(.s-f,.s-r,.s-b){display:none}
+:is(.sigil,[data-amx-sigil] svg):not(.menu-head *) .s-a{stroke-width:4px}
+:is(.sigil,[data-amx-sigil] svg):not(.menu-head *) .s-c{r:7px}
+/* Retro draws the seal as pixels: bold lines and no hairlines; the small seal keeps one pentagon */
+:root[data-skin=retro] .sigil .s-f,:root[data-skin=retro] .sigil .s-r,:root[data-skin=retro] .menu-head .sigil .s-f,:root[data-skin=retro] .menu-head .sigil .s-r{display:none}
+:root[data-skin=retro] :is(.sigil,[data-amx-sigil] svg):not(.menu-head *) .s-p2{display:none}
+:root[data-skin=retro] :is(.sigil,[data-amx-sigil] svg):not(.menu-head *) .s-a{stroke-width:4.6px}
+:root[data-skin=retro] .menu-head .sigil .s-a{stroke-width:3px}
+:root[data-skin=retro] .menu-head .sigil .s-p2{display:none}
+

@@ -1,0 +1,21 @@
+Ars Machina — Scribe and Cast
+Version v4.9.11.3 (Retro seal restored)
+Build date: 2026-11-09
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Scope: Retro art only. No rule or content change; save formats unchanged.
+
+- Retro seal. The 4.9.11.1 Retro seal (ring, one pentagon, centre dot) is withdrawn at Haik's request. The seal's
+  SVG now holds both drawings: the 4.9.11.1 one (elements under class sn) and the earlier one redrawn at three
+  times its size to fit the 120-unit viewBox (class so; same shapes and proportions). Modern shows sn, Retro shows
+  so; the first-run chooser shows each half its own. The rules are in the early seal <style>, so the Retro pixel
+  renderer sees them when it first draws.
+- Retro crest. crest() returns the pre-4.9.11.1 drawing in Retro.
+- With 4.9.11.2, every piece of Retro circle art is back to its pre-4.9.11.1 drawing. Modern is unchanged.
+
+TESTS
+- f9113Checks (both builds): which drawing shows in the header and menu seal in each skin, the chooser's two
+  halves, and the crest in each skin.
+- Screenshot differences from 4.9.11.2, all expected: the eight Retro views (the seal in the header and menu; the
+  crest in Play) and the two Modern first-run views (the seal in the chooser's Retro half). Modern build, menu and
+  play views are unchanged.

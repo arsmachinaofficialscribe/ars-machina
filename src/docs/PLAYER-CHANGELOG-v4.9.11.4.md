@@ -1,7 +1,7 @@
 # Ars Machina — Scribe and Cast
-## Player-facing changelog: v4.8.9.2 through v4.9.10.0
+## Player-facing changelog: v4.8.9.2 through v4.9.11.4
 
-This is a consolidated guide to the important player-facing changes from v4.8.9.2 through v4.9.10.0. It combines the original v4.9.2.0 summary with later improvements and corrections. Earlier entries are summarized where later work superseded them.
+This is a consolidated guide to the important player-facing changes from v4.8.9.2 through v4.9.11.4. It combines the original v4.9.2.0 summary with later improvements and corrections. Earlier entries are summarized where later work superseded them.
 
 ## v4.8.9.2 — Credits, recovery and safer file handling
 
@@ -76,6 +76,47 @@ This is a consolidated guide to the important player-facing changes from v4.8.9.
 - **Pray for a miracle** with the level adjusted for how soon and how badly it is needed, and **invoke God’s aid** for +1 to +3 on a scene’s rolls until one fails.
 - **Temper** a Dominion aura with one of seven virtues, or **tarnish** an Infernal aura with a sin; the trait then shows as a bonus or penalty you tick on the rolls it touches.
 - **Ars Notoria**: recite the seven Rings of Solomon in order, with every modifier; active rings add their experience and Characteristics in Play. Build checks the language requirements and gives 50 experience points for the languages.
+
+## v4.9.11.4 — Odds controls moved to Modifiers (2026-11-10)
+
+- **The odds box under the Characteristics is gone.** It took a row of the Play page, did not explain itself, and its − and + also changed the Ease Factor of your next roll.
+- **Modifiers › Odds badges.** The roll console's Modifiers tab now explains what the % badges mean and has a tick box, off to start: “Measure the badges against my own numbers”. Ticked, it shows an Ease Factor and a combat opposing total for the badges. These change the badges only, never a roll.
+- While the box is unticked, the badges behave as they did before 4.9.11.1.
+- No rule or save-format change.
+
+## v4.9.11.3 — Retro seal restored (2026-11-09)
+
+- **Retro has its earlier seal and crest back.** The seal in the header, the main menu and the first-run screen, and the crest on the Play page, are drawn as they were before 4.9.11.1. Modern keeps the newer drawings.
+- No rule or save-format change.
+
+## v4.9.11.2 — Roll screen hotfix (2026-11-09)
+
+- **The roll screen waits for you.** It no longer fades out by itself after a couple of seconds; it stays until you click, tap or press a key.
+- **Retro has its earlier roll circle back.** The 4.9.11.1 Retro circle drew its medallions as plain studs, did not take the Art and realm colours, and looked wrong in motion.
+- **Modern circle fixes.** The medallions fade in with the drawing instead of appearing as dark discs first; they follow the wood, iron and Characteristic dice colours; and they no longer show in Imaginem’s ghost copies.
+- No rule or save-format change.
+
+## v4.9.11.1 — Audit fixes, one set of sizes, and new circles (2026-11-09)
+
+- **New art.** The seal (header, main menu, first-run screen and the browser tab icon), the crest on the Play page and the roll circle are redrawn, in both Modern and Retro. The seal now has fifteen marks on its rim for the fifteen Arts and three turning layers. The roll circle carries the Arts as medallions: ten Forms on the outer ring, five Techniques on the pentagon. When you roll a spell, its Technique and Form light up.
+- **Abilities fit.** The “all scores” table now fits its card at every window width; before, the Score column was cut off unless the window was very wide. “Bought in” and “XP to the next score” moved to a second line. On a phone each Ability is a small card.
+- **Odds explained.** Under the Characteristics in Play, one line says what the percentage badges are measured against: an Ease Factor (9 to start), and in Combat an opposing total (10 to start). Use − and + to change either; every badge follows.
+- **Play header.** Wounds sit in equal cells, Confidence shows “Score” and “Points” so the two numbers cannot be confused, and Burden shows only when you carry one.
+- **Spell cards** show Range, Duration and Target, and the two colours of the casting bar are keyed.
+- **Phones and tablets.** In Combat, each weapon is a card instead of a table cut off at the edge. Jumping to a section no longer hides its title under the summary strip. At tablet width the header stays on one row and the roll console sits beside the page instead of far below it. The roll screen says “Tap to continue”.
+- **Settings.** Done stays in view, and sections have space between them.
+- **Roll console.** Reset appears only once a modifier is set, the aura fold appears once a roll is loaded, and there is a single sound switch (in the header; in the File menu on a phone).
+- **One look.** Text sizes follow one scale with nothing smaller than 12 px; corners, button heights and thin lines are consistent; gold marks the main action on a screen; single-line fields are underlined and notes are boxed, in Build and the Storyguide alike.
+- **Fixes:** notes named sections by numerals that were wrong (“Inventory (section IX)”); “Sound off” and “Main menu” wording; Storyguide page headings no longer show a focus box; the Storyguide tile keeps one description.
+- No rule or save-format change.
+
+## v4.9.11.0 — Play and the Storyguide catch up with the Build sheet (2026-11-09)
+
+- **Play is faster.** Loading a roll, ticking a modifier or changing a tab now redraws only what changed (the roll console and the section you touched), not the whole page, and the page is laid out once per click instead of three times. On a phone this is about a third quicker.
+- **Short sources everywhere.** Play and the Storyguide show sources the way the Build sheet does: “DE p. 367” instead of “Ars Magica Definitive Edition p. 367”. Point at the chip for the full title.
+- **One way of writing buttons.** Buttons in the Storyguide and the main menu are in sentence case, like the rest of the app: “New saga”, “Saga library”, “+ New person”, “Next season ▶”. Headings keep their Title Case.
+- **Fix:** in the Storyguide, a person’s name or a story’s title at the top of its page is shown exactly as you typed it (it was being capitalized like a heading).
+- No rule or save-format change.
 
 ## v4.9.10.0 — A clearer Build sheet, and a faster one
 

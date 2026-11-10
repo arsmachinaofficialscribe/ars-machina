@@ -1,0 +1,25 @@
+Ars Machina — Scribe and Cast
+Version v4.9.11.4 (Odds controls moved to Modifiers)
+Build date: 2026-11-10
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Scope: one Play change at Haik's direction. No rule or content change. Play state gains an optional `odds`
+object; character files without it load as before.
+
+- Removed: the 4.9.11.1 odds caption under the Characteristic tiles (div.f9111-odds), its script and its styles.
+  Its controls wrote P().ef and P().oppTotal, which are also the Ease Factor and opposing total of the next roll,
+  so a player could change a roll without meaning to.
+- Added: Modifiers › "Odds badges" in the roll console (consoleMods wrapped): a note saying what the % badges are, a
+  tick box "Measure the badges against my own numbers" (off by default), and, when ticked, two number fields.
+  State: P().odds = {on, ef, opp}; ef 0..60, opp -30..99, rounded and clamped when read.
+- oddsChip is wrapped. Only when odds.on is true, and only for a check that takes the page's Ease Factor
+  (label "Ease Factor", value equal to P().ef) or the page's opposing total (label naming an opponent, value equal
+  to P().oppTotal), the badge is computed against odds.ef or odds.opp. Checks with an Ease Factor of their own
+  (from a rule or a table) and opposed checks with a rolled opponent are untouched. No roll reads P().odds.
+- "Reset manual modifiers" shows while the box is ticked and clears it, like any other modifier.
+- Known gap, by this decision: on a touch screen, with no tooltip, the page itself no longer says what the badges
+  are measured against; the note in Modifiers does.
+
+TESTS
+- f9114Checks (both builds), 6 checks. The two 4.9.11.1 caption checks are retired.
+- Screenshot differences from 4.9.11.3, expected: the four Play views (the caption row is gone).

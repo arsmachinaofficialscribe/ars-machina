@@ -1065,6 +1065,324 @@ async function f910Checks(url, tag) {
   } finally { await browser.close(); }
 }
 
+async function f911Checks(url, tag) {
+  const { chromium } = require('playwright');
+  const browser = await chromium.launch();
+  try {
+    const { p, errs } = await pageFor(browser, url, tag);
+    await enter(p);
+    if (!(await p.evaluate(() => !!document.getElementById('v4.9.11.0')))) { check(tag + 'skipped (no v4.9.11.0)', true); return; }
+    const r = await p.evaluate(async () => {
+      const w = ms => new Promise(z => setTimeout(z, ms)), q = s => document.querySelector(s), out = {};
+      const frame = () => new Promise(z => requestAnimationFrame(() => requestAnimationFrame(z)));
+      const m = document.getElementById('menu'); m && (m.hidden = true, document.body.classList.remove('menu-open'));
+      const t = document.getElementById('am-seal-tip'); t && t.remove();
+      st = exampleState(); persist(); setMode('play'); P().tab = 'skills'; renderPlay(); await w(400);
+      // keyed redraw: loading a roll keeps the hero and the untouched sections, rebuilds the console
+      const hero = q('#work .hero'), secs = [...document.querySelectorAll('#work .psec')], con = q('#ledger .console');
+      const row = q('#work .pane [data-pact="load"]');
+      row && row.click(); await frame();
+      const kept = [...document.querySelectorAll('#work .psec')].filter(e => secs.includes(e)).length;
+      out.keyed = [q('#work .hero') === hero, kept >= secs.length - 1 && secs.length > 1, q('#ledger .console') !== con || q('#ledger .cbody') !== null, !!row];
+      // the Situation strip follows the state (it is re-inserted, never left stale) and appears once
+      const sx = () => (q('[data-sx="stress"]') || {}).getAttribute && q('[data-sx="stress"]').getAttribute('aria-pressed');
+      const s0 = sx(); q('[data-sx="stress"]').click(); await frame(); const s1 = sx(); q('[data-sx="stress"]').click(); await frame();
+      out.sx = [s0 !== s1, sx() === s0, document.querySelectorAll('#work .sx').length === 1];
+      // every tab draws the same text through the keyed path as through a full redraw, with no duplicate ids
+      const norm = () => [q('#work').innerText.replace(/\s+/g, ' ').trim(), q('#ledger').innerText.replace(/\s+/g, ' ').trim(), document.querySelectorAll('#work *').length];
+      const dup = () => { const seen = new Set(), d = []; document.querySelectorAll('[id]').forEach(e => { seen.has(e.id) ? d.push(e.id) : seen.add(e.id); }); return d; };
+      out.same = []; out.dups = [];
+      for (const tb of ['skills', 'magic', 'realms', 'combat', 'inv', 'persona', 'seasons', 'ordeals', 'profile']) {
+        P().tab = tb === 'skills' ? 'magic' : 'skills'; renderPlay(); await frame();
+        P().tab = tb; renderPlay(); await frame(); const a = norm(); out.dups.push(...dup());
+        window.amPlayFull = true; renderPlay(); await frame(); window.amPlayFull = false; const b = norm();
+        (a[0] !== b[0] || a[1] !== b[1] || a[2] !== b[2]) && out.same.push(tb + ':' + a[2] + '/' + b[2]);
+      }
+      // no layout is read back during a redraw (the console scroll and the section strip offsets are deferred)
+      let reads = 0; const G = [[HTMLElement.prototype, 'offsetHeight'], [HTMLElement.prototype, 'offsetWidth'], [Element.prototype, 'scrollTop'], [Element.prototype, 'scrollWidth'], [Element.prototype, 'clientWidth']];
+      const saved = G.map(([o, k]) => { const d = Object.getOwnPropertyDescriptor(o, k); Object.defineProperty(o, k, { configurable: true, get() { reads++; return d.get.call(this); }, set: d.set ? function (v) { d.set.call(this, v); } : undefined }); return d; });
+      const gbcr = Element.prototype.getBoundingClientRect, gcs = window.getComputedStyle; Element.prototype.getBoundingClientRect = function () { reads++; return gbcr.call(this); }; window.getComputedStyle = function () { reads++; return gcs.apply(this, arguments); };
+      P().tab = 'skills'; renderPlay();
+      G.forEach(([o, k], i) => Object.defineProperty(o, k, saved[i])); Element.prototype.getBoundingClientRect = gbcr; window.getComputedStyle = gcs;
+      out.reads = reads; await frame(); await frame();
+      out.navH = getComputedStyle(document.documentElement).getPropertyValue('--psec-nav-h').trim();
+      // short source chips in Play
+      P().tab = 'magic'; renderPlay(); await frame();
+      const mg = q('#work').innerText, chip = [...document.querySelectorAll('#work [title]')].find(e => /Definitive Edition/.test(e.title) && /DE p\. \d/.test(e.textContent));
+      out.chips = [/DE p\. \d/.test(mg), !/Ars Magica Definitive Edition p\./.test(mg), !!chip];
+      P().tab = 'inv'; renderPlay(); await frame(); out.chips.push(!/Ars Magica (Definitive Edition|DE) p\./.test(q('#work').innerText));
+      // main menu tiles in sentence case
+      setMode('build'); openMenu('troupe'); await w(200);
+      out.menu = [...document.querySelectorAll('#menu [data-mn] b, #menu [data-mn] strong, #menu [data-mn]')].map(e => e.textContent).join('|');
+      return out;
+    });
+    check(tag + 'Play: loading a roll keeps the hero and the untouched sections (keyed redraw)', r.keyed.every(Boolean), JSON.stringify(r.keyed));
+    check(tag + 'Play: the Situation strip follows the state after a keyed redraw and appears once', r.sx.every(Boolean), JSON.stringify(r.sx));
+    check(tag + 'Play: every tab reads the same through the keyed redraw as through a full redraw', r.same.length === 0, r.same.join(' '));
+    check(tag + 'Play: no duplicate ids after keyed redraws', r.dups.length === 0, r.dups.slice(0, 5).join(','));
+    check(tag + 'Play: a redraw reads no layout (scroll and strip offsets deferred)', r.reads === 0, String(r.reads));
+    check(tag + 'Play: the section strip offset is still measured after the redraw', /^\d+px$/.test(r.navH), r.navH);
+    check(tag + 'Play: sources show as short chips (DE p. N) with the full title on hover', r.chips.every(Boolean), JSON.stringify(r.chips));
+    check(tag + 'main menu: New character and Preview character in sentence case', /New character/.test(r.menu) && /Preview character/.test(r.menu) && !/New Character|Preview Character/.test(r.menu), r.menu.slice(0, 200));
+    // Storyguide: buttons in sentence case, Definitive Edition pages as DE
+    await p.evaluate(() => { document.getElementById('menu').hidden = false; openMenu('home'); }); await wait(300);
+    await p.click('#menu [data-mn="storyguide"]'); await wait(1800);
+    const tiles = await p.evaluate(() => [...document.querySelectorAll('#menu [data-mn^="sg-"]')].map(e => e.textContent.replace(/\s+/g, ' ')).join('|'));
+    check(tag + 'Storyguide menu: New saga, Saga library, Import saga JSON', /New saga/.test(tiles) && /Saga library/.test(tiles) && /Import saga JSON/.test(tiles) && !/New Saga|Saga Library|Import Saga/.test(tiles), tiles.slice(0, 200));
+    await p.click('#menu [data-mn="sg-new"]'); await wait(900);
+    const nm = await p.$('#sg-new input, .sg input[type=text]'); if (nm) { await nm.fill('Case saga'); await p.keyboard.press('Enter'); await wait(900); }
+    const sgr = await p.evaluate(async () => {
+      const w = ms => new Promise(z => setTimeout(z, ms)), go = s => { const b = document.querySelector(`[data-sga="go"][data-screen="${s}"]`); b && b.click(); }, txt = [];
+      for (const s of ['people', 'stories', 'encounters', 'calendar', 'journal', 'maps', 'covenant']) { go(s); await w(250); document.querySelectorAll('#sg .sg-main button').forEach(b => txt.push(b.textContent.trim().replace(/\s+/g, ' '))); }
+      go('people'); await w(250); const add = document.querySelector('#sg .sg-main [data-sga="add"]'); add && add.click(); await w(400);
+      const h2 = (document.querySelector('#sg .sg-main h2') || {}).textContent;
+      go('bestiary'); await w(1200); const best = document.querySelector('#sg .sg-main').innerText;
+      return { txt, h2, best: [/\bDE p\. \d/.test(best), !/\bArM5 p\. \d/.test(best)] };
+    });
+    const bad = sgr.txt.filter(t => /^(\+ |◀ )?(New|Next|Previous|Delete|All|Save|Remove|Clear|Create|Export|Show|End|Close|Go|Choose|From|Manage|Covenant|Session) [A-Z][a-z]/.test(t) && !/JSON|Storyguide/.test(t));
+    check(tag + 'Storyguide: action buttons in sentence case', bad.length === 0 && sgr.txt.some(t => t === '+ New person') && sgr.txt.some(t => /^Next season/.test(t)), bad.slice(0, 6).join(' | '));
+    check(tag + 'Storyguide: a record heading shows its name as typed (no Title Case)', sgr.h2 === 'New person', String(sgr.h2));
+    check(tag + 'Storyguide bestiary: Definitive Edition pages read DE p. N', sgr.best.every(Boolean), JSON.stringify(sgr.best));
+    check(tag + 'no errors in the Play and Storyguide checks', errs.length === 0, errs.slice(0, 3).join(' | '));
+  } finally { await browser.close(); }
+}
+
+// 4.9.11.1: the 2026-11-09 audit fixes and the redrawn seal, crest and roll circle
+async function f9111Checks(url, tag) {
+  const { chromium } = require('playwright');
+  const browser = await chromium.launch();
+  try {
+    const { p, errs } = await pageFor(browser, url, tag);
+    await enter(p);
+    if (!(await p.evaluate(() => !!document.getElementById('v4.9.11.1')))) { check(tag + 'skipped (no v4.9.11.1)', true); return; }
+    const prep = () => p.evaluate(async () => {
+      const m = document.getElementById('menu'); m && (m.hidden = true, document.body.classList.remove('menu-open'));
+      const t = document.getElementById('am-seal-tip'); t && t.remove();
+      st = exampleState(); persist(); setMode('build'); renderAll(); scrollTo(0, 0); await new Promise(z => setTimeout(z, 500));
+    });
+    await prep();
+    // art
+    const art = await p.evaluate(() => {
+      const q = (s, r) => (r || document).querySelector(s), sig = q('header.top .sigil'), svg = fxCircleSvg0();
+      const d = document.createElement('div'); d.innerHTML = svg;
+      const disp = (root, c) => { const e = root && root.querySelector(c); return e ? getComputedStyle(e).display : 'missing'; };
+      openMenu('home'); const big = q('#menu .menu-head .sigil'); const bigFine = disp(big, '.s-f');
+      const mh = q('#menu'); mh && (mh.hidden = true); document.body.classList.remove('menu-open');
+      return { vb: sig && sig.getAttribute('viewBox'), layers: ['.turn', '.turn-mid', '.turn-in'].map(c => !!(sig && sig.querySelector(c))), smallFine: disp(sig, '.s-f'), bigFine,
+        meds: d.querySelectorAll('.fx-med').length, icons: [...d.querySelectorAll('.fx-ico')].filter(g => g.children.length > 0).length, r5: !!d.querySelector('.fx-r5'),
+        kept: ['.fx-r1', '.fx-r2', '.fx-r3', '.fx-r4', '.fx-draw', '.fx-ticks', '.fx-ringtext'].every(c => !!d.querySelector(c)), bad: /undefined|NaN/.test(svg), seam: (d.querySelector('textPath') || {}).getAttribute && d.querySelector('textPath').getAttribute('textLength') };
+    });
+    check(tag + 'seal: 120-unit drawing with three turning layers', art.vb === '0 0 120 120' && art.layers.every(Boolean), JSON.stringify(art.layers) + ' ' + art.vb);
+    check(tag + 'seal: fine work only on the large (menu) seal', art.smallFine === 'none' && art.bigFine !== 'none' && art.bigFine !== 'missing', art.smallFine + ' / ' + art.bigFine);
+    check(tag + 'roll circle: fifteen Art medallions with icons, five layers, old class names kept', art.meds === 15 && art.icons === 15 && art.r5 && art.kept && !art.bad && !!art.seam, JSON.stringify(art));
+    // Build
+    const b = await p.evaluate(() => {
+      const q = s => document.querySelector(s), t = q('#s-abil tbody[data-lv-list="abil"]').parentElement, wr = t.closest('.tbl-wrap');
+      const sc = t.querySelector('tbody tr td:nth-child(7)').getBoundingClientRect(), wb = wr.getBoundingClientRect();
+      const small = [...document.querySelectorAll('#work *')].filter(e => !e.children.length && e.textContent.trim() && e.getBoundingClientRect().width > 0 && parseFloat(getComputedStyle(e).fontSize) < 12).length;
+      const vf = [...document.querySelectorAll('#s-vf .vf-cols>*')].map(e => Math.round(e.getBoundingClientRect().height));
+      return { fit: wr.scrollWidth <= wr.clientWidth + 1 && sc.width > 0 && sc.right <= wb.right + 1, clipped: [...t.querySelectorAll('input')].filter(i => i.scrollWidth > i.clientWidth + 2).map(i => i.value),
+        role: t.getAttribute('role') === 'table' && t.querySelector('tbody tr').getAttribute('role') === 'row', nums: /\(section [IVXL]+\)|section [IVXL]+[ :(]/.test(document.documentElement.innerHTML), small, vf,
+        gilt: getComputedStyle(q('.btn.primary') || document.body).backgroundColor };
+    });
+    check(tag + 'Abilities: the Score column is inside the card at 1280 px, nothing clipped', b.fit && b.clipped.length === 0 && b.role, JSON.stringify(b.clipped));
+    check(tag + 'no note cites a section by numeral', !b.nums);
+    check(tag + 'Build: no text under 12 px', b.small === 0, String(b.small));
+    check(tag + 'Virtues and Flaws panels take their own heights', b.vf.length === 2 && b.vf[0] !== b.vf[1], JSON.stringify(b.vf));
+    const set = async () => p.evaluate(async () => {
+      openSettings(); await new Promise(z => setTimeout(z, 400)); const m = document.querySelector('.pmodal'), a = m.querySelector('.pm-acts').getBoundingClientRect();
+      const gaps = [...m.querySelectorAll('[data-setpane=general]>.fset')].slice(1).map(f => Math.round(f.getBoundingClientRect().top - f.previousElementSibling.getBoundingClientRect().bottom));
+      m.remove(); return { vis: a.top >= 0 && a.bottom <= innerHeight + 1, gaps };
+    });
+    const s1 = await set();
+    check(tag + 'Settings: Done is in view and sections are spaced (1280 px)', s1.vis && s1.gaps.every(g => g >= 16), JSON.stringify(s1));
+    // Play
+    const pl = await p.evaluate(async () => {
+      const w = ms => new Promise(z => setTimeout(z, ms)), q = s => document.querySelector(s), out = {};
+      setMode('play'); P().tab = 'skills'; renderPlay(); await w(400);
+      out.moved = !!document.getElementById('v4.9.11.4');   // 4.9.11.4 moved the odds controls to Modifiers (f9114Checks)
+      const cap = () => (q('#work .f9111-odds') || {}).innerText || '';
+      if (!out.moved) {
+      out.cap = /Ease Factor/.test(cap()) && document.querySelectorAll('#work .f9111-odds').length === 1;
+      const ef0 = +P().ef, t0 = q('#work .pane .odds').title;
+      q('#work .f9111-odds [aria-label="Raise the Ease Factor"]').click(); await w(250);
+      out.ef = [ef0, +P().ef, t0 !== q('#work .pane .odds').title, new RegExp('\\b' + (ef0 + 3) + '\\b').test(cap())];
+      q('#work .f9111-odds [aria-label="Lower the Ease Factor"]').click(); await w(250); out.efBack = +P().ef === ef0;
+      }
+      const rb = () => q('#ledger [data-pact="reset-mods"]');
+      out.reset0 = rb() ? rb().hidden : 'none';
+      P().misc = 2; renderPlay(); await w(200); out.reset1 = rb() ? rb().hidden : 'none'; P().misc = 0; renderPlay(); await w(200);
+      out.aura0 = !q('#ledger .cbody>.empty') || getComputedStyle(q('#ledger .roll-aura') || document.body).display === 'none' || !q('#ledger .roll-aura');
+      out.snd = [...document.querySelectorAll('[data-global-sound-toggle],[data-pact="sfx-toggle"]')].filter(e => e.getBoundingClientRect().width > 0).length;
+      out.small = [...document.querySelectorAll('#work *,#ledger *')].filter(e => !e.children.length && e.textContent.trim() && e.getBoundingClientRect().width > 0 && parseFloat(getComputedStyle(e).fontSize) < 12).length;
+      out.crest = !!q('#work .crest-svg .turn-mid');
+      out.conf = /Score/.test((q('#work .hx-conf') || {}).innerText || '') && /Points/i.test((q('#work .hx-conf') || {}).innerText || '');
+      P().tab = 'combat'; renderPlay(); await w(300);
+      if (!out.moved) { out.opp = /opposing total/i.test(cap()); const o0 = +P().oppTotal;
+      const up = q('#work .f9111-odds [aria-label="Raise the opposing total"]'); up && up.click(); await w(250); out.oppUp = +P().oppTotal === o0 + 1; P().oppTotal = o0; renderPlay(); }
+      P().tab = 'magic'; renderPlay(); await w(300);
+      out.rdt = /R\s+\S+.*D\s+\S+.*T\s+\S+/.test((q('#work .spell-card .sc-rdt') || {}).innerText || '');
+      // rolling a spell lights its two Arts on the circle
+      P().sel = 'spell:0'; renderPlay(); await w(200); const c = getCheck('spell:0');
+      q('[data-pact="roll"]').click(); await w(900);
+      const fx = q('.fx'), lit = fx ? [...fx.querySelectorAll('.fx-med')].filter(m => parseFloat(getComputedStyle(m.querySelector('.fx-mc')).strokeWidth) > 2).map(m => m.getAttribute('class').replace(/.*fx-m-/, '')) : [];
+      out.lit = [lit.sort().join(','), fx && fx.dataset.fx, fx && fx.dataset.fxt]; out.hint = /Tap to continue/.test(document.documentElement.innerHTML);
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true })); await w(300); const f2 = q('.fx'); f2 && f2.remove();
+      P().tab = 'skills'; P().sel = null; renderPlay();
+      return out;
+    });
+    if (!pl.moved) {
+      check(tag + 'Play: the odds caption names the Ease Factor and its control changes every badge', pl.cap && pl.ef[1] === pl.ef[0] + 3 && pl.ef[2] && pl.ef[3] && pl.efBack, JSON.stringify(pl.ef));
+      check(tag + 'Combat: the caption names the opposing total and steps it', pl.opp && pl.oppUp);
+    }
+    check(tag + 'console: Reset shows only when a modifier is set; no aura fold on the empty console', pl.reset0 === true && pl.reset1 === false && pl.aura0, pl.reset0 + '/' + pl.reset1 + '/' + pl.aura0);
+    check(tag + 'Play: one sound switch on screen', pl.snd === 1, String(pl.snd));
+    check(tag + 'Play: no text under 12 px; Confidence labelled; crest has its new layer', pl.small === 0 && pl.conf && pl.crest, pl.small + ' ' + pl.conf + ' ' + pl.crest);
+    check(tag + 'spell cards show Range, Duration and Target', pl.rdt);
+    check(tag + 'roll circle: the rolled spell lights its Technique and Form', pl.lit[0].split(',').length === 2 && pl.lit[0].includes(pl.lit[1]) && pl.lit[0].includes(pl.lit[2]), JSON.stringify(pl.lit));
+    check(tag + 'the roll ceremony has a touch hint', pl.hint);
+    // tablet
+    await p.setViewportSize({ width: 768, height: 1024 }); await wait(500);
+    const tb = await p.evaluate(async () => {
+      const w = ms => new Promise(z => setTimeout(z, ms)); setMode('play'); await w(400);
+      const h = document.querySelector('header.top').getBoundingClientRect().height, a = document.getElementById('work').getBoundingClientRect(), c = document.getElementById('ledger').getBoundingClientRect();
+      setMode('build'); await w(400); const t = document.querySelector('#s-abil tbody[data-lv-list="abil"]').parentElement.closest('.tbl-wrap');
+      return { h, side: c.left >= a.right - 1 && c.width > 200, fit: t.scrollWidth <= t.clientWidth + 1, hs: document.scrollingElement.scrollWidth - innerWidth };
+    });
+    check(tag + '768 px: one-row header, console beside the Play page, Abilities fit', tb.h < 80 && tb.side && tb.fit && tb.hs <= 0, JSON.stringify(tb));
+    // phone
+    await p.setViewportSize({ width: 390, height: 844 }); await wait(500);
+    const ph = await p.evaluate(async () => {
+      const w = ms => new Promise(z => setTimeout(z, ms)), q = s => document.querySelector(s), out = {};
+      const chip = [...document.querySelectorAll('.f975-gchip')].find(c => c.getBoundingClientRect().width > 0 && /Skills/i.test(c.textContent)); chip && chip.click(); await w(1200);
+      const st2 = q('.f975-strip').getBoundingClientRect(), sec = [...document.querySelectorAll('#work>section.folio')].map(e => e.getBoundingClientRect()).find(r => r.top > 0 && r.top < innerHeight);
+      out.jump = !!chip && !!sec && sec.top >= st2.bottom - 1;
+      const t = q('#s-abil tbody[data-lv-list="abil"]').parentElement; out.abil = getComputedStyle(t.querySelector('tbody tr')).display === 'grid' && t.getBoundingClientRect().width <= innerWidth;
+      scrollTo(0, 0); openSettings(); await w(400); const m = q('.pmodal'), a = m.querySelector('.pm-acts').getBoundingClientRect(); out.done = a.top >= 0 && a.bottom <= innerHeight + 1; m.remove();
+      setMode('play'); P().tab = 'combat'; renderPlay(); await w(500);
+      const wt = q('#work table.wtab'); out.cards = wt && getComputedStyle(wt.querySelector('tbody tr')).display === 'grid';
+      out.over = [...document.querySelectorAll('#work .pane .psec *')].filter(e => { const r = e.getBoundingClientRect(); return r.width > 1 && r.height > 1 && r.right > innerWidth + 1 && !e.closest('thead'); }).length;
+      out.hs = document.scrollingElement.scrollWidth - innerWidth; P().tab = 'skills'; renderPlay();
+      return out;
+    });
+    check(tag + '390 px: a rail jump stops below the summary strip', ph.jump);
+    check(tag + '390 px: Abilities and weapons are cards; nothing runs off the page; Settings Done in view', ph.abil && ph.cards && ph.over === 0 && ph.hs <= 0 && ph.done, JSON.stringify(ph));
+    await p.setViewportSize({ width: 1280, height: 900 }); await wait(300);
+    // Storyguide: the page heading takes focus without a box; one description on the menu tile
+    await p.evaluate(() => { document.getElementById('menu').hidden = false; openMenu('home'); }); await wait(300);
+    const desc = await p.evaluate(() => (document.querySelector('#menu [data-mn="storyguide"] small') || {}).textContent || '');
+    await p.click('#menu [data-mn="storyguide"]'); await wait(1800);
+    await p.click('#menu [data-mn="sg-new"]'); await wait(900);
+    const nm = await p.$('#sg-new input, .sg input[type=text]'); if (nm) { await nm.fill('Audit saga'); await p.keyboard.press('Enter'); await wait(900); }
+    const sg = await p.evaluate(async () => {
+      const b = document.querySelector('[data-sga="go"][data-screen="people"]'); b && b.click(); await new Promise(z => setTimeout(z, 300));
+      const h = document.querySelector('#sg .sg-main h2'); h && h.focus(); const i = document.querySelector('#sg input[type=text]');
+      return { outline: h ? getComputedStyle(h).outlineStyle : 'missing', top: i ? getComputedStyle(i).borderTopWidth : 'missing' };
+    });
+    check(tag + 'Storyguide: heading focus draws no box; single-line fields are underlined', sg.outline === 'none' && (sg.top === '0px' || sg.top === 'missing'), JSON.stringify(sg));
+    check(tag + 'Storyguide menu tile keeps one description', /Prepare stories/.test(desc), desc);
+    check(tag + 'no errors in the 4.9.11.1 checks', errs.length === 0, errs.slice(0, 3).join(' | '));
+  } finally { await browser.close(); }
+}
+
+// 4.9.11.2: the roll screen waits for the player; Retro keeps the earlier circle
+async function f9112Checks(url, tag) {
+  const { chromium } = require('playwright');
+  const browser = await chromium.launch();
+  try {
+    const { p, errs } = await pageFor(browser, url, tag);
+    await enter(p);
+    if (!(await p.evaluate(() => !!document.getElementById('v4.9.11.2')))) { check(tag + 'skipped (no v4.9.11.2)', true); return; }
+    const r = await p.evaluate(async () => {
+      const w = ms => new Promise(z => setTimeout(z, ms)), q = s => document.querySelector(s), out = {};
+      const m = document.getElementById('menu'); m && (m.hidden = true, document.body.classList.remove('menu-open'));
+      const t = document.getElementById('am-seal-tip'); t && t.remove();
+      const cnt = svg => { const d = document.createElement('div'); d.innerHTML = svg; return [d.querySelectorAll('.fx-med').length, !!d.querySelector('.fx-r4'), !!d.querySelector('.fx-glyph')]; };
+      const root = document.documentElement, skin = root.getAttribute('data-skin');
+      out.modern = cnt(fxCircleSvg()); root.setAttribute('data-skin', 'retro'); out.retro = cnt(fxCircleSvg()); skin ? root.setAttribute('data-skin', skin) : root.removeAttribute('data-skin');
+      st = exampleState(); persist(); setMode('play'); P().tab = 'magic';
+      const i = st.spells.findIndex(s => /Im/.test(s.tf || '')); P().sel = 'spell:' + (i < 0 ? 0 : i); renderPlay(); await w(300);
+      q('[data-pact="roll"]').click(); await w(1200);
+      const fx = q('.fx'); out.ghost = fx ? [fx.querySelectorAll('.fx-ghost').length, [...fx.querySelectorAll('.fx-ghost .fx-med')].filter(e => getComputedStyle(e).display !== 'none').length] : null;
+      await w(7300); out.open = !!q('.fx') && q('.fx').classList.contains('fx-done');
+      return out;
+    });
+    await p.keyboard.press('Enter'); await wait(800);
+    const closed = await p.evaluate(() => !document.querySelector('.fx'));
+    check(tag + 'roll screen: still open 7 s after the result, and a key closes it', r.open && closed, r.open + '/' + closed);
+    check(tag + 'roll circle: Modern has fifteen medallions, Retro the earlier circle', r.modern[0] === 15 && r.retro[0] === 0 && r.retro[1] && r.retro[2], JSON.stringify([r.modern, r.retro]));
+    check(tag + 'roll circle: no medallion shows in an Imaginem ghost copy', !!r.ghost && r.ghost[0] > 0 && r.ghost[1] === 0, JSON.stringify(r.ghost));
+    check(tag + 'no errors in the 4.9.11.2 checks', errs.length === 0, errs.slice(0, 3).join(' | '));
+  } finally { await browser.close(); }
+}
+
+// 4.9.11.3: Retro shows the earlier seal and crest; Modern the 4.9.11.1 ones
+async function f9113Checks(url, tag) {
+  const { chromium } = require('playwright');
+  const browser = await chromium.launch();
+  try {
+    const { p, errs } = await pageFor(browser, url, tag);
+    const ch = await p.evaluate(() => { const v = (h, c) => { const e = document.querySelector('.amx-half--' + h + ' [data-amx-sigil] ' + c); return e ? getComputedStyle(e).display !== 'none' : null; };
+      return document.querySelector('.amx-start') ? [v('modern', 'g.sn>*'), v('modern', 'g.so>*'), v('retro', 'g.sn>*'), v('retro', 'g.so>*')] : null; });
+    await enter(p);
+    if (!(await p.evaluate(() => !!document.getElementById('v4.9.11.3')))) { check(tag + 'skipped (no v4.9.11.3)', true); return; }
+    const r = await p.evaluate(async () => {
+      const w = ms => new Promise(z => setTimeout(z, ms)), root = document.documentElement, skin = root.getAttribute('data-skin');
+      const m = document.getElementById('menu'); m && (m.hidden = true, document.body.classList.remove('menu-open'));
+      const vis = c => { const e = document.querySelector('header.top .sigil ' + c); return !!e && getComputedStyle(e).display !== 'none'; };
+      st = exampleState(); persist(); setMode('play'); await w(300);
+      const out = { modern: [vis('g.sn>*'), vis('g.so>*'), /turn-mid/.test(crest())] };
+      root.setAttribute('data-skin', 'retro'); out.retro = [vis('g.sn>*'), vis('g.so>*'), /turn-mid/.test(crest()), vis('g.so>rect')];
+      skin ? root.setAttribute('data-skin', skin) : root.removeAttribute('data-skin'); return out;
+    });
+    check(tag + 'seal: Modern shows the new drawing, Retro the earlier one (two squares)', r.modern[0] && !r.modern[1] && !r.retro[0] && r.retro[1] && r.retro[3], JSON.stringify(r));
+    check(tag + 'crest: new rings in Modern, the earlier crest in Retro', r.modern[2] && !r.retro[2]);
+    // the Retro half's seal may already be replaced by its pixel drawing (then its shapes are gone: null)
+    check(tag + 'first-run screen: the Modern half shows the new seal and the Retro half does not', !ch || (ch[0] && !ch[1] && !ch[2] && ch[3] !== false), JSON.stringify(ch));
+    check(tag + 'no errors in the 4.9.11.3 checks', errs.length === 0, errs.slice(0, 3).join(' | '));
+  } finally { await browser.close(); }
+}
+
+// 4.9.11.4: the odds yardstick is in Modifiers, off until ticked, and never touches a roll
+async function f9114Checks(url, tag) {
+  const { chromium } = require('playwright');
+  const browser = await chromium.launch();
+  try {
+    const { p, errs } = await pageFor(browser, url, tag);
+    await enter(p);
+    if (!(await p.evaluate(() => !!document.getElementById('v4.9.11.4')))) { check(tag + 'skipped (no v4.9.11.4)', true); return; }
+    const o = await p.evaluate(async () => {
+      const w = ms => new Promise(z => setTimeout(z, ms)), q = s => document.querySelector(s), o = {};
+      const m = document.getElementById('menu'); m && (m.hidden = true, document.body.classList.remove('menu-open'));
+      const tip = document.getElementById('am-seal-tip'); tip && tip.remove();
+      st = exampleState(); persist(); setMode('play'); P().tab = 'skills'; renderPlay(); await w(300);
+      const t = () => q('#work .pane .odds').title, rb = () => { const b = q('#ledger [data-pact="reset-mods"]'); return b ? b.hidden : 'none'; };
+      o.caption = !!q('.f9111-odds'); o.t0 = t(); o.ef0 = +P().ef; o.opp0 = +P().oppTotal;
+      q('[data-pact="ctab"][data-t="mods"]').click(); await w(300);
+      o.fs = !!q('#ledger fieldset.f9114'); o.off = [q('.f9114 input[type=checkbox]').checked, document.querySelectorAll('.f9114 input[type=number]').length, rb()];
+      st.play.odds = { on: false, ef: 21, opp: 3 }; renderPlay(); await w(200); o.offNoEffect = t() === o.t0; delete st.play.odds; renderPlay(); await w(200);
+      q('.f9114 input[type=checkbox]').click(); await w(300);
+      o.on = [document.querySelectorAll('.f9114 input[type=number]').length, t() === o.t0, rb()];
+      const i = q('.f9114 input[data-pk="odds.ef"]'); i.value = '15'; i.dispatchEvent(new Event('change', { bubbles: true })); await w(400);
+      o.t15 = t(); o.efAfter = +P().ef;
+      P().sel = 'trait'; P().ctab = 'roll'; renderPlay(); await w(200); const c = getCheck(P().sel); o.rollEf = c ? +c.ef : null; P().ctab = 'mods';
+      P().tab = 'combat'; renderPlay(); await w(300);
+      const ct = () => [...document.querySelectorAll('#work .pane .odds')].map(e => e.title).find(x => /Opponent/.test(x)) || '';
+      o.c10 = ct(); P().odds.opp = 4; renderPlay(); await w(200); o.c4 = ct(); o.oppAfter = +P().oppTotal;
+      st.play.odds = '<img src=x onerror="window.__o=1">'; let threw = false; try { renderPlay(); } catch (e) { threw = true; } await w(200); o.h1 = [threw, typeof P().odds, window.__o || 0];
+      st.play.odds = { on: true, ef: '<b>x', opp: {} }; try { renderPlay(); } catch (e) { threw = true; } await w(200); o.h2 = [threw, ct()];
+      delete st.play.odds; P().tab = 'skills'; P().sel = null; renderPlay(); await w(200); o.back = t() === o.t0;
+      return o;
+    });
+    check(tag + 'odds: no box under the Characteristics; Modifiers has "Odds badges"', !o.caption && o.fs);
+    check(tag + 'odds: off by default, with no fields, no effect and no Reset', o.off[0] === false && o.off[1] === 0 && o.off[2] === true && o.offNoEffect, JSON.stringify(o.off));
+    check(tag + 'odds: ticked, it starts from the current numbers and shows Reset', o.on[0] === 2 && o.on[1] && o.on[2] === false, JSON.stringify(o.on));
+    check(tag + 'odds: the badges follow the chosen Ease Factor and opposing total', /Ease Factor 15$/.test(o.t15) && / 10$/.test(o.c10) && / 4$/.test(o.c4), [o.t15, o.c10, o.c4].join(' | '));
+    check(tag + 'odds: the roll keeps its own Ease Factor and opposing total', o.efAfter === o.ef0 && o.rollEf === o.ef0 && o.oppAfter === o.opp0 && o.back, JSON.stringify([o.ef0, o.efAfter, o.rollEf, o.opp0, o.oppAfter]));
+    check(tag + 'odds: hostile saved values are dropped or clamped; no errors', !o.h1[0] && o.h1[1] === 'undefined' && !o.h1[2] && !o.h2[0] && / 10$/.test(o.h2[1]) && errs.length === 0, JSON.stringify([o.h1, o.h2]) + errs.slice(0, 2).join(' | '));
+  } finally { await browser.close(); }
+}
+
 (async () => {
   const t0 = Date.now(); let version;
   if (ONLY !== 'browser') {
@@ -1100,6 +1418,16 @@ async function f910Checks(url, tag) {
       if (OFFLINE) await f999Checks('file://' + OFFLINE.replace(/\\/g, '/').replace(/^([A-Za-z]):/, '/$1:'), '[4.9.9.9 offline] ');
       await f910Checks(`http://127.0.0.1:${port}/index.html`, '[4.9.10.0 cf] ');
       if (OFFLINE) await f910Checks('file://' + OFFLINE.replace(/\\/g, '/').replace(/^([A-Za-z]):/, '/$1:'), '[4.9.10.0 offline] ');
+      await f911Checks(`http://127.0.0.1:${port}/index.html`, '[4.9.11.0 cf] ');
+      if (OFFLINE) await f911Checks('file://' + OFFLINE.replace(/\\/g, '/').replace(/^([A-Za-z]):/, '/$1:'), '[4.9.11.0 offline] ');
+      await f9111Checks(`http://127.0.0.1:${port}/index.html`, '[4.9.11.1 cf] ');
+      if (OFFLINE) await f9111Checks('file://' + OFFLINE.replace(/\\/g, '/').replace(/^([A-Za-z]):/, '/$1:'), '[4.9.11.1 offline] ');
+      await f9112Checks(`http://127.0.0.1:${port}/index.html`, '[4.9.11.2 cf] ');
+      if (OFFLINE) await f9112Checks('file://' + OFFLINE.replace(/\\/g, '/').replace(/^([A-Za-z]):/, '/$1:'), '[4.9.11.2 offline] ');
+      await f9113Checks(`http://127.0.0.1:${port}/index.html`, '[4.9.11.3 cf] ');
+      if (OFFLINE) await f9113Checks('file://' + OFFLINE.replace(/\\/g, '/').replace(/^([A-Za-z]):/, '/$1:'), '[4.9.11.3 offline] ');
+      await f9114Checks(`http://127.0.0.1:${port}/index.html`, '[4.9.11.4 cf] ');
+      if (OFFLINE) await f9114Checks('file://' + OFFLINE.replace(/\\/g, '/').replace(/^([A-Za-z]):/, '/$1:'), '[4.9.11.4 offline] ');
       if (BASE) {
         const old = await serve(BASE);
         try { await shots(`http://127.0.0.1:${port}/index.html`, `http://127.0.0.1:${old.address().port}/index.html`); }
