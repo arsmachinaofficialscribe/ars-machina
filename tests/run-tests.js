@@ -1513,6 +1513,61 @@ async function f4100Checks(url, tag) {
   } finally { await browser.close(); }
 }
 
+async function typingChecks(url, tag) {
+  const { chromium } = require('playwright');
+  const browser = await chromium.launch();
+  try {
+    const { p, errs } = await pageFor(browser, url, tag);
+    await enter(p);
+    if (!(await p.evaluate(() => !!document.getElementById('v4.10.0.1')))) { check(tag + 'typing: skipped (no v4.10.0.1)', true); return; }
+    const sel = (f) => f.pk ? `input[data-pk="${f.pk}"]` : `#work [data-k="${f.k}"]`;
+    const bad = []; let n = 0;
+    for (const ty of ['magus', 'companion', 'grog']) {
+      for (const mode of ['build', 'play']) {
+        const fields = await p.evaluate(async ([ty, mode]) => {
+          const m = document.getElementById('menu'); m && (m.hidden = true, document.body.classList.remove('menu-open'));
+          const t = document.getElementById('am-seal-tip'); t && t.remove();
+          st = blankState(ty); setMode(mode); mode === 'build' ? renderAll() : renderPlay(); await new Promise(z => setTimeout(z, 300));
+          const vis = i => i.offsetParent && !i.disabled && !i.readOnly;
+          if (mode === 'build') {
+            document.querySelectorAll('#work section.folio.shut').forEach(s => s.classList.remove('shut'));
+            const all = [...document.querySelectorAll('#work input[data-k], #work textarea[data-k]')].filter(i => (i.type === 'number' || i.type === 'text' || i.tagName === 'TEXTAREA') && vis(i));
+            const num = all.filter(i => i.type === 'number'), txt = all.filter(i => i.type !== 'number').slice(0, 6);
+            return num.concat(txt).map(i => ({ k: i.dataset.k, num: i.type === 'number' })).filter((f, i, a) => a.findIndex(g => g.k === f.k) === i);
+          }
+          const out = [], tabs = [...new Set([...document.querySelectorAll('.gt [data-t], nav.ptabs [data-t]')].map(b => b.dataset.t))];
+          const ctabs = [...new Set([...document.querySelectorAll('[data-pact="ctab"][data-t]')].map(b => b.dataset.t))];
+          for (const tb of tabs.map(x => ['t', x]).concat(ctabs.map(x => ['c', x]))) {
+            const b = tb[0] === 'c' ? document.querySelector(`[data-pact="ctab"][data-t="${tb[1]}"]`) : document.querySelector(`.gt [data-t="${tb[1]}"], nav.ptabs [data-t="${tb[1]}"]`);
+            b && b.click(); await new Promise(z => setTimeout(z, 250));
+            [...document.querySelectorAll('input[data-pk]')].filter(i => (i.type === 'number' || i.type === 'text') && vis(i))
+              .forEach(i => out.some(f => f.pk === i.dataset.pk) || out.push({ pk: i.dataset.pk, num: i.type === 'number', tb }));
+          }
+          return out;
+        }, [ty, mode]);
+        for (const f of fields) {
+          const ok = await p.evaluate(([f, s]) => {
+            if (f.tb) { const b = f.tb[0] === 'c' ? document.querySelector(`[data-pact="ctab"][data-t="${f.tb[1]}"]`) : document.querySelector(`.gt [data-t="${f.tb[1]}"], nav.ptabs [data-t="${f.tb[1]}"]`); b && b.getAttribute('aria-selected') !== 'true' && b.click(); }
+            const i = document.querySelector(s); if (!i || !i.offsetParent) return false;
+            i.value = ''; i.dispatchEvent(new Event('input', { bubbles: true })); return true;
+          }, [f, sel(f)]);
+          if (!ok) continue;
+          await p.waitForTimeout(350);
+          if (!(await p.evaluate(s => { const i = document.querySelector(s); i && i.focus(); return !!i && document.activeElement === i; }, sel(f)))) continue;
+          await p.evaluate(() => { const t = document.getElementById('am-seal-tip'); t && t.remove(); });
+          await p.keyboard.press('Control+A');                    /* as a player would: select what is there, then type */
+          await p.keyboard.type('2'); await p.waitForTimeout(350); await p.keyboard.type('5'); await p.waitForTimeout(350);
+          const v = await p.evaluate(s => { const i = document.querySelector(s); return i ? i.value : null; }, sel(f));
+          n++; v !== '25' && bad.push(ty + '/' + mode + ':' + (f.pk || f.k) + '=' + v);
+        }
+      }
+    }
+    await p.evaluate(() => { st = blankState('magus'); persist(); setMode('build'); renderAll(); });
+    check(tag + 'typing: "2" then "5" gives 25 in every Build and Play field tried (' + n + ' fields, three character types)', bad.length === 0 && n > 40, bad.slice(0, 8).join(' | '));
+    check(tag + 'typing: no page errors', errs.length === 0, errs.slice(0, 2).join(' | '));
+  } finally { await browser.close(); }
+}
+
 (async () => {
   const t0 = Date.now(); let version;
   if (ONLY !== 'browser') {
@@ -1560,6 +1615,8 @@ async function f4100Checks(url, tag) {
       if (OFFLINE) await f9114Checks('file://' + OFFLINE.replace(/\\/g, '/').replace(/^([A-Za-z]):/, '/$1:'), '[4.9.11.4 offline] ');
       await f4100Checks(`http://127.0.0.1:${port}/index.html`, '[4.10.0.0 cf] ');
       if (OFFLINE) await f4100Checks('file://' + OFFLINE.replace(/\\/g, '/').replace(/^([A-Za-z]):/, '/$1:'), '[4.10.0.0 offline] ');
+      await typingChecks(`http://127.0.0.1:${port}/index.html`, '[4.10.0.1 cf] ');
+      if (OFFLINE) await typingChecks('file://' + OFFLINE.replace(/\\/g, '/').replace(/^([A-Za-z]):/, '/$1:'), '[4.10.0.1 offline] ');
       if (BASE) {
         const old = await serve(BASE);
         try { await shots(`http://127.0.0.1:${port}/index.html`, `http://127.0.0.1:${old.address().port}/index.html`); }

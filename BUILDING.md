@@ -131,6 +131,10 @@ grants as `fx.grants [{ab, score}]` (`wizard.js`). Faerie Blood varieties and Fa
 (`window.amFaerieBlood`): Characteristic varieties through `charEff`, totals through `myEffects`, Selkie through
 `getCheck("depr")`, descriptions through `checks`.
 
+Since 4.10.0.1 both keyed redraws keep the field being typed in: `amPlaySet`'s `set` (4.9.11.0 script: `typing`,
+`putBack`) and an `amWorkSet` wrapper (v4.10.0.1 script) put the focused field back in place of its rebuilt copy, so
+its caret survives. Number fields have no `setSelectionRange`; refocusing a new one put the caret at the start.
+
 ## What the tests cover
 - CSP: every inline script, lazy payload and on-demand file matches an exact SHA-256 in `script-src`; no unused hashes; no unsafe keywords, 'self', wildcards or nonces; SRI equals the file; `data-cfasync="false"` leads every script tag.
 - Version consistency (APP_VERSION, header, changelog top, CHANGES and PLAYER-CHANGELOG files), `_headers` present, no `netlify.toml`.

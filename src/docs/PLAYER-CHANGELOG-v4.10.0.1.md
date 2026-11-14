@@ -1,7 +1,7 @@
 # Ars Machina — Scribe and Cast
-## Player-facing changelog: v4.8.9.2 through v4.10.0.0
+## Player-facing changelog: v4.8.9.2 through v4.10.0.1
 
-This is a consolidated guide to the important player-facing changes from v4.8.9.2 through v4.10.0.0. It combines the original v4.9.2.0 summary with later improvements and corrections. Earlier entries are summarized where later work superseded them.
+This is a consolidated guide to the important player-facing changes from v4.8.9.2 through v4.10.0.1. It combines the original v4.9.2.0 summary with later improvements and corrections. Earlier entries are summarized where later work superseded them.
 
 ## v4.8.9.2 — Credits, recovery and safer file handling
 
@@ -76,6 +76,10 @@ This is a consolidated guide to the important player-facing changes from v4.8.9.
 - **Pray for a miracle** with the level adjusted for how soon and how badly it is needed, and **invoke God’s aid** for +1 to +3 on a scene’s rolls until one fails.
 - **Temper** a Dominion aura with one of seven virtues, or **tarnish** an Infernal aura with a sin; the trait then shows as a bonus or penalty you tick on the rolls it touches.
 - **Ars Notoria**: recite the seven Rings of Solomon in order, with every modifier; active rings add their experience and Characteristics in Play. Build checks the language requirements and gives 50 experience points for the languages.
+
+## v4.10.0.1 — Typing fix (2026-11-14)
+
+- **Fixed: typing 25 could come out as 52.** In some fields the cursor jumped back to the start after each digit: in Build, fields such as Years since Gauntlet; in Play, Fatigue levels, time lost in Seasons and several Modifiers. The cursor now stays where you are typing.
 
 ## v4.10.0.0 — Creation grants, Faerie Blood varieties, Virtues and Flaws fix (2026-11-13)
 

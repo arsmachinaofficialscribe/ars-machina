@@ -1,0 +1,25 @@
+Ars Machina — Scribe and Cast
+Version v4.10.0.1 (typing fix)
+Build date: 2026-11-14
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Scope: one fix. No rules or save-format change.
+
+FIX — the cursor jumped to the start of a field while typing ("25" became "52")
+- Cause: a keystroke in some fields redraws the part of the page that holds them. Build: a field that changes the
+  experience pools redraws its section through the 4.9.10.0 keyed redraw (window.amWorkSet), e.g. Years since
+  Gauntlet. Play: every keystroke redraws Play through the 4.9.11.0 keyed redraw (amPlaySet); a field inside a block
+  that mixes words with elements is rebuilt whole. The rebuilt field was then refocused (renderAll by id, renderPlay by
+  data-pk) with the caret at the start; number fields have no setSelectionRange, so the next digit went in front.
+- Fix: before the redraw, the field being typed in is kept; afterwards it is put back in place of its rebuilt copy
+  (same data-k or data-pk, same kind of field), taking the new markup's attributes, so it keeps its caret and
+  selection. Its value is replaced only when the sheet's value differs (a clamped number). renderPlay no longer moves
+  the caret of a kept text field to its end.
+- Code: Play in the 4.9.11.0 script (typing, putBack in amPlaySet's set); Build in the new v4.10.0.1 script (an
+  amWorkSet wrapper).
+
+TESTS
+- typingChecks (both builds): select a field's contents and type "2" then "5", with redraws between keys, in every
+  number field and the first text fields of Build, and every number and text field on each Play tab and console tab,
+  for a magus, a companion and a grog (111 fields); no page errors.
+- Screenshot differences from 4.10.0.0: none.
