@@ -120,6 +120,17 @@ Since 4.9.11.4 the odds yardstick is `P().odds = {on, ef, opp}`, edited under Mo
 wrapper) and read only by the `oddsChip` wrapper, and only while `on` is true. Nothing that rolls reads it. A control
 on the Play page must never write `P().ef` or `P().oppTotal` as a side effect: those are the next roll's numbers.
 
+Since 4.10.0.0 `window.amWorkSet` tracks each top-level `section.folio` of a part by its own id (`__amSrc` is the
+part's key, `__amOwn` the section's own markup key; `window.__amFrag` maps parts to ids). Grogs and Companions draw
+`#s-being` and `#s-vf` from one `sVF()` part; the earlier one-section-per-part assumption removed `#s-vf`.
+Creation grants live in `patches/v4.10.0.0/grants.js`: extra `bonusPools` entries with their `BONUS_OK` limits,
+Redcap apprenticeship (Homebrew rule `redcapReplace` wraps `budget`), and Abilities conferred at a score
+(`window.amGrants`, `window.amSyncGrants`). A grant writes the Ability row's `free` and records `vfg`/`vfgOld` so it can
+follow its size and be withdrawn; rows are never removed (Play state is keyed by row index). Custom Virtues store
+grants as `fx.grants [{ab, score}]` (`wizard.js`). Faerie Blood varieties and Faerie Legacy are `faerie.js`
+(`window.amFaerieBlood`): Characteristic varieties through `charEff`, totals through `myEffects`, Selkie through
+`getCheck("depr")`, descriptions through `checks`.
+
 ## What the tests cover
 - CSP: every inline script, lazy payload and on-demand file matches an exact SHA-256 in `script-src`; no unused hashes; no unsafe keywords, 'self', wildcards or nonces; SRI equals the file; `data-cfasync="false"` leads every script tag.
 - Version consistency (APP_VERSION, header, changelog top, CHANGES and PLAYER-CHANGELOG files), `_headers` present, no `netlify.toml`.

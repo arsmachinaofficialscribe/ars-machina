@@ -1,0 +1,63 @@
+Ars Machina — Scribe and Cast
+Version v4.10.0.0 (Creation grants, Faerie Blood varieties, Virtues and Flaws fix)
+Build date: 2026-11-13
+Package: Cloudflare Pages (direct upload) and a self-contained offline HTML file
+
+Scope: one bug fix, a rules block on Virtues that grant experience or Abilities at character creation, the Faerie
+Blood varieties of Realms of Power: Faerie, and Ability grants in the custom Virtue wizard. Numbered 4.10.0.0 at
+Haik's direction (2026-11-13). Supersedes the unreleased 4.9.11.5 build. No save-format change: Ability rows may
+carry vfg/vfgOld and custom Virtues fx.grants; files without them load as before.
+
+FIX — Virtues & Flaws disappeared from Build (Grogs and Companions)
+- Cause: for non-magi, sVF() returns two sibling sections in one part (#s-being, then #s-vf). The 4.9.10.0 keyed
+  redraw, window.amWorkSet, assumed one section per part and cached the part under its first id. On the next redraw
+  with that part unchanged it kept #s-being and removed #s-vf as stale. Magi have no #s-being. Data never touched.
+- Fix: amWorkSet parses every top-level section of each part and tracks each by its own id (__amSrc = part key, fast
+  path for an unchanged part; __amOwn = own markup key, kept when only a sibling changed). A section is removed only
+  when its id is absent from the whole new render. window.__amFrag holds the current part-to-ids map only.
+- CSP hashes recomputed by pack.py in both builds.
+
+RULES — experience pools (DE pages; each limited to its Virtue's list)
+- Vernacular Education 50 (p. 77 "Educated (Vernacular)"; C&G p. 109): Academic, Bargain, Organization Lore,
+  Profession: Merchant, any language (book: the trade language of the region; any language is our reading).
+- Baccalaureus 90 (p. 71); Cathedral School Master 240 (p. 73); Clan Ilfetu 50 (p. 73); Falconer 50 (p. 80);
+  Forge-Companion 50 (p. 82); Marshal 50 (p. 95); Physician of Salerno 50 (p. 103); Trained Assassin 50 (p. 113);
+  Venditor 50 (p. 114). Mentored by Demons 50 per copy (p. 98; was 50 once).
+- Redcap (p. 105) and Lone Redcap (p. 91): 300 apprenticeship XP for General, Academic, Arcane and Martial Abilities,
+  plus Well-Traveled's 50 (p. 116) at no cost unless the Virtue is also taken. Haik's ruling: on top of later life.
+  New Homebrew rule redcapReplace (off): later life counts fifteen fewer years, as for a magus (DE p. 43).
+- Still not modelled: Simple Student and Prestigious Student, 30 per finished year.
+
+RULES — Abilities conferred at a score
+- DE "Choosing this Virtue confers the Ability X 1": Animal Ken 70, Corpse Magic 74, Crafter's Healing 75,
+  Curse-Throwing 75, Dowsing 77, Embitterment 78, Enchanting Music 78, Entrancement 78, Faerie Magic 79, Font of
+  Knowledge 82, Induction 86, Magic Sensitivity 92, Persona 101, Premonitions 104, Second Sight 106, Sense Holiness and
+  Unholiness 107, Shapeshifter 107, Summon Animals 111, Whistle Up The Wind 116, Wilderness Sense 116, The Enigma 78,
+  Heartbeast 85; Strong Faerie Blood p. 110 (Second Sight). RoP:F power Virtues pp. 111–114 (book on): Beguile,
+  Conjure, Dream, Empathy, Enchantment, Evocation, Grant, Portage, Ware, Weal, Woe (Ceremony left out: three books
+  share the name).
+- Custom Virtues: the wizard's new "Abilities it grants" part stores fx.grants [{ab, score 1–10}]; the grant gives the
+  experience for that score (5 × s(s+1)/2). Names are stripped of < and >, cut at 60 characters.
+- Mechanism: first row of the Ability gets free = max(free, grant); a missing row is added; vfg/vfgOld let the grant
+  follow its size and be withdrawn. Rows are never removed automatically (Play state is keyed by row index).
+- Abilities added (DE pages): Faerie Magic (Arcane, 165), Corpse Magic 162, Crafter's Healing 162, Embitterment 164,
+  Font of Knowledge 165, Induction 166–167, Persona 169, Whistle Up The Wind 172.
+- Existing characters who bought the first point of a granted Ability have those points free again.
+
+RULES — Faerie Blood varieties (DE p. 79; RoP:F pp. 106–110, read from the printed pages) and Faerie Legacy
+(RoP:F p. 112: the legacy benefit replaces the normal one)
+- +1 Characteristic, not above +3; Legacy up to +4: Bloodcap Str (p. 106), Ettin Sta (107), Nymph Com (108),
+  Padfoot Per (109), Sidhe Pre (DE 79; 109).
+- Totals, applied automatically: Dwarf +1 Craft (DE 79; 107), Brownie +1 Profession (107); Legacy: +2 for the one
+  favoured Ability named in Faerie Legacy's detail (a failing check asks for it). Goblin +1 stealth, Legacy +2 (108).
+- Tick boxes in Play: Satyr +1 Com and Pre with sexually compatible characters, Legacy +2 (109); Undine +2 underwater,
+  Legacy note "replaces any penalty" (110). Selkie +3 on the Deprivation roll (109).
+- Described in the rule checks: Bee King, Spinnen (DE 79), Faerie God (Sympathy points 1/2, 107–108), Ghul claws
+  (Dam +2/+4, 108), Huldra (108), Selkie's legacy. Faerie Legacy without Faerie Blood fails a check.
+- The DE table's heritage lines are replaced by these for the named variety; an unnamed or unknown variety keeps the
+  existing behaviour. Not added: Faerie Blood's +1 to the Sympathy Trait cap (RoP:F p. 112; the app has no Sympathy
+  Traits), and RoP:F's optional faerie powers for the faerie-blooded (p. 107 box).
+
+TESTS
+- f4100Checks (both builds), 13 checks.
+- Screenshot differences from 4.9.11.4: none.

@@ -1383,6 +1383,136 @@ async function f9114Checks(url, tag) {
   } finally { await browser.close(); }
 }
 
+async function f4100Checks(url, tag) {
+  const { chromium } = require('playwright');
+  const browser = await chromium.launch();
+  try {
+    const { p, errs } = await pageFor(browser, url, tag);
+    await enter(p);
+    if (!(await p.evaluate(() => !!document.getElementById('v4.10.0.0')))) { check(tag + 'skipped (no v4.10.0.0)', true); return; }
+    const o = await p.evaluate(async () => {
+      const w = ms => new Promise(z => setTimeout(z, ms)), q = s => document.querySelector(s), o = {};
+      const m = document.getElementById('menu'); m && (m.hidden = true, document.body.classList.remove('menu-open'));
+      const tip = document.getElementById('am-seal-tip'); tip && tip.remove();
+      /* the reported bug: a Characteristic change, through the page's own buttons, removed #s-vf for grogs and companions */
+      o.redraw = {};
+      for (const t of ['grog', 'companion', 'magus']) {
+        st = blankState(t); persist(); setMode('build'); renderAll(); await w(250);
+        st.vf.push({ n: 'Tough', kind: 'V' }); renderAll(); await w(150);
+        const r = [];
+        for (const id of ['ch-inc-Str', 'ch-inc-Str', 'ch-dec-Str', 'ch-inc-Sta', 'ch-dec-Sta']) {
+          const btn = document.getElementById(id); btn && btn.click(); await w(120);
+          r.push(!!q('#work>#s-vf') && (t === 'magus' ? !q('#s-being') : !!q('#work>#s-being')) && /Tough/.test((q('#s-vf') || {}).textContent || ''));
+        }
+        const a = q('#rail a[href="#s-vf"]'); a && a.click(); await w(250);
+        const s = q('#s-vf');
+        o.redraw[t] = [r.every(Boolean), !!a, !!s && !s.classList.contains('shut'), document.querySelectorAll('#work>section.folio[id="s-vf"]').length];
+      }
+      /* Vernacular Education and the other pools; Mentored by Demons per copy */
+      st = blankState('companion');
+      st.vf.push({ n: 'Vernacular Education', kind: 'V' }, { n: 'Venditor', kind: 'V' }, { n: 'Mentored by Demons', kind: 'V' }, { n: 'Mentored by Demons', kind: 'V' });
+      st.abil.push({ n: 'Artes Liberales', prm: '', sp: '', xp: 5, xps: { 'b:Vernacular Education': 5 } }, { n: 'Brawl', prm: '', sp: '', xp: 5, xps: { 'b:Vernacular Education': 5 } });
+      renderAll(); await w(150);
+      const pl = budget(st).pools; o.pools = ['Vernacular Education', 'Venditor', 'Mentored by Demons'].map(k => (pl.find(x => x[0].indexOf(k) === 0) || [0, 0])[1]);
+      const cx = stageCtx(st), vp = cx.pools.find(x => x.id === 'b:Vernacular Education');
+      o.vern = vp ? st.abil.filter(a => a.xps && a.xps['b:Vernacular Education']).map(a => a.n + ':' + (cx.okFor(vp, a, st.abil.indexOf(a)) ? 'no' : 'ok')) : ['no pool'];
+      /* Abilities at score 1 from their Virtue; given back when the Virtue goes; no double count */
+      st = blankState('companion'); st.vf.push({ n: 'Second Sight', kind: 'V' }, { n: 'Entrancement', kind: 'V' }); renderAll(); await w(150);
+      const sc = n => { const r = st.abil.find(a => a.n === n); return r ? ablCalc(st, r).score : null; };
+      o.g1 = [sc('Second Sight'), sc('Entrancement')];
+      st.abil.find(a => a.n === 'Second Sight').xps = { later: 5 }; st.abil.find(a => a.n === 'Second Sight').xp = 5; renderAll(); await w(100);
+      o.g2 = sc('Second Sight');                                     /* 5 bought + 5 free = 10: still 1 */
+      st.vf = st.vf.filter(v => v.n !== 'Second Sight'); renderAll(); await w(100);
+      o.g3 = [sc('Second Sight'), st.abil.find(a => a.n === 'Second Sight').free];
+      st = blankState('magus'); st.house = 'Merinita'; st.vf.push({ n: 'Faerie Magic', kind: 'V', free: true, house: true }, { n: 'Strong Faerie Blood', kind: 'V', d: 'Undine' }); renderAll(); await w(100);
+      o.g4 = [sc('Faerie Magic'), sc('Second Sight'), st.abil.filter(a => a.n === 'Second Sight').length];
+      st = exampleState(); renderAll(); await w(150);
+      o.g5 = st.abil.filter(a => a.n === 'Second Sight').map(a => [a.free, ablCalc(st, a).score]);
+      /* Faerie Blood ancestry */
+      const fb = async d => {
+        st = blankState('companion'); st.vf.push({ n: 'Faerie Blood', kind: 'V', d });
+        st.abil.push({ n: 'Craft', prm: 'Smith', sp: '', xp: 5, xps: { later: 5 } }, { n: 'Stealth', prm: '', sp: '', xp: 5, xps: { later: 5 } });
+        renderAll(); setMode('play'); await w(150);
+        const cc = abilCheck(st.abil.findIndex(a => a.n === 'Craft')), sk = abilCheck(st.abil.findIndex(a => a.n === 'Stealth'));
+        const r = { craft: cc.post.some(x => /Faerie Blood/.test(x.l)), stealth: sk.post.some(x => /Faerie Blood/.test(x.l)),
+          opt: (cc.toggles || []).concat(sk.toggles || []).map(x => x.cond || x.l).filter(x => /heritage/.test(x)).length };
+        setMode('build'); return r;
+      };
+      o.fb = [await fb('Dwarf'), await fb('Goblin blood'), await fb(''), await fb('Sidhe')];
+      /* hostile grant fields */
+      st = migrate({ type: 'grog', vf: [], abil: [{ n: 'Second Sight', vfg: '<img src=x onerror="window.__g=1">', vfgOld: '<b>', free: 5 }] });
+      renderAll(); await w(150);
+      const h = st.abil[0]; o.hostile = [h.free, 'vfg' in h, window.__g || 0, !!document.querySelector('#work img[src="x"]')];
+      /* Redcap: 300 on top + free Well-Traveled; Homebrew rule takes 15 years out of later life */
+      const pool = (k) => (budget(st).pools.find(x => x[0].indexOf(k) === 0) || [0, null])[1];
+      st = blankState('companion'); st.ages.age = 35; st.vf.push({ n: 'Redcap', kind: 'V' }); renderAll(); await w(100);
+      o.rc = [pool('Redcap apprenticeship'), pool('Well-Traveled'), pool('Later life')];
+      localStorage.setItem('am-optrules', JSON.stringify({ redcapReplace: true })); renderAll(); await w(100);
+      o.rc2 = [pool('Redcap apprenticeship'), pool('Later life'), typeof amOpt === 'function' && amOpt('redcapReplace')];
+      localStorage.removeItem('am-optrules'); renderAll(); await w(50);
+      o.rcOpt = !!(window.OPT_RULES ? OPT_RULES : []).length || true;
+      /* Faerie Blood varieties and Faerie Legacy (RoP:F pp. 106-112) */
+      const fbc = async (d, leg, fav) => {
+        st = blankState('companion'); st.chars.Sta = 3; st.chars.Pre = 3; st.chars.Com = 1;
+        st.vf.push({ n: 'Faerie Blood', kind: 'V', d }); leg && st.vf.push({ n: 'Faerie Legacy', kind: 'V', d: fav || '' });
+        st.abil.push({ n: 'Profession', prm: 'Cook', sp: '', xp: 5, xps: { later: 5 } }, { n: 'Profession', prm: 'Scribe', sp: '', xp: 5, xps: { later: 5 } }, { n: 'Stealth', prm: '', sp: '', xp: 5, xps: { later: 5 } });
+        renderAll(); setMode('play'); await w(120);
+        const ce = charEff(st), sum = i => { const c = abilCheck(i); return c.post.filter(x => /Faerie Blood/.test(x.l)).reduce((t, x) => t + x.v, 0); };
+        const r = { Sta: ce.Sta, Pre: ce.Pre, Com: ce.Com, cook: sum(0 + st.abil.findIndex(a => a.prm === 'Cook')), scribe: sum(st.abil.findIndex(a => a.prm === 'Scribe')), stealth: sum(st.abil.findIndex(a => a.n === 'Stealth')) };
+        r.fails = checks(st).filter(c => !c.ok && /Faerie Legacy/.test(c.t)).length;
+        r.info = (checks(st).find(c => c.ok && /^Faerie Blood \(/.test(c.t)) || {}).t || '';
+        setMode('build'); return r;
+      };
+      o.v = { ettin: await fbc('Ettin'), ettinL: await fbc('Ettin', 1), sidheL: await fbc('Sidhe', 1), nymph: await fbc('Nymph'),
+        brownie: await fbc('Brownie'), brownieL: await fbc('Brownie', 1, 'Cook'), brownieL0: await fbc('Brownie', 1, ''), goblinL: await fbc('Goblin', 1), ghul: await fbc('Ghul') };
+      st = blankState('companion'); st.vf.push({ n: 'Faerie Legacy', kind: 'V' }); renderAll(); await w(50);
+      o.legAlone = checks(st).some(c => !c.ok && /Faerie Legacy needs/.test(c.t));
+      st = blankState('companion'); st.vf.push({ n: 'Faerie Blood', kind: 'V', d: 'Selkie' }); renderAll(); setMode('play'); await w(100);
+      const dc = getCheck('depr'); o.selkie = dc ? dc.post.filter(x => /Selkie/.test(x.l)).map(x => x.v) : 'no depr check';
+      st = blankState('companion'); st.vf.push({ n: 'Faerie Blood', kind: 'V', d: 'Undine' }); renderAll(); await w(60);
+      const uc = getCheck('char:Str'); o.undine = (uc.toggles || []).filter(x => /underwater/.test(x.cond || '')).map(x => x.v);
+      setMode('build'); await w(100);
+      /* custom Virtue wizard: Abilities it grants, through its own controls */
+      st = blankState('companion'); st.vf.push({ n: '', kind: 'V' }); renderAll(); await w(100);
+      openWizard(st.vf.length - 1); await w(100);
+      const set = (sel, v) => { const i = q(sel); i.value = v; i.dispatchEvent(new Event('input', { bubbles: true })); };
+      set('#wizard [data-wz="n"]', 'Fae-touched eyes');
+      q('#wizard [data-wzg="add"]').click(); await w(80);
+      set('#wizard [data-wzg="ab"]', 'Second Sight'); set('#wizard [data-wzg="sc"]', '2'); await w(50);
+      o.wzPrev = (q('#wizard .wiz-prev') || {}).textContent || '';
+      q('#wizard [data-wz="save"]').click(); await w(200);
+      const ss = () => { const r = st.abil.find(a => a.n === 'Second Sight'); return r ? [r.free, ablCalc(st, r).score] : null; };
+      o.wz1 = ss(); o.wzSaved = JSON.stringify(st.vf[st.vf.length - 1].fx.grants);
+      openWizard(st.vf.length - 1); await w(100); set('#wizard [data-wzg="sc"]', '1'); q('#wizard [data-wz="save"]').click(); await w(150);
+      o.wz2 = ss();
+      st.vf.pop(); renderAll(); await w(100); o.wz3 = ss();
+      st.vf.push({ n: 'X', kind: 'V', custom: true, fx: { grants: [{ ab: '<img src=x onerror="window.__w=1">', score: 3 }, { ab: 'Brawl', score: 'many' }, { ab: { a: 1 }, score: 2 }] } });
+      renderAll(); await w(100); o.wzHostile = [window.__w || 0, st.abil.filter(a => /img/.test(a.n)).map(a => /[<>]/.test(a.n) || a.n.length > 60), !!document.querySelector('#work img[src="x"]'), st.abil.some(a => a.n === 'Brawl' && a.vfg)];
+      st = blankState('magus'); persist(); renderAll(); await w(100);
+      return o;
+    });
+    const R = o.redraw;
+    check(tag + 'grants: Virtues & Flaws survives Characteristic changes and opens from the rail (grog, companion, magus)',
+      ['grog', 'companion', 'magus'].every(t => R[t][0] && R[t][1] && R[t][2] && R[t][3] === 1), JSON.stringify(R));
+    check(tag + 'grants: Vernacular Education 50, Venditor 50, Mentored by Demons 50 per copy', JSON.stringify(o.pools) === '[50,50,100]', JSON.stringify(o.pools));
+    check(tag + 'grants: Vernacular Education buys Academic Abilities, not Brawl', JSON.stringify(o.vern) === '["Artes Liberales:ok","Brawl:no"]', JSON.stringify(o.vern));
+    check(tag + 'grants: a Supernatural Ability Virtue gives score 1; buying the first point stays 1; removing it leaves only what was bought',
+      JSON.stringify(o.g1) === '[1,1]' && o.g2 === 1 && JSON.stringify(o.g3) === '[1,0]', JSON.stringify([o.g1, o.g2, o.g3]));
+    check(tag + 'grants: Faerie Magic 1 for Merinita, Second Sight 1 from Strong Faerie Blood (one row); sample not doubled',
+      JSON.stringify(o.g4) === '[1,1,1]' && o.g5.length === 1 && o.g5[0][1] === 1, JSON.stringify([o.g4, o.g5]));
+    check(tag + 'grants: Faerie Blood ancestry — Dwarf and Goblin apply, no other heritage, nothing without a named ancestry',
+      o.fb[0].craft && !o.fb[0].stealth && o.fb[0].opt === 0 && o.fb[1].stealth && !o.fb[1].craft && !o.fb[2].craft && o.fb[2].opt === 0 && !o.fb[3].craft && o.fb[3].opt === 0, JSON.stringify(o.fb));
+    check(tag + 'redcap: 300 on top of later life and Well-Traveled 50; Homebrew rule takes 15 years out', JSON.stringify(o.rc) === '[300,50,450]' && JSON.stringify(o.rc2) === '[300,225,true]', JSON.stringify([o.rc, o.rc2]));
+    const V = o.v;
+    check(tag + 'faerie: Characteristic varieties +1 to +3, Faerie Legacy to +4 (Ettin, Sidhe, Nymph)', V.ettin.Sta === 3 && V.ettinL.Sta === 4 && V.sidheL.Pre === 4 && V.nymph.Com === 2 && /Ettin/.test(V.ettin.info), JSON.stringify([V.ettin, V.ettinL.Sta, V.sidheL.Pre, V.nymph.Com]));
+    check(tag + 'faerie: Brownie +1 Profession; Legacy +2 to the favoured one; Goblin Legacy +2 stealth', V.brownie.cook === 1 && V.brownie.scribe === 1 && V.brownieL.cook === 2 && V.brownieL.scribe === 1 && V.brownieL.fails === 0 && V.brownieL0.fails === 1 && V.goblinL.stealth === 2 && V.goblinL.cook === 0, JSON.stringify([V.brownie, V.brownieL, V.brownieL0.fails, V.goblinL]));
+    check(tag + 'faerie: Selkie +3 on Deprivation, Undine a +2 tick box, Ghul described, Legacy alone flagged', JSON.stringify(o.selkie) === '[3]' && JSON.stringify(o.undine) === '[2]' && /claws/.test(V.ghul.info) && o.legAlone, JSON.stringify([o.selkie, o.undine, V.ghul.info, o.legAlone]));
+    check(tag + 'wizard: a custom Virtue grants Second Sight 2, then 1, then nothing when removed', /Grants Second Sight 2/.test(o.wzPrev) && JSON.stringify(o.wz1) === '[15,2]' && JSON.stringify(o.wz2) === '[5,1]' && JSON.stringify(o.wz3) === '[0,0]' && o.wzSaved === '[{"ab":"Second Sight","score":2}]', JSON.stringify([o.wzPrev.slice(-40), o.wz1, o.wz2, o.wz3, o.wzSaved]));
+    check(tag + 'wizard: hostile grants are cleaned (no markup, bad scores dropped)', !o.wzHostile[0] && o.wzHostile[1].length === 1 && !o.wzHostile[1][0] && !o.wzHostile[2] && !o.wzHostile[3], JSON.stringify(o.wzHostile));
+    check(tag + 'grants: hostile grant fields are dropped; no injection; no errors', o.hostile[0] === 0 && !o.hostile[1] && !o.hostile[2] && !o.hostile[3] && errs.length === 0, JSON.stringify(o.hostile) + errs.slice(0, 2).join(' | '));
+  } finally { await browser.close(); }
+}
+
 (async () => {
   const t0 = Date.now(); let version;
   if (ONLY !== 'browser') {
@@ -1428,6 +1558,8 @@ async function f9114Checks(url, tag) {
       if (OFFLINE) await f9113Checks('file://' + OFFLINE.replace(/\\/g, '/').replace(/^([A-Za-z]):/, '/$1:'), '[4.9.11.3 offline] ');
       await f9114Checks(`http://127.0.0.1:${port}/index.html`, '[4.9.11.4 cf] ');
       if (OFFLINE) await f9114Checks('file://' + OFFLINE.replace(/\\/g, '/').replace(/^([A-Za-z]):/, '/$1:'), '[4.9.11.4 offline] ');
+      await f4100Checks(`http://127.0.0.1:${port}/index.html`, '[4.10.0.0 cf] ');
+      if (OFFLINE) await f4100Checks('file://' + OFFLINE.replace(/\\/g, '/').replace(/^([A-Za-z]):/, '/$1:'), '[4.10.0.0 offline] ');
       if (BASE) {
         const old = await serve(BASE);
         try { await shots(`http://127.0.0.1:${port}/index.html`, `http://127.0.0.1:${old.address().port}/index.html`); }
